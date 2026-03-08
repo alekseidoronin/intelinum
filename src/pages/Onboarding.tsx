@@ -66,8 +66,8 @@ export default function Onboarding() {
   };
 
   const goNext = () => {
-    if (step === 3) {
-      setStep(4);
+    if (step === 4) {
+      setStep(5);
       let p = 0;
       const interval = setInterval(() => {
         p += Math.random() * 15 + 5;
@@ -81,13 +81,6 @@ export default function Onboarding() {
     } else {
       setStep(s => s + 1);
     }
-  };
-
-  const canProceed = () => {
-    if (step === 2) return name.trim().length > 0;
-    if (step === 3) return texts.trim().length > 10;
-    if (step === 4 - 1) return selectedStyle !== "";
-    return true;
   };
 
   // Steps: 0=welcome, 1=auth, 2=name, 3=texts, 4=style, 5=loading
