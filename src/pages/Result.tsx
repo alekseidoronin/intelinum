@@ -112,7 +112,7 @@ export default function Result() {
       </motion.div>
 
       {/* Platform tabs */}
-      <div className="mb-4 overflow-x-auto scrollbar-hide">
+      <div className="mb-4 overflow-x-auto [&::-webkit-scrollbar]:h-[3px] [&::-webkit-scrollbar-track]:bg-border [&::-webkit-scrollbar-thumb]:bg-sapphire/40 [&::-webkit-scrollbar-thumb]:rounded-full pb-1">
         <div className="flex gap-2 w-max px-5">
           {platforms.map(p => (
             <button key={p.id} onClick={() => setActiveTab(p.id)}
