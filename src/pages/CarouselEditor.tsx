@@ -65,6 +65,10 @@ export default function CarouselEditor() {
   const [colorTarget, setColorTarget] = useState<ColorTarget>(null);
   const [bgSubTab, setBgSubTab] = useState<BgSubTab>("gradient");
   const [showFontPicker, setShowFontPicker] = useState(false);
+  const [customGradFrom, setCustomGradFrom] = useState("#112250");
+  const [customGradTo, setCustomGradTo] = useState("#3C507D");
+  const [customGradDir, setCustomGradDir] = useState("135deg");
+  const [customGradActive, setCustomGradActive] = useState<"from" | "to" | null>(null);
   const [regenerating, setRegenerating] = useState(false);
   const [downloaded, setDownloaded] = useState(false);
 
