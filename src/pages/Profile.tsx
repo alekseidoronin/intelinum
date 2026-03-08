@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { ChevronRight, Crown, Palette, FileText, Bell, LogOut, Shield, HelpCircle, Pencil, Check, X, Eye, EyeOff } from "lucide-react";
+import { ChevronRight, Crown, Palette, FileText, Bell, LogOut, Shield, HelpCircle, Pencil, Check, X, Eye, EyeOff, Camera } from "lucide-react";
 import { BottomNav } from "@/components/BottomNav";
 import { TopBar } from "@/components/TopBar";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+
+const AVATARS = ["🔮", "🌙", "⭐", "🌟", "🦋", "🌸", "🔥", "💎", "🌊", "🦄", "🌺", "✨"];
 
 const menuItems = [
   { icon: FileText, label: "Мой стиль письма", desc: "Обновить тексты-примеры", path: "/profile/style" },
@@ -30,9 +32,35 @@ export default function Profile() {
   const [showPw, setShowPw] = useState(false);
   const [savingPw, setSavingPw] = useState(false);
 
+  const [avatarEmoji, setAvatarEmoji] = useState(() => localStorage.getItem("avatarEmoji") || "🔮");
+  const [avatarPhoto, setAvatarPhoto] = useState<string | null>(() => localStorage.getItem("avatarPhoto") || null);
+  const [showAvatarPicker, setShowAvatarPicker] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
   // Use localStorage name as fallback for non-auth users
   const shownName = displayName || localStorage.getItem("userName") || "Пользователь";
   const email = user?.email || "";
+
+  const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const dataUrl = ev.target?.result as string;
+      setAvatarPhoto(dataUrl);
+      localStorage.setItem("avatarPhoto", dataUrl);
+      setShowAvatarPicker(false);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleSelectEmoji = (emoji: string) => {
+    setAvatarEmoji(emoji);
+    setAvatarPhoto(null);
+    localStorage.setItem("avatarEmoji", emoji);
+    localStorage.removeItem("avatarPhoto");
+    setShowAvatarPicker(false);
+  };
 
   const startEditName = () => {
     setNewName(shownName);
@@ -99,13 +127,24 @@ export default function Profile() {
       {/* User card */}
       <div className="px-5 pt-3 mb-5">
         <div
-          className="rounded-3xl p-5"
+          className="rounded-3xl p-5 relative"
           style={{ background: "linear-gradient(145deg, hsl(224 65% 19%), hsl(221 35% 30%))" }}>
 
-          <div className="flex items-center gap-3">
-            <div className="w-14 h-14 rounded-2xl bg-white/15 flex items-center justify-center text-2xl border border-white/20 flex-shrink-0">
-              🔮
+          <div className="flex items-center gap-4">
+            {/* Avatar */}
+            <div className="relative flex-shrink-0">
+              <button
+                onClick={() => setShowAvatarPicker(v => !v)}
+                className="w-20 h-20 rounded-full bg-white/15 border-2 border-white/30 flex items-center justify-center text-4xl overflow-hidden hover:border-white/60 transition-all active:scale-95">
+                {avatarPhoto
+                  ? <img src={avatarPhoto} alt="avatar" className="w-full h-full object-cover" />
+                  : avatarEmoji}
+              </button>
+              <div className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-white/20 border border-white/30 flex items-center justify-center pointer-events-none">
+                <Camera size={13} className="text-swan" />
+              </div>
             </div>
+
             <div className="flex-1 min-w-0">
               {editingName ? (
                 <div className="flex items-center gap-2">
@@ -140,6 +179,28 @@ export default function Profile() {
               </div>
             </div>
           </div>
+
+          {/* Avatar picker */}
+          {showAvatarPicker && (
+            <div className="mt-3 bg-white/10 backdrop-blur rounded-2xl p-4 border border-white/20">
+              <p className="text-sm font-medium text-swan mb-3">Выбери персонажа или загрузи фото</p>
+              <div className="grid grid-cols-6 gap-2 mb-3">
+                {AVATARS.map(em => (
+                  <button key={em} onClick={() => handleSelectEmoji(em)}
+                    className={`w-10 h-10 rounded-xl text-2xl flex items-center justify-center transition-all active:scale-90 ${avatarEmoji === em && !avatarPhoto ? "bg-white/30 ring-2 ring-white" : "hover:bg-white/20"}`}>
+                    {em}
+                  </button>
+                ))}
+              </div>
+              <button
+                onClick={() => fileInputRef.current?.click()}
+                className="w-full py-2.5 rounded-xl bg-white/15 border border-white/30 text-sm font-medium text-swan flex items-center justify-center gap-2 hover:bg-white/25 transition-all active:scale-95">
+                <Camera size={15} />
+                Загрузить фото
+              </button>
+              <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handlePhotoUpload} />
+            </div>
+          )}
 
           <div className="mt-4 pt-4 border-t border-white/15">
             <div className="flex items-center justify-between mb-2">
