@@ -6,70 +6,70 @@
 
 @layer base {
   :root {
-    /* Royal Blue dark theme - main palette */
-    --background: 228 47% 7%;
-    --background-2: 226 44% 10%;
-    --background-3: 225 40% 14%;
+    /* Swan Wing light theme */
+    --background: 40 30% 97%;
+    --background-2: 40 25% 94%;
+    --background-3: 38 20% 90%;
 
-    --foreground: 40 33% 93%;
+    --foreground: 228 47% 14%;
 
-    --card: 226 44% 10%;
-    --card-foreground: 40 33% 93%;
+    --card: 0 0% 100%;
+    --card-foreground: 228 47% 14%;
 
-    --popover: 226 44% 12%;
-    --popover-foreground: 40 33% 93%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 228 47% 14%;
 
     /* Gold accent */
-    --primary: 38 64% 72%;
-    --primary-foreground: 228 47% 7%;
-    --primary-glow: 42 75% 60%;
+    --primary: 36 52% 44%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 38 58% 56%;
 
     /* Sapphire */
     --secondary: 220 39% 40%;
-    --secondary-foreground: 40 33% 93%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 225 30% 18%;
-    --muted-foreground: 220 20% 58%;
+    --muted: 38 22% 91%;
+    --muted-foreground: 220 14% 48%;
 
-    --accent: 38 64% 72%;
-    --accent-foreground: 228 47% 7%;
+    --accent: 36 52% 44%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 70% 50%;
-    --destructive-foreground: 40 33% 93%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 225 30% 20%;
-    --border-gold: 38 50% 45%;
-    --input: 225 30% 16%;
-    --ring: 38 64% 72%;
+    --border: 38 18% 85%;
+    --border-gold: 36 42% 62%;
+    --input: 38 18% 89%;
+    --ring: 36 52% 44%;
 
     --radius: 0.75rem;
 
     /* Sidebar */
-    --sidebar-background: 228 50% 8%;
-    --sidebar-foreground: 40 33% 85%;
-    --sidebar-primary: 38 64% 72%;
-    --sidebar-primary-foreground: 228 47% 7%;
-    --sidebar-accent: 225 30% 14%;
-    --sidebar-accent-foreground: 40 33% 85%;
-    --sidebar-border: 225 30% 16%;
-    --sidebar-ring: 38 64% 72%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 228 47% 15%;
+    --sidebar-primary: 36 52% 44%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 38 20% 93%;
+    --sidebar-accent-foreground: 228 47% 15%;
+    --sidebar-border: 38 18% 86%;
+    --sidebar-ring: 36 52% 44%;
 
     /* Custom tokens */
-    --gold: 38 64% 72%;
-    --gold-light: 40 70% 82%;
-    --gold-dark: 36 55% 50%;
+    --gold: 36 52% 44%;
+    --gold-light: 38 56% 58%;
+    --gold-dark: 34 48% 34%;
     --sapphire: 220 39% 40%;
     --royal: 228 65% 19%;
-    --swan: 40 33% 93%;
+    --swan: 40 30% 97%;
 
-    --gradient-hero: linear-gradient(135deg, hsl(228 65% 10%) 0%, hsl(225 50% 16%) 50%, hsl(220 45% 22%) 100%);
-    --gradient-gold: linear-gradient(135deg, hsl(36 55% 50%) 0%, hsl(38 64% 72%) 60%, hsl(40 70% 82%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(226 44% 11%) 0%, hsl(225 40% 14%) 100%);
-    --gradient-rail: linear-gradient(145deg, hsl(226 44% 12%) 0%, hsl(225 45% 17%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(228 60% 22%) 0%, hsl(225 52% 30%) 50%, hsl(220 48% 38%) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(34 48% 34%) 0%, hsl(36 52% 44%) 60%, hsl(38 56% 58%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(40 25% 97%) 100%);
+    --gradient-rail: linear-gradient(145deg, hsl(228 55% 22%) 0%, hsl(225 52% 30%) 100%);
 
-    --shadow-gold: 0 0 30px hsl(38 64% 72% / 0.15), 0 4px 20px hsl(228 47% 4% / 0.6);
-    --shadow-card: 0 8px 32px hsl(228 47% 4% / 0.5);
-    --shadow-glow: 0 0 60px hsl(38 64% 72% / 0.12);
+    --shadow-gold: 0 0 20px hsl(36 52% 44% / 0.15), 0 4px 16px hsl(36 52% 44% / 0.10);
+    --shadow-card: 0 4px 20px hsl(228 30% 20% / 0.07);
+    --shadow-glow: 0 0 40px hsl(36 52% 44% / 0.10);
   }
 }
 
