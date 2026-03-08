@@ -63,11 +63,7 @@ export default function Onboarding() {
 
       <div className="w-full max-w-md relative z-10">
         <div className="flex justify-center mb-8">
-          {step === 0 ? (
-            <Logo size="lg" vertical />
-          ) : (
-            <Logo size="sm" />
-          )}
+          <Logo size="lg" vertical />
         </div>
 
         {step < 4 && (
