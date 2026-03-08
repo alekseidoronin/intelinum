@@ -65,19 +65,19 @@ export default function Home() {
   const num = (dayNum - 1) % 9 + 1;
 
   return (
-    <div className="h-dvh flex flex-col bg-background overflow-hidden">
+    <div className="min-h-dvh flex flex-col bg-background">
       {/* Header */}
       <TopBar />
 
       {/* Scrollable content */}
-      <div className="flex-1 flex flex-col px-4 pt-3 gap-3 overflow-hidden">
+      <div className="flex-1 flex flex-col px-4 pt-3 gap-3 pb-24">
 
         {/* Контент дня widget */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="min-h-0 max-h-[38vh] rounded-2xl overflow-hidden flex flex-col"
+          className="rounded-2xl overflow-hidden flex flex-col"
           style={{ background: "linear-gradient(145deg, hsl(224 65% 19%), hsl(221 35% 30%))" }}>
 
           {/* Widget Header */}
@@ -106,7 +106,7 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3 }}
-            className="flex-1 px-4 py-4 overflow-y-auto scrollbar-hide">
+            className="px-4 py-4">
             <p className="text-sm text-white/85 leading-relaxed whitespace-pre-line">
               {todayPost}
             </p>
