@@ -1,5 +1,5 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import { Home, Sparkles, BookOpen, User } from "lucide-react";
+import { Home, BookOpen, User } from "lucide-react";
 
 const items = [
   { icon: Home, label: "Главная", path: "/home" },
