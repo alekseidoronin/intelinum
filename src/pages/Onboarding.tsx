@@ -55,27 +55,24 @@ export default function Onboarding() {
   };
 
   return (
-    <div className="min-h-screen gradient-hero flex flex-col items-center justify-center px-5 relative overflow-hidden">
-      {/* Background ornament */}
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center px-5 relative overflow-hidden">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full bg-primary/5 blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-64 h-64 rounded-full bg-sapphire/10 blur-3xl" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-48 bg-sapphire/5 blur-3xl rounded-full" />
+        <div className="absolute bottom-0 right-0 w-64 h-64 bg-gold/10 blur-3xl rounded-full" />
       </div>
 
       <div className="w-full max-w-md relative z-10">
-        {/* Logo */}
         <div className="flex justify-center mb-8">
           <Logo size="lg" />
         </div>
 
-        {/* Step indicator */}
         {step < 4 && (
           <div className="flex justify-center gap-2 mb-8">
             {[0, 1, 2, 3].map(i => (
               <div
                 key={i}
                 className={`h-1 rounded-full transition-all duration-500 ${
-                  i <= step ? "bg-primary w-8" : "bg-muted w-4"
+                  i <= step ? "bg-royal w-8" : "bg-shell w-4"
                 }`}
               />
             ))}
@@ -93,23 +90,23 @@ export default function Onboarding() {
             {/* Step 0 — Welcome */}
             {step === 0 && (
               <div className="text-center">
-                <h1 className="font-display text-4xl gradient-text-gold mb-3 leading-tight">
+                <h1 className="font-display text-4xl text-royal mb-3 leading-tight">
                   Ваш контент-конвейер<br />на каждый день
                 </h1>
-                <p className="text-muted-foreground mb-8 leading-relaxed">
+                <p className="text-sapphire/80 mb-8 leading-relaxed text-sm">
                   Записи эфиров или актуальные темы → готовый пакет постов для всех площадок за 2 минуты
                 </p>
                 <div className="space-y-3 mb-8">
                   {["Посты под все площадки в вашем стиле", "Картинки без промптов", "Темы из трендов каждый день"].map(f => (
-                    <div key={f} className="flex items-center gap-3 glass-card rounded-xl px-4 py-3">
-                      <Check size={16} className="text-gold flex-shrink-0" />
-                      <span className="text-sm text-foreground/90">{f}</span>
+                    <div key={f} className="flex items-center gap-3 bg-white rounded-xl px-4 py-3 shadow-card border border-border">
+                      <Check size={16} className="text-sapphire flex-shrink-0" />
+                      <span className="text-sm text-foreground">{f}</span>
                     </div>
                   ))}
                 </div>
                 <button
                   onClick={goNext}
-                  className="w-full py-4 rounded-2xl bg-gradient-gold text-background font-semibold text-lg shadow-gold transition-all active:scale-95"
+                  className="w-full py-4 rounded-2xl bg-royal text-swan font-semibold text-lg shadow-card transition-all active:scale-95 hover:bg-sapphire"
                 >
                   Начать бесплатно
                 </button>
@@ -119,21 +116,21 @@ export default function Onboarding() {
             {/* Step 1 — Name */}
             {step === 1 && (
               <div>
-                <h2 className="font-display text-3xl gradient-text-gold mb-2">{steps[step].title}</h2>
-                <p className="text-muted-foreground mb-6">{steps[step].subtitle}</p>
+                <h2 className="font-display text-3xl text-royal mb-2">{steps[step].title}</h2>
+                <p className="text-sapphire/80 mb-6 text-sm">{steps[step].subtitle}</p>
                 <input
                   type="text"
                   value={name}
                   onChange={e => setName(e.target.value)}
                   placeholder="Ваше имя"
-                  className="w-full px-5 py-4 rounded-2xl bg-muted/50 border border-border/50 text-foreground placeholder:text-muted-foreground text-lg focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/30 transition-all"
+                  className="w-full px-5 py-4 rounded-2xl bg-white border border-border text-foreground placeholder:text-muted-foreground text-lg focus:outline-none focus:border-sapphire focus:ring-1 focus:ring-sapphire/30 transition-all"
                   onKeyDown={e => e.key === "Enter" && canProceed() && goNext()}
                   autoFocus
                 />
                 <button
                   onClick={goNext}
                   disabled={!canProceed()}
-                  className="w-full mt-5 py-4 rounded-2xl bg-gradient-gold text-background font-semibold text-lg shadow-gold transition-all active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="w-full mt-5 py-4 rounded-2xl bg-royal text-swan font-semibold text-lg shadow-card transition-all active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-sapphire"
                 >
                   Продолжить
                 </button>
@@ -143,24 +140,24 @@ export default function Onboarding() {
             {/* Step 2 — Texts */}
             {step === 2 && (
               <div>
-                <h2 className="font-display text-3xl gradient-text-gold mb-2">{steps[step].title}</h2>
-                <p className="text-muted-foreground mb-6">{steps[step].subtitle}</p>
+                <h2 className="font-display text-3xl text-royal mb-2">{steps[step].title}</h2>
+                <p className="text-sapphire/80 mb-6 text-sm">{steps[step].subtitle}</p>
                 <textarea
                   value={texts}
                   onChange={e => setTexts(e.target.value)}
                   placeholder="Вставьте сюда 3–5 ваших постов, статей или текстов. Наш помощник изучит ваш стиль и будет писать именно так, как пишете вы..."
                   rows={8}
-                  className="w-full px-5 py-4 rounded-2xl bg-muted/50 border border-border/50 text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/30 transition-all resize-none leading-relaxed"
+                  className="w-full px-5 py-4 rounded-2xl bg-white border border-border text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:border-sapphire focus:ring-1 focus:ring-sapphire/30 transition-all resize-none leading-relaxed"
                 />
                 <div className="flex gap-3 mt-4">
-                  <button className="flex-1 py-3 rounded-xl border border-border/70 text-muted-foreground flex items-center justify-center gap-2 text-sm active:scale-95 transition-all">
+                  <button className="flex-1 py-3 rounded-xl border border-border text-sapphire flex items-center justify-center gap-2 text-sm active:scale-95 transition-all bg-white hover:border-sapphire">
                     <Upload size={15} />
                     Загрузить файл
                   </button>
                   <button
                     onClick={goNext}
                     disabled={!canProceed()}
-                    className="flex-2 flex-grow py-3 rounded-xl bg-gradient-gold text-background font-semibold shadow-gold transition-all active:scale-95 disabled:opacity-40"
+                    className="flex-grow py-3 rounded-xl bg-royal text-swan font-semibold shadow-card transition-all active:scale-95 disabled:opacity-40 hover:bg-sapphire"
                   >
                     Продолжить
                   </button>
@@ -171,22 +168,22 @@ export default function Onboarding() {
             {/* Step 3 — Style */}
             {step === 3 && (
               <div>
-                <h2 className="font-display text-3xl gradient-text-gold mb-2">{steps[step].title}</h2>
-                <p className="text-muted-foreground mb-5">{steps[step].subtitle}</p>
+                <h2 className="font-display text-3xl text-royal mb-2">{steps[step].title}</h2>
+                <p className="text-sapphire/80 mb-5 text-sm">{steps[step].subtitle}</p>
                 <div className="grid grid-cols-2 gap-3 mb-5">
                   {styles.map(s => (
                     <button
                       key={s.id}
                       onClick={() => setSelectedStyle(s.id)}
-                      className={`p-4 rounded-2xl text-left transition-all active:scale-95 relative ${
+                      className={`p-4 rounded-2xl text-left transition-all active:scale-95 relative bg-white ${
                         selectedStyle === s.id
-                          ? "gold-border bg-primary/10 shadow-gold"
-                          : "border border-border/40 bg-muted/30 hover:border-border"
+                          ? "border-2 border-sapphire shadow-card"
+                          : "border border-border hover:border-sapphire/50"
                       }`}
                     >
                       {selectedStyle === s.id && (
-                        <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-primary flex items-center justify-center">
-                          <Check size={11} className="text-background" />
+                        <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-sapphire flex items-center justify-center">
+                          <Check size={11} className="text-swan" />
                         </div>
                       )}
                       <div className="text-2xl mb-2">{s.emoji}</div>
@@ -198,7 +195,7 @@ export default function Onboarding() {
                 <button
                   onClick={goNext}
                   disabled={!canProceed()}
-                  className="w-full py-4 rounded-2xl bg-gradient-gold text-background font-semibold text-lg shadow-gold transition-all active:scale-95 disabled:opacity-40"
+                  className="w-full py-4 rounded-2xl bg-royal text-swan font-semibold text-lg shadow-card transition-all active:scale-95 disabled:opacity-40 hover:bg-sapphire"
                 >
                   Готово
                 </button>
@@ -209,23 +206,14 @@ export default function Onboarding() {
             {step === 4 && (
               <div className="text-center py-8">
                 <div className="relative w-24 h-24 mx-auto mb-6">
-                  <div className="absolute inset-0 rounded-full border-2 border-primary/20" />
-                  <div
-                    className="absolute inset-0 rounded-full border-2 border-primary border-t-transparent animate-spin"
-                    style={{ animationDuration: "1.5s" }}
-                  />
-                  <Sparkles className="absolute inset-0 m-auto text-gold animate-pulse" size={32} />
+                  <div className="absolute inset-0 rounded-full border-2 border-shell" />
+                  <div className="absolute inset-0 rounded-full border-2 border-sapphire border-t-transparent animate-spin" style={{ animationDuration: "1.5s" }} />
+                  <Sparkles className="absolute inset-0 m-auto text-sapphire animate-pulse" size={32} />
                 </div>
-                <h2 className="font-display text-3xl gradient-text-gold mb-3">Изучаем ваш стиль...</h2>
-                <p className="text-muted-foreground mb-6 text-sm">
-                  Наш помощник анализирует ваши тексты и готовит первый пост
-                </p>
-                <div className="w-full bg-muted rounded-full h-2 mb-2">
-                  <motion.div
-                    className="h-2 rounded-full bg-gradient-gold"
-                    animate={{ width: `${loadingProgress}%` }}
-                    transition={{ duration: 0.4 }}
-                  />
+                <h2 className="font-display text-3xl text-royal mb-3">Изучаем ваш стиль...</h2>
+                <p className="text-muted-foreground mb-6 text-sm">Наш помощник анализирует ваши тексты</p>
+                <div className="w-full bg-shell rounded-full h-2 mb-2">
+                  <motion.div className="h-2 rounded-full bg-sapphire" animate={{ width: `${loadingProgress}%` }} transition={{ duration: 0.4 }} />
                 </div>
                 <div className="text-xs text-muted-foreground">{Math.round(loadingProgress)}%</div>
               </div>

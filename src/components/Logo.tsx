@@ -8,6 +8,7 @@ interface LogoProps {
 export function Logo({ size = "md", showText = true }: LogoProps) {
   const sizes = { sm: 32, md: 40, lg: 56 };
   const px = sizes[size];
+  const textSizes = { sm: 14, md: 18, lg: 26 };
 
   return (
     <div className="flex items-center gap-3">
@@ -16,12 +17,12 @@ export function Logo({ size = "md", showText = true }: LogoProps) {
         alt="ИНТЕЛИНУМ логотип"
         width={px}
         height={px}
-        className="object-contain drop-shadow-[0_0_8px_hsl(38_64%_72%/0.5)]"
+        className="object-contain"
       />
       {showText && (
         <span
-          className="font-display gradient-text-gold tracking-widest uppercase"
-          style={{ fontSize: size === "sm" ? 14 : size === "md" ? 18 : 26, letterSpacing: "0.2em" }}
+          className="font-display text-royal tracking-widest uppercase font-semibold"
+          style={{ fontSize: textSizes[size], letterSpacing: "0.18em" }}
         >
           ИНТЕЛИНУМ
         </span>
