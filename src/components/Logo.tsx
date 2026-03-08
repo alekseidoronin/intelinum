@@ -7,9 +7,9 @@ interface LogoProps {
 }
 
 export function Logo({ size = "md", showText = true, vertical = true }: LogoProps) {
-  const sizes = { sm: 32, md: 40, lg: 72 };
+  const sizes = { sm: 42, md: 40, lg: 72 };
   const px = sizes[size];
-  const textSizes = { sm: 14, md: 18, lg: 26 };
+  const textSizes = { sm: 17, md: 18, lg: 26 };
 
   if (vertical) {
     return (
