@@ -67,7 +67,7 @@ export default function Home() {
   return (
     <div className="h-dvh flex flex-col bg-background overflow-hidden">
       {/* Header */}
-      <TopBar showLogo />
+      <TopBar />
 
       {/* Scrollable content */}
       <div className="flex-1 flex flex-col px-4 gap-3 overflow-hidden">

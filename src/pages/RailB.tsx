@@ -35,7 +35,7 @@ export default function RailB() {
 
   return (
     <div className="min-h-screen bg-background pb-24">
-      <TopBar title="Что сейчас обсуждают" showBack />
+      <TopBar showBack />
 
       {generating && selected ? (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="px-5 py-12 text-center">
