@@ -126,7 +126,7 @@ export default function Home() {
               Редактировать
             </button>
           </div>
-        </motion.div>
+        </div>
 
         {/* Section label */}
         <h2 className="font-display text-lg font-semibold text-royal shrink-0">Создать контент</h2>

@@ -1,6 +1,5 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { Home, Sparkles, BookOpen, User } from "lucide-react";
-import { motion } from "framer-motion";
 
 const items = [
   { icon: Home, label: "Главная", path: "/home" },
@@ -25,22 +24,15 @@ export function BottomNav() {
             <button
               key={item.path}
               onClick={() => navigate(item.path)}
-              className="flex flex-col items-center justify-center gap-1.5 flex-1 py-3 px-1 transition-all relative"
+              className="flex flex-col items-center justify-center gap-1.5 flex-1 py-3 px-1 transition-all"
             >
-              {isActive && (
-                <motion.div
-                  layoutId="nav-pill"
-                  className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-1 rounded-full bg-royal"
-                  transition={{ type: "spring", bounce: 0.3, duration: 0.5 }}
-                />
-              )}
               <item.icon
                 size={26}
-                className={isActive ? "text-royal" : "text-muted-foreground"}
+                className={isActive ? "text-gold-dark" : "text-muted-foreground"}
               />
               <span
                 className={`text-[11px] leading-none font-medium font-body whitespace-nowrap ${
-                  isActive ? "text-royal" : "text-muted-foreground"
+                  isActive ? "text-gold-dark" : "text-muted-foreground"
                 }`}
               >
                 {item.label}
