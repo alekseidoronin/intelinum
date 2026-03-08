@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "@/hooks/useAuth";
+import { AppLayout } from "@/components/AppLayout";
 import WritingStyle from "./pages/WritingStyle";
 import VisualStyle from "./pages/VisualStyle";
 import Onboarding from "./pages/Onboarding";
@@ -31,26 +32,28 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Navigate to="/onboarding" replace />} />
-            <Route path="/onboarding" element={<Onboarding />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/profile/style" element={<WritingStyle />} />
-            <Route path="/profile/visual" element={<VisualStyle />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/rail-a" element={<RailA />} />
-            <Route path="/rail-b" element={<RailB />} />
-            <Route path="/result" element={<Result />} />
-            <Route path="/library" element={<Library />} />
-            <Route path="/image-editor" element={<ImageEditor />} />
-            <Route path="/carousel-editor" element={<CarouselEditor />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/pricing" element={<Pricing />} />
-            <Route path="/education" element={<Education />} />
-            <Route path="/solutions" element={<Solutions />} />
-            <Route path="/news" element={<News />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <AppLayout>
+            <Routes>
+              <Route path="/" element={<Navigate to="/onboarding" replace />} />
+              <Route path="/onboarding" element={<Onboarding />} />
+              <Route path="/auth" element={<Auth />} />
+              <Route path="/profile/style" element={<WritingStyle />} />
+              <Route path="/profile/visual" element={<VisualStyle />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/rail-a" element={<RailA />} />
+              <Route path="/rail-b" element={<RailB />} />
+              <Route path="/result" element={<Result />} />
+              <Route path="/library" element={<Library />} />
+              <Route path="/image-editor" element={<ImageEditor />} />
+              <Route path="/carousel-editor" element={<CarouselEditor />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/pricing" element={<Pricing />} />
+              <Route path="/education" element={<Education />} />
+              <Route path="/solutions" element={<Solutions />} />
+              <Route path="/news" element={<News />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </AppLayout>
         </BrowserRouter>
       </TooltipProvider>
     </AuthProvider>

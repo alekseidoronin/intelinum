@@ -121,7 +121,7 @@ export default function Profile() {
   };
 
   return (
-    <div className="min-h-screen bg-background pb-32">
+    <div className="min-h-screen bg-background pb-32 md:pb-8">
       <TopBar />
 
       {/* User card */}
