@@ -6,7 +6,7 @@ import { TopBar } from "@/components/TopBar";
 
 const menuItems = [
   { icon: FileText, label: "Мой стиль письма", desc: "Обновить тексты-примеры", path: "/profile/style" },
-  { icon: Palette, label: "Стиль картинок", desc: "Изменить визуальный стиль", path: "/profile/visual" },
+  { icon: Palette, label: "Стиль визуала", desc: "Изменить визуальный стиль картинок", path: "/profile/visual" },
   { icon: Bell, label: "Уведомления", desc: "Настройки напоминаний", path: "/profile/notifications" },
   { icon: Shield, label: "Безопасность", desc: "Пароль и данные", path: "/profile/security" },
   { icon: HelpCircle, label: "Поддержка", desc: "Написать нам", path: "/profile/support" },
