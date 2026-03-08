@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Copy, Edit3, Download, RefreshCw, ChevronLeft, Check, FileText, LayoutGrid, Sparkles, Image } from "lucide-react";
 import { BottomNav } from "@/components/BottomNav";
+import { useToast } from "@/hooks/use-toast";
 
 const platforms = [
   {
@@ -76,8 +77,10 @@ const platforms = [
 
 export default function Result() {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [activeTab, setActiveTab] = useState("instagram");
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [regenerating, setRegenerating] = useState(false);
 
   const cur = platforms.find(p => p.id === activeTab)!;
 
@@ -85,6 +88,26 @@ export default function Result() {
     navigator.clipboard.writeText(text);
     setCopiedId(id);
     setTimeout(() => setCopiedId(null), 2000);
+  };
+
+  const handleEdit = () => {
+    toast({ description: "Редактирование будет доступно в следующем обновлении" });
+  };
+
+  const handleDownload = (type: string) => {
+    toast({ description: `${type} будет доступен в следующем обновлении` });
+  };
+
+  const handleRegenerate = () => {
+    setRegenerating(true);
+    setTimeout(() => {
+      setRegenerating(false);
+      toast({ description: "Пакет перегенерирован ✨" });
+    }, 1200);
+  };
+
+  const handlePdf = () => {
+    toast({ description: "PDF-гайд будет создан в следующем обновлении 📄" });
   };
 
   return (
@@ -142,13 +165,13 @@ export default function Result() {
               {copiedId === activeTab ? <Check size={14} /> : <Copy size={14} />}
               {copiedId === activeTab ? "Скопировано!" : "Копировать"}
             </button>
-            <button className="py-2.5 rounded-xl bg-background text-royal text-sm font-medium flex items-center justify-center gap-2 border border-border hover:border-sapphire/50 transition-all active:scale-95">
+            <button onClick={handleEdit} className="py-2.5 rounded-xl bg-background text-royal text-sm font-medium flex items-center justify-center gap-2 border border-border hover:border-sapphire/50 transition-all active:scale-95">
               <Edit3 size={14} />
               Редактировать
             </button>
-            <button className="col-span-2 py-2.5 rounded-xl bg-background border border-border text-sapphire text-sm font-medium flex items-center justify-center gap-2 hover:border-sapphire/50 transition-colors active:scale-95">
-              <RefreshCw size={14} />
-              Перегенерировать
+            <button onClick={handleRegenerate} className="col-span-2 py-2.5 rounded-xl bg-background border border-border text-sapphire text-sm font-medium flex items-center justify-center gap-2 hover:border-sapphire/50 transition-colors active:scale-95">
+              <RefreshCw size={14} className={regenerating ? "animate-spin" : ""} />
+              {regenerating ? "Генерируется…" : "Перегенерировать"}
             </button>
           </div>
         </motion.div>
@@ -163,12 +186,12 @@ export default function Result() {
               </div>
             </div>
             <div className="flex gap-2 w-full">
-              <button className="flex-1 py-2 rounded-xl border border-border text-xs text-royal flex items-center justify-center gap-1 hover:border-sapphire/50 transition-colors active:scale-95">
+              <button onClick={() => handleDownload("Картинка")} className="flex-1 py-2 rounded-xl border border-border text-xs text-royal flex items-center justify-center gap-1 hover:border-sapphire/50 transition-colors active:scale-95">
                 <Download size={12} />
                 Скачать
               </button>
-              <button className="py-2 px-3 rounded-xl bg-sapphire/10 text-sapphire flex items-center justify-center hover:bg-sapphire/20 transition-colors active:scale-95">
-                <RefreshCw size={13} />
+              <button onClick={handleRegenerate} className="py-2 px-3 rounded-xl bg-sapphire/10 text-sapphire flex items-center justify-center hover:bg-sapphire/20 transition-colors active:scale-95">
+                <RefreshCw size={13} className={regenerating ? "animate-spin" : ""} />
               </button>
             </div>
           </div>
@@ -181,11 +204,11 @@ export default function Result() {
               </div>
             </div>
             <div className="flex gap-2 w-full">
-              <button className="flex-1 py-2 rounded-xl border border-border text-xs text-royal flex items-center justify-center gap-1 hover:border-sapphire/50 transition-colors active:scale-95">
+              <button onClick={() => handleDownload("Карусель ZIP")} className="flex-1 py-2 rounded-xl border border-border text-xs text-royal flex items-center justify-center gap-1 hover:border-sapphire/50 transition-colors active:scale-95">
                 <Download size={12} />
                 ZIP
               </button>
-              <button className="py-2 px-3 rounded-xl bg-sapphire/10 text-sapphire flex items-center justify-center hover:bg-sapphire/20 transition-colors active:scale-95">
+              <button onClick={handleEdit} className="py-2 px-3 rounded-xl bg-sapphire/10 text-sapphire flex items-center justify-center hover:bg-sapphire/20 transition-colors active:scale-95">
                 <Edit3 size={13} />
               </button>
             </div>
@@ -194,7 +217,7 @@ export default function Result() {
 
         {/* Extra actions */}
         <div className="space-y-2">
-          <button className="w-full bg-white border border-border rounded-2xl px-4 py-3.5 flex items-center gap-3 text-left hover:border-sapphire/40 shadow-card transition-all active:scale-[0.98]">
+          <button onClick={handlePdf} className="w-full bg-white border border-border rounded-2xl px-4 py-3.5 flex items-center gap-3 text-left hover:border-sapphire/40 shadow-card transition-all active:scale-[0.98]">
             <div className="w-9 h-9 rounded-xl bg-sapphire/10 flex items-center justify-center">
               <FileText size={16} className="text-sapphire" />
             </div>
@@ -203,9 +226,9 @@ export default function Result() {
               <p className="text-xs text-muted-foreground">Красивый гайд на 3–7 страниц для привлечения клиентов</p>
             </div>
           </button>
-          <button className="w-full bg-white border border-border rounded-2xl px-4 py-3.5 flex items-center gap-3 text-left hover:border-sapphire/40 shadow-card transition-all active:scale-[0.98]">
+          <button onClick={handleRegenerate} className="w-full bg-white border border-border rounded-2xl px-4 py-3.5 flex items-center gap-3 text-left hover:border-sapphire/40 shadow-card transition-all active:scale-[0.98]">
             <div className="w-9 h-9 rounded-xl bg-sapphire/10 flex items-center justify-center">
-              <RefreshCw size={16} className="text-sapphire" />
+              <RefreshCw size={16} className={`text-sapphire ${regenerating ? "animate-spin" : ""}`} />
             </div>
             <div className="flex-1">
               <p className="text-sm font-medium text-royal">Перегенерировать</p>
