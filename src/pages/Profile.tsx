@@ -16,7 +16,7 @@ export default function Profile() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-background pb-24">
+    <div className="min-h-screen bg-background pb-32">
       <TopBar />
 
       {/* User card — Royal Blue background */}
