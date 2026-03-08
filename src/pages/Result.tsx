@@ -159,21 +159,21 @@ export default function Result() {
           <div className="px-4 py-4 max-h-64 overflow-y-auto scrollbar-hide">
             <p className="text-base text-foreground leading-relaxed whitespace-pre-line">{cur.text}</p>
           </div>
-          <div className="px-4 pb-4 border-t border-border pt-3 grid grid-cols-2 gap-2">
+          <div className="px-4 pb-4 border-t border-border pt-3 flex gap-2">
             <button onClick={() => handleCopy(activeTab, cur.text)}
-              className={`py-3.5 rounded-xl text-base font-medium flex items-center justify-center gap-2 transition-all active:scale-95 ${
+              className={`flex-1 py-3 rounded-xl text-sm font-medium flex items-center justify-center gap-1.5 transition-all active:scale-95 ${
                 copiedId === activeTab ? "bg-sapphire/10 text-sapphire" : "bg-background text-royal border border-border hover:border-sapphire/50"
               }`}>
-              {copiedId === activeTab ? <Check size={16} /> : <Copy size={16} />}
-              {copiedId === activeTab ? "Скопировано!" : "Копировать"}
+              {copiedId === activeTab ? <Check size={15} /> : <Copy size={15} />}
+              {copiedId === activeTab ? "Скопировано" : "Копировать"}
             </button>
-            <button onClick={handleEdit} className="py-3.5 rounded-xl bg-background text-royal text-base font-medium flex items-center justify-center gap-2 border border-border hover:border-sapphire/50 transition-all active:scale-95">
-              <Edit3 size={16} />
+            <button onClick={handleEdit} className="flex-1 py-3 rounded-xl bg-background text-royal text-sm font-medium flex items-center justify-center gap-1.5 border border-border hover:border-sapphire/50 transition-all active:scale-95">
+              <Edit3 size={15} />
               Редактировать
             </button>
-            <button onClick={handleRegenerate} className="col-span-2 py-3.5 rounded-xl bg-background border border-border text-sapphire text-base font-medium flex items-center justify-center gap-2 hover:border-sapphire/50 transition-colors active:scale-95">
-              <RefreshCw size={16} className={regenerating ? "animate-spin" : ""} />
-              {regenerating ? "Генерируется…" : "Перегенерировать"}
+            <button onClick={handleRegenerate} className="flex-1 py-3 rounded-xl bg-background border border-border text-sapphire text-sm font-medium flex items-center justify-center gap-1.5 hover:border-sapphire/50 transition-colors active:scale-95">
+              <RefreshCw size={15} className={regenerating ? "animate-spin" : ""} />
+              {regenerating ? "Генерируется…" : "Переписать"}
             </button>
           </div>
         </motion.div>
