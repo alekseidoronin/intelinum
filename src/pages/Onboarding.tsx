@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, Zap, Image, TrendingUp } from "lucide-react";
+import { Sparkles, Zap, Layers, Gem } from "lucide-react";
 import logoImg from "@/assets/logo.png";
 
 const features = [
-  { icon: Zap, text: "Посты под все площадки в вашем стиле" },
-  { icon: Image, text: "Картинки без промптов" },
-  { icon: TrendingUp, text: "Темы из трендов каждый день" },
+  { icon: Zap,    emoji: "⚡", title: "Пишет вашим языком",         desc: "Платформа изучает ваш стиль и создаёт тексты, которые звучат как вы" },
+  { icon: Layers, emoji: "🎴", title: "Красивые картинки сами",     desc: "Выбираете стиль один раз — дальше картинки создаются автоматически" },
+  { icon: Gem,    emoji: "🔮", title: "Каждое утро — готовая тема", desc: "Не надо думать «о чём сегодня писать» — тема дня уже ждёт вас" },
 ];
 
 export default function Onboarding() {
