@@ -71,11 +71,7 @@ export default function Home() {
       <div className="px-4 pt-14 pb-3 py-[20px]">
         <div className="flex items-center justify-between">
           <Logo size="sm" vertical={false} />
-          <button
-            onClick={handleBell}
-            className="w-9 h-9 rounded-xl border border-border bg-card flex items-center justify-center text-sapphire hover:border-sapphire transition-colors shadow-card active:scale-90">
-            <Bell size={17} />
-          </button>
+          <SideMenuButton />
         </div>
       </div>
 
