@@ -146,30 +146,12 @@ export default function Profile() {
             </div>
 
             <div className="flex-1 min-w-0">
-              {editingName ? (
-                <div className="flex items-center gap-2">
-                  <input
-                    value={newName}
-                    onChange={e => setNewName(e.target.value)}
-                    onKeyDown={e => e.key === "Enter" && saveName()}
-                    autoFocus
-                    className="flex-1 min-w-0 bg-white/15 border border-white/30 rounded-xl px-3 py-1.5 text-base text-swan focus:outline-none"
-                  />
-                  <button onClick={saveName} disabled={savingName} className="w-8 h-8 flex items-center justify-center rounded-lg bg-white/20 text-swan">
-                    <Check size={16} />
-                  </button>
-                  <button onClick={() => setEditingName(false)} className="w-8 h-8 flex items-center justify-center rounded-lg bg-white/10 text-swan/60">
-                    <X size={16} />
-                  </button>
-                </div>
-              ) : (
-                <div className="flex items-center gap-2">
-                  <h2 className="font-display text-xl text-swan truncate">{shownName}</h2>
-                  <button onClick={startEditName} className="w-7 h-7 flex items-center justify-center rounded-lg bg-white/10 text-swan/60 hover:text-swan flex-shrink-0">
-                    <Pencil size={13} />
-                  </button>
-                </div>
-              )}
+              <div className="flex items-center gap-2">
+                <h2 className="font-display text-xl text-swan truncate">{shownName}</h2>
+                <button onClick={startEditName} className="w-7 h-7 flex items-center justify-center rounded-lg bg-white/10 text-swan/60 hover:text-swan flex-shrink-0">
+                  <Pencil size={13} />
+                </button>
+              </div>
               {email ? (
                 <p className="text-sm text-swan/50 truncate mt-0.5">{email}</p>
               ) : null}
@@ -300,6 +282,52 @@ export default function Profile() {
       </div>
 
       <BottomNav />
+
+      {/* Edit name bottom sheet */}
+      {editingName && (
+        <div className="fixed inset-0 z-50 flex flex-col justify-end" onClick={() => setEditingName(false)}>
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
+          <div
+            className="relative rounded-t-3xl px-5 pt-5 pb-10 space-y-4"
+            style={{ background: "hsl(var(--background))" }}
+            onClick={e => e.stopPropagation()}
+          >
+            {/* Handle */}
+            <div className="w-10 h-1 rounded-full bg-border mx-auto mb-2" />
+            <p className="text-lg font-semibold text-foreground">Изменить имя</p>
+            <input
+              value={newName}
+              onChange={e => setNewName(e.target.value)}
+              onKeyDown={e => e.key === "Enter" && saveName()}
+              autoFocus
+              placeholder="Ваше имя"
+              className="w-full px-4 py-4 rounded-2xl text-base focus:outline-none transition-all"
+              style={{
+                background: "hsl(var(--muted))",
+                border: "1.5px solid hsl(var(--border))",
+                color: "hsl(var(--foreground))",
+              }}
+            />
+            <div className="flex gap-3">
+              <button
+                onClick={saveName}
+                disabled={savingName || !newName.trim()}
+                className="flex-1 py-4 rounded-2xl text-base font-bold disabled:opacity-40 transition-all active:scale-95"
+                style={{ background: "var(--gradient-gold)", color: "hsl(var(--royal))" }}
+              >
+                {savingName ? "Сохраняем..." : "Сохранить"}
+              </button>
+              <button
+                onClick={() => setEditingName(false)}
+                className="py-4 px-5 rounded-2xl text-base font-medium border transition-all active:scale-95"
+                style={{ borderColor: "hsl(var(--border))", color: "hsl(var(--muted-foreground))" }}
+              >
+                Отмена
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
