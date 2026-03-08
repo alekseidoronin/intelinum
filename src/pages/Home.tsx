@@ -82,7 +82,7 @@ export default function Home() {
               <div>
                 <div className="text-xs text-white/60 leading-tight">Контент дня</div>
                 <div className="text-sm font-medium text-white leading-tight">
-                  Число {num} — {today.toLocaleDateString("ru", { day: "numeric", month: "long" })}
+                  Число {num} - {today.toLocaleDateString("ru", { day: "numeric", month: "long" })}
                 </div>
               </div>
             </div>
