@@ -32,7 +32,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background pb-24">
       {/* Header — прижат к safe area сверху */}
-      <div className="px-4 pt-14 pb-3">
+      <div className="px-4 pt-8 pb-3">
         <div className="flex items-center justify-between">
           <Logo size="sm" vertical={false} />
           <button className="w-9 h-9 rounded-xl border border-border bg-card flex items-center justify-center text-sapphire hover:border-sapphire transition-colors shadow-card">
