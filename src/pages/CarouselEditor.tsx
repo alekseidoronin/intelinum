@@ -65,6 +65,10 @@ export default function CarouselEditor() {
   const [colorTarget, setColorTarget] = useState<ColorTarget>(null);
   const [bgSubTab, setBgSubTab] = useState<BgSubTab>("gradient");
   const [showFontPicker, setShowFontPicker] = useState(false);
+  const [customGradFrom, setCustomGradFrom] = useState("#112250");
+  const [customGradTo, setCustomGradTo] = useState("#3C507D");
+  const [customGradDir, setCustomGradDir] = useState("135deg");
+  const [customGradActive, setCustomGradActive] = useState<"from" | "to" | null>(null);
   const [regenerating, setRegenerating] = useState(false);
   const [downloaded, setDownloaded] = useState(false);
 
@@ -422,14 +426,92 @@ export default function CarouselEditor() {
             </div>
 
             {bgSubTab === "gradient" && (
-              <div className="grid grid-cols-4 gap-2">
-                {BG_GRADIENTS.map((g) => (
-                  <button key={g} onClick={() => updateBg(g, "gradient")}
-                    style={{ background: g }}
-                    className={`h-14 rounded-xl border-2 transition-all ${
-                      slide.bg.value === g ? "border-royal scale-105 shadow-card" : "border-transparent hover:border-border"
-                    }`} />
-                ))}
+              <div className="space-y-3">
+                {/* Preset swatches */}
+                <div className="grid grid-cols-4 gap-2">
+                  {BG_GRADIENTS.map((g) => (
+                    <button key={g} onClick={() => { updateBg(g, "gradient"); setCustomGradActive(null); }}
+                      style={{ background: g }}
+                      className={`h-14 rounded-xl border-2 transition-all ${
+                        slide.bg.value === g ? "border-royal scale-105 shadow-card" : "border-transparent hover:border-border"
+                      }`} />
+                  ))}
+                </div>
+
+                {/* Separator */}
+                <div className="flex items-center gap-2">
+                  <div className="flex-1 h-px bg-border" />
+                  <span className="text-xs text-muted-foreground">Свой градиент</span>
+                  <div className="flex-1 h-px bg-border" />
+                </div>
+
+                {/* Custom gradient preview */}
+                <div
+                  className="h-14 rounded-xl border border-border"
+                  style={{ background: `linear-gradient(${customGradDir}, ${customGradFrom}, ${customGradTo})` }}
+                />
+
+                {/* Direction buttons */}
+                <div className="flex gap-1.5">
+                  {[
+                    { label: "↗", val: "135deg" },
+                    { label: "→", val: "90deg" },
+                    { label: "↓", val: "180deg" },
+                    { label: "↘", val: "45deg" },
+                  ].map(({ label, val }) => (
+                    <button key={val}
+                      onClick={() => {
+                        setCustomGradDir(val);
+                        updateBg(`linear-gradient(${val}, ${customGradFrom}, ${customGradTo})`, "gradient");
+                      }}
+                      className={`flex-1 py-1.5 rounded-lg border text-sm font-medium transition-all ${
+                        customGradDir === val ? "border-royal bg-royal text-swan" : "border-border text-foreground hover:border-sapphire/50"
+                      }`}>
+                      {label}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Color pickers for from/to */}
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setCustomGradActive((v) => (v === "from" ? null : "from"))}
+                    className={`flex-1 py-2 rounded-xl border text-xs font-medium flex items-center justify-center gap-2 transition-all ${
+                      customGradActive === "from" ? "border-royal bg-royal/5 text-royal" : "border-border text-foreground"
+                    }`}>
+                    <div className="w-4 h-4 rounded-sm border border-black/10" style={{ backgroundColor: customGradFrom }} />
+                    Начало
+                  </button>
+                  <button
+                    onClick={() => setCustomGradActive((v) => (v === "to" ? null : "to"))}
+                    className={`flex-1 py-2 rounded-xl border text-xs font-medium flex items-center justify-center gap-2 transition-all ${
+                      customGradActive === "to" ? "border-royal bg-royal/5 text-royal" : "border-border text-foreground"
+                    }`}>
+                    <div className="w-4 h-4 rounded-sm border border-black/10" style={{ backgroundColor: customGradTo }} />
+                    Конец
+                  </button>
+                </div>
+
+                {customGradActive === "from" && (
+                  <ColorPicker
+                    key="grad-from"
+                    color={customGradFrom}
+                    onChange={(c) => {
+                      setCustomGradFrom(c);
+                      updateBg(`linear-gradient(${customGradDir}, ${c}, ${customGradTo})`, "gradient");
+                    }}
+                  />
+                )}
+                {customGradActive === "to" && (
+                  <ColorPicker
+                    key="grad-to"
+                    color={customGradTo}
+                    onChange={(c) => {
+                      setCustomGradTo(c);
+                      updateBg(`linear-gradient(${customGradDir}, ${customGradFrom}, ${c})`, "gradient");
+                    }}
+                  />
+                )}
               </div>
             )}
 
