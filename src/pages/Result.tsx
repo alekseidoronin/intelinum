@@ -162,12 +162,12 @@ export default function Result() {
                 <p className="text-xs text-muted-foreground">Картинка</p>
               </div>
             </div>
-            <div className="flex gap-2 w-full">
-              <button className="flex-1 py-2 rounded-lg border border-border text-xs text-royal flex items-center justify-center gap-1 hover:border-sapphire/50 transition-colors">
+            <div className="grid grid-cols-2 gap-2 w-full">
+              <button className="py-2.5 rounded-xl border border-border text-xs text-royal flex items-center justify-center gap-1.5 hover:border-sapphire/50 transition-colors active:scale-95">
                 <Download size={12} />
                 Скачать
               </button>
-              <button className="flex-1 py-2 rounded-lg bg-sapphire/10 text-xs text-sapphire flex items-center justify-center gap-1 hover:bg-sapphire/20 transition-colors">
+              <button className="py-2.5 rounded-xl bg-sapphire/10 text-xs text-sapphire flex items-center justify-center gap-1.5 hover:bg-sapphire/20 transition-colors active:scale-95">
                 <RefreshCw size={12} />
                 Ещё
               </button>
@@ -181,12 +181,12 @@ export default function Result() {
                 <p className="text-xs text-muted-foreground">8 слайдов</p>
               </div>
             </div>
-            <div className="flex gap-2 w-full">
-              <button className="flex-1 py-2 rounded-lg border border-border text-xs text-royal flex items-center justify-center gap-1 hover:border-sapphire/50 transition-colors">
+            <div className="grid grid-cols-2 gap-2 w-full">
+              <button className="py-2.5 rounded-xl border border-border text-xs text-royal flex items-center justify-center gap-1.5 hover:border-sapphire/50 transition-colors active:scale-95">
                 <Download size={12} />
                 ZIP
               </button>
-              <button className="flex-1 py-2 rounded-lg bg-sapphire/10 text-xs text-sapphire flex items-center justify-center gap-1 hover:bg-sapphire/20 transition-colors">
+              <button className="py-2.5 rounded-xl bg-sapphire/10 text-xs text-sapphire flex items-center justify-center gap-1.5 hover:bg-sapphire/20 transition-colors active:scale-95">
                 <Edit3 size={12} />
                 Изм.
               </button>
