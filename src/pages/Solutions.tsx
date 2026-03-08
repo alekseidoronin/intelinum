@@ -8,7 +8,7 @@ export default function Solutions() {
   return (
     <div className="min-h-screen bg-background pb-24">
       <TopBar />
-      <div className="px-5 pb-4 flex items-center gap-3">
+      <div className="px-5 pt-3 pb-4 flex items-center gap-3">
         <button onClick={() => navigate(-1)} className="w-9 h-9 rounded-xl border border-border bg-white flex items-center justify-center text-sapphire shadow-card">
           <ChevronLeft size={18} />
         </button>
