@@ -3,10 +3,12 @@ import { supabase } from "@/integrations/supabase/client";
 
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Copy, Edit3, RefreshCw, ChevronLeft, ChevronRight, Check, FileText, LayoutGrid, Sparkles, Image } from "lucide-react";
+import { Copy, Edit3, RefreshCw, ChevronLeft, ChevronRight, Check, FileText, LayoutGrid, Sparkles, Image, X } from "lucide-react";
 import { BottomNav } from "@/components/BottomNav";
 import { TopBar } from "@/components/TopBar";
 import { useToast } from "@/hooks/use-toast";
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+
 
 const platforms = [
   {
