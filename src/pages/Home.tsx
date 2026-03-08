@@ -71,13 +71,13 @@ export default function Home() {
       <div className="flex-1 flex flex-col px-4 pt-3 gap-3 pb-24">
 
         {/* Контент дня */}
-        <div className="rounded-2xl overflow-hidden flex flex-col"
+        <div className="rounded-2xl overflow-hidden flex flex-col max-h-52"
           style={{ background: "linear-gradient(145deg, hsl(224 65% 19%), hsl(221 35% 30%))" }}>
 
-          <div className="px-4 pt-4 pb-3 flex items-center justify-between border-b border-white/10">
+          <div className="px-4 pt-3 pb-2.5 flex items-center justify-between border-b border-white/10 shrink-0">
             <div className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-lg bg-white/15 flex items-center justify-center flex-shrink-0">
-                <Zap size={13} className="text-gold" />
+              <div className="w-6 h-6 rounded-lg bg-white/15 flex items-center justify-center flex-shrink-0">
+                <Zap size={12} className="text-gold" />
               </div>
               <div>
                 <div className="text-xs text-white/60 leading-tight">Контент дня</div>
@@ -88,8 +88,8 @@ export default function Home() {
             </div>
             <button
               onClick={handleRefresh}
-              className="w-8 h-8 flex items-center justify-center text-white/50 hover:text-white/90 transition-colors active:scale-90">
-              <RefreshCw size={15} className={refreshing ? "animate-spin" : ""} />
+              className="w-7 h-7 flex items-center justify-center text-white/50 hover:text-white/90 transition-colors active:scale-90">
+              <RefreshCw size={14} className={refreshing ? "animate-spin" : ""} />
             </button>
           </div>
 
@@ -98,7 +98,7 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3 }}
-            className="px-4 py-4">
+            className="px-4 py-3 overflow-y-auto scrollbar-hide flex-1">
             <p className="text-sm text-white/85 leading-relaxed whitespace-pre-line">
               {todayPost}
             </p>
