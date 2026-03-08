@@ -43,16 +43,17 @@ export default function Onboarding() {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center justify-center px-5 relative overflow-hidden">
+    <div className="min-h-screen bg-background flex flex-col items-center px-5 relative overflow-hidden pt-12">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-48 bg-sapphire/5 blur-3xl rounded-full" />
         <div className="absolute bottom-0 right-0 w-64 h-64 bg-gold/10 blur-3xl rounded-full" />
       </div>
 
+      <div className="mb-10 flex items-center justify-center relative z-10">
+        <Logo size="lg" vertical />
+      </div>
+
       <div className="w-full max-w-md relative z-10">
-        <div className="mb-8 flex items-start justify-center py-0 pt-0">
-          <Logo size="lg" vertical />
-        </div>
 
         {step === 1
 
