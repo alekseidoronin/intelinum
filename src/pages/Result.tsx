@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Copy, Edit3, Download, RefreshCw, ChevronLeft, Check, FileText, LayoutGrid, Sparkles, Image } from "lucide-react";
+import { Copy, Edit3, Download, RefreshCw, ChevronLeft, ChevronRight, Check, FileText, LayoutGrid, Sparkles, Image } from "lucide-react";
 import { BottomNav } from "@/components/BottomNav";
 import { TopBar } from "@/components/TopBar";
 import { useToast } from "@/hooks/use-toast";
@@ -179,42 +179,34 @@ export default function Result() {
         </motion.div>
 
         {/* Image & Carousel */}
-        <div className="grid grid-cols-2 gap-3">
-          <div className="bg-white border border-border rounded-2xl p-4 flex flex-col items-center gap-3 shadow-card">
-            <div className="w-full aspect-square rounded-xl bg-shell flex items-center justify-center">
-              <div className="text-center">
-                <Image size={28} className="text-sapphire mx-auto mb-2" />
-                <p className="text-xs text-muted-foreground">Картинка</p>
-              </div>
+        <div className="space-y-2">
+          <button
+            onClick={() => navigate("/image-editor")}
+            className="w-full bg-white border border-border rounded-2xl px-4 py-4 flex items-center gap-3 shadow-card active:scale-[0.98] transition-all text-left"
+          >
+            <div className="w-12 h-12 rounded-xl bg-sapphire/10 flex items-center justify-center flex-shrink-0">
+              <Image size={22} className="text-sapphire" />
             </div>
-            <div className="flex gap-2 w-full">
-              <button onClick={() => handleDownload("Картинка")} className="flex-1 py-2 rounded-xl border border-border text-xs text-royal flex items-center justify-center gap-1 hover:border-sapphire/50 transition-colors active:scale-95">
-                <Download size={12} />
-                Скачать
-              </button>
-              <button onClick={handleRegenerate} className="py-2 px-3 rounded-xl bg-sapphire/10 text-sapphire flex items-center justify-center hover:bg-sapphire/20 transition-colors active:scale-95">
-                <RefreshCw size={13} className={regenerating ? "animate-spin" : ""} />
-              </button>
+            <div className="flex-1">
+              <p className="text-sm font-medium text-royal">Картинка</p>
+              <p className="text-xs text-muted-foreground">Выбор размера · скачать</p>
             </div>
-          </div>
+            <ChevronRight size={16} className="text-muted-foreground" />
+          </button>
 
-          <div className="bg-white border border-border rounded-2xl p-4 flex flex-col items-center gap-3 shadow-card">
-            <div className="w-full aspect-square rounded-xl bg-shell flex items-center justify-center">
-              <div className="text-center">
-                <LayoutGrid size={28} className="text-sapphire mx-auto mb-2" />
-                <p className="text-xs text-muted-foreground">8 слайдов</p>
-              </div>
+          <button
+            onClick={() => navigate("/carousel-editor")}
+            className="w-full bg-white border border-border rounded-2xl px-4 py-4 flex items-center gap-3 shadow-card active:scale-[0.98] transition-all text-left"
+          >
+            <div className="w-12 h-12 rounded-xl bg-sapphire/10 flex items-center justify-center flex-shrink-0">
+              <LayoutGrid size={22} className="text-sapphire" />
             </div>
-            <div className="flex gap-2 w-full">
-              <button onClick={() => handleDownload("Карусель ZIP")} className="flex-1 py-2 rounded-xl border border-border text-xs text-royal flex items-center justify-center gap-1 hover:border-sapphire/50 transition-colors active:scale-95">
-                <Download size={12} />
-                ZIP
-              </button>
-              <button onClick={handleEdit} className="py-2 px-3 rounded-xl bg-sapphire/10 text-sapphire flex items-center justify-center hover:bg-sapphire/20 transition-colors active:scale-95">
-                <Edit3 size={13} />
-              </button>
+            <div className="flex-1">
+              <p className="text-sm font-medium text-royal">Карусель — 8 слайдов</p>
+              <p className="text-xs text-muted-foreground">Редактор текста · шрифт · размер</p>
             </div>
-          </div>
+            <ChevronRight size={16} className="text-muted-foreground" />
+          </button>
         </div>
 
         {/* Extra actions */}
