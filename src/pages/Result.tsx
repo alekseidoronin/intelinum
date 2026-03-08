@@ -135,20 +135,21 @@ export default function Result() {
           <div className="px-4 py-4 max-h-64 overflow-y-auto scrollbar-hide">
             <p className="text-sm text-foreground leading-relaxed whitespace-pre-line">{cur.text}</p>
           </div>
-          <div className="px-4 pb-4 flex gap-2 border-t border-border pt-3">
+          <div className="px-4 pb-4 border-t border-border pt-3 grid grid-cols-2 gap-2">
             <button onClick={() => handleCopy(activeTab, cur.text)}
-              className={`flex-1 py-2.5 rounded-xl text-sm font-medium flex items-center justify-center gap-2 transition-all active:scale-95 ${
+              className={`py-2.5 rounded-xl text-sm font-medium flex items-center justify-center gap-2 transition-all active:scale-95 ${
                 copiedId === activeTab ? "bg-sapphire/10 text-sapphire" : "bg-background text-royal border border-border hover:border-sapphire/50"
               }`}>
               {copiedId === activeTab ? <Check size={14} /> : <Copy size={14} />}
               {copiedId === activeTab ? "Скопировано!" : "Копировать"}
             </button>
-            <button className="flex-1 py-2.5 rounded-xl bg-background text-royal text-sm font-medium flex items-center justify-center gap-2 border border-border hover:border-sapphire/50 transition-all active:scale-95">
+            <button className="py-2.5 rounded-xl bg-background text-royal text-sm font-medium flex items-center justify-center gap-2 border border-border hover:border-sapphire/50 transition-all active:scale-95">
               <Edit3 size={14} />
               Редактировать
             </button>
-            <button className="py-2.5 px-3 rounded-xl bg-background border border-border text-sapphire hover:border-sapphire/50 transition-colors active:scale-95">
+            <button className="col-span-2 py-2.5 rounded-xl bg-background border border-border text-sapphire text-sm font-medium flex items-center justify-center gap-2 hover:border-sapphire/50 transition-colors active:scale-95">
               <RefreshCw size={14} />
+              Перегенерировать
             </button>
           </div>
         </motion.div>
