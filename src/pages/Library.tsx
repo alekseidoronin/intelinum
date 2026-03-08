@@ -27,7 +27,7 @@ export default function Library() {
   });
 
   return (
-    <div className="min-h-screen bg-background pb-24">
+    <div className="min-h-screen bg-background pb-32">
       <TopBar />
 
       <div className="px-5 mb-4">
