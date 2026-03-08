@@ -181,8 +181,8 @@ export default function Home() {
           transition={{ delay: 0.4 }}
           className="shrink-0 bg-card rounded-2xl px-4 py-3 border border-border shadow-card mb-2">
           <div className="flex items-center justify-between mb-1.5">
-            <span className="text-xs text-muted-foreground">Пакеты в этом месяце</span>
-            <span className="text-xs text-sapphire font-medium">2 / 3</span>
+            <span className="text-sm text-muted-foreground">Пакеты в этом месяце</span>
+            <span className="text-sm text-sapphire font-medium">2 / 3</span>
           </div>
           <div className="w-full bg-shell rounded-full h-1.5">
             <div className="h-1.5 rounded-full bg-sapphire" style={{ width: "67%" }} />
