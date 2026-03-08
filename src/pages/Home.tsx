@@ -166,10 +166,7 @@ export default function Home() {
         </motion.button>
 
         {/* Limit bar */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
+        <div
           className="shrink-0 bg-card rounded-2xl px-4 py-3 border border-border shadow-card mb-2">
           <div className="flex items-center justify-between mb-1.5">
             <span className="text-sm text-muted-foreground">Пакеты в этом месяце</span>
