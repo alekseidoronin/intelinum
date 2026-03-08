@@ -70,7 +70,7 @@ export default function Home() {
       <TopBar />
 
       {/* Scrollable content */}
-      <div className="flex-1 flex flex-col px-4 gap-3 overflow-hidden">
+      <div className="flex-1 flex flex-col px-4 pt-3 gap-3 overflow-hidden">
 
         {/* Контент дня widget */}
         <motion.div
