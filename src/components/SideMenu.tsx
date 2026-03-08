@@ -55,7 +55,7 @@ export function SideMenuButton() {
               className="fixed top-0 right-0 bottom-0 z-50 w-72 bg-card flex flex-col shadow-2xl"
             >
               {/* Header */}
-              <div className="px-5 pt-12 pb-4 flex items-center justify-between border-b border-border">
+              <div className="px-5 pt-5 pb-4 flex items-center justify-between border-b border-border">
                 <Logo size="sm" vertical={false} />
                 <button
                   onClick={() => setOpen(false)}
