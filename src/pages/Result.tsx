@@ -119,7 +119,6 @@ export default function Result() {
               className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition-all ${
                 activeTab === p.id ? "bg-royal text-swan" : "bg-white text-sapphire border border-border hover:border-sapphire/50 shadow-card"
               }`}>
-              <span>{p.emoji}</span>
               {p.name}
             </button>
           ))}
@@ -129,7 +128,7 @@ export default function Result() {
       <div className="px-5 space-y-4">
         <motion.div key={activeTab} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="bg-white border border-border rounded-2xl overflow-hidden shadow-card">
           <div className="px-4 py-3 border-b border-border flex items-center justify-between bg-background">
-            <span className="text-sm font-medium text-royal">{cur.emoji} {cur.name}</span>
+            <span className="text-sm font-medium text-royal">{cur.name}</span>
             <span className="text-xs text-muted-foreground">{cur.text.length} / {cur.charLimit.toLocaleString()} симв.</span>
           </div>
           <div className="px-4 py-4 max-h-64 overflow-y-auto scrollbar-hide">
