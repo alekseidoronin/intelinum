@@ -7,6 +7,7 @@ import { BottomNav } from "@/components/BottomNav";
 const categories = [
   {
     tag: "Психология",
+    description: "Тревога, страхи, эмоции и уверенность через числа",
     icon: Brain,
     color: "text-violet-500",
     bg: "bg-violet-50",
