@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronRight, Upload, Check, Sparkles } from "lucide-react";
+import { Check, Sparkles } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import styleRealistic from "@/assets/style-realistic.jpg";
 import styleMinimal from "@/assets/style-minimal.jpg";
