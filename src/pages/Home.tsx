@@ -150,9 +150,6 @@ export default function Home() {
 
         {/* Rail B */}
         <motion.button
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.4, delay: 0.2 }}
           onClick={() => navigate("/rail-b")}
           className="shrink-0 w-full bg-card rounded-2xl p-3.5 text-left shadow-card border border-border hover:border-sapphire/40 transition-all active:scale-[0.98]">
           <div className="flex items-center gap-3">
