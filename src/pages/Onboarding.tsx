@@ -22,30 +22,16 @@ const styles = [
 const steps = [
   { title: "Добро пожаловать", subtitle: "AI-платформа для нумерологов" },
   { title: "Как вас зовут?", subtitle: "Мы будем обращаться по имени" },
-  { title: "Стиль визуала", subtitle: "Выберите, как будут выглядеть ваши картинки" },
-  { title: "Всё готово!", subtitle: "" },
 ];
 
 export default function Onboarding() {
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [name, setName] = useState("");
-  const [selectedStyle, setSelectedStyle] = useState("");
-  const [loadingProgress, setLoadingProgress] = useState(0);
 
   const goNext = () => {
-    if (step === 2) {
-      setStep(3);
-      let p = 0;
-      const interval = setInterval(() => {
-        p += Math.random() * 15 + 5;
-        if (p >= 100) {
-          p = 100;
-          clearInterval(interval);
-          setTimeout(() => navigate("/home"), 600);
-        }
-        setLoadingProgress(Math.min(p, 100));
-      }, 400);
+    if (step === 1) {
+      navigate("/home");
     } else {
       setStep(s => s + 1);
     }
@@ -53,7 +39,6 @@ export default function Onboarding() {
 
   const canProceed = () => {
     if (step === 1) return name.trim().length > 0;
-    if (step === 2) return selectedStyle !== "";
     return true;
   };
 
@@ -69,27 +54,17 @@ export default function Onboarding() {
           <Logo size="lg" vertical />
         </div>
 
-        {step < 3 && (
+        {step === 1 && (
           <div className="flex justify-center gap-2 mb-8">
-            {[0, 1, 2].map(i => (
-              <div
-                key={i}
-                className={`h-1 rounded-full transition-all duration-500 ${
-                  i <= step ? "bg-royal w-8" : "bg-shell w-4"
-                }`}
-              />
+            {[0, 1].map(i => (
+              <div key={i} className={`h-1 rounded-full transition-all duration-500 ${i <= step ? "bg-royal w-8" : "bg-shell w-4"}`} />
             ))}
           </div>
         )}
 
         <AnimatePresence mode="wait">
-          <motion.div
-            key={step}
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -24 }}
-            transition={{ duration: 0.4 }}
-          >
+          <motion.div key={step} initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -24 }} transition={{ duration: 0.4 }}>
+
             {/* Step 0 — Welcome */}
             {step === 0 && (
               <div className="text-center">
@@ -107,10 +82,7 @@ export default function Onboarding() {
                     </div>
                   ))}
                 </div>
-                <button
-                  onClick={goNext}
-                  className="w-full py-4 rounded-2xl bg-royal text-swan font-semibold text-lg shadow-card transition-all active:scale-95 hover:bg-sapphire"
-                >
+                <button onClick={goNext} className="w-full py-4 rounded-2xl bg-royal text-swan font-semibold text-lg shadow-card transition-all active:scale-95 hover:bg-sapphire">
                   Начать бесплатно
                 </button>
               </div>
@@ -119,8 +91,8 @@ export default function Onboarding() {
             {/* Step 1 — Name */}
             {step === 1 && (
               <div>
-                <h2 className="font-display text-3xl text-royal mb-2">{steps[step].title}</h2>
-                <p className="text-sapphire/80 mb-6 text-sm">{steps[step].subtitle}</p>
+                <h2 className="font-display text-3xl text-royal mb-2">{steps[1].title}</h2>
+                <p className="text-sapphire/80 mb-6 text-sm">{steps[1].subtitle}</p>
                 <input
                   type="text"
                   value={name}
@@ -130,72 +102,13 @@ export default function Onboarding() {
                   onKeyDown={e => e.key === "Enter" && canProceed() && goNext()}
                   autoFocus
                 />
-                <button
-                  onClick={goNext}
-                  disabled={!canProceed()}
-                  className="w-full mt-5 py-4 rounded-2xl bg-royal text-swan font-semibold text-lg shadow-card transition-all active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-sapphire"
-                >
-                  Продолжить
+                <button onClick={goNext} disabled={!canProceed()}
+                  className="w-full mt-5 py-4 rounded-2xl bg-royal text-swan font-semibold text-lg shadow-card transition-all active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-sapphire">
+                  Войти в приложение
                 </button>
               </div>
             )}
 
-
-            {/* Step 2 — Style */}
-            {step === 2 && (
-              <div>
-                <h2 className="font-display text-3xl text-royal mb-2">{steps[2].title}</h2>
-                <p className="text-sapphire/80 mb-5 text-sm">{steps[2].subtitle}</p>
-                <div className="grid grid-cols-2 gap-3 mb-5">
-                  {styles.map(s => (
-                    <button
-                      key={s.id}
-                      onClick={() => setSelectedStyle(s.id)}
-                      className={`p-4 rounded-2xl text-left transition-all active:scale-95 relative bg-white ${
-                        selectedStyle === s.id
-                          ? "border-2 border-sapphire shadow-card"
-                          : "border border-border hover:border-sapphire/50"
-                      }`}
-                    >
-                      {selectedStyle === s.id && (
-                        <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-sapphire flex items-center justify-center">
-                          <Check size={11} className="text-swan" />
-                        </div>
-                      )}
-                      <div className="w-full h-24 rounded-xl overflow-hidden mb-2">
-                        <img src={s.img} alt={s.name} className="w-full h-full object-cover" />
-                      </div>
-                      <div className="text-sm font-medium text-foreground">{s.name}</div>
-                      <div className="text-xs text-muted-foreground mt-0.5">{s.desc}</div>
-                    </button>
-                  ))}
-                </div>
-                <button
-                  onClick={goNext}
-                  disabled={!canProceed()}
-                  className="w-full py-4 rounded-2xl bg-royal text-swan font-semibold text-lg shadow-card transition-all active:scale-95 disabled:opacity-40 hover:bg-sapphire"
-                >
-                  Готово
-                </button>
-              </div>
-            )}
-
-            {/* Step 4 — Loading */}
-            {step === 4 && (
-              <div className="text-center py-8">
-                <div className="relative w-24 h-24 mx-auto mb-6">
-                  <div className="absolute inset-0 rounded-full border-2 border-shell" />
-                  <div className="absolute inset-0 rounded-full border-2 border-sapphire border-t-transparent animate-spin" style={{ animationDuration: "1.5s" }} />
-                  <Sparkles className="absolute inset-0 m-auto text-sapphire animate-pulse" size={32} />
-                </div>
-                <h2 className="font-display text-3xl text-royal mb-3">Изучаем ваш стиль...</h2>
-                <p className="text-muted-foreground mb-6 text-sm">Наш помощник анализирует ваши тексты</p>
-                <div className="w-full bg-shell rounded-full h-2 mb-2">
-                  <motion.div className="h-2 rounded-full bg-sapphire" animate={{ width: `${loadingProgress}%` }} transition={{ duration: 0.4 }} />
-                </div>
-                <div className="text-xs text-muted-foreground">{Math.round(loadingProgress)}%</div>
-              </div>
-            )}
           </motion.div>
         </AnimatePresence>
       </div>
