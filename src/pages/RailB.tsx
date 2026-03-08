@@ -222,27 +222,24 @@ export default function RailB() {
         </div>
       </div>
 
-      <div className="px-5 grid grid-cols-2 gap-3">
+      <div className="px-5 space-y-3">
         {categories.map((cat, i) => (
           <motion.button
             key={cat.tag}
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.06 }}
             onClick={() => setActiveCategory(cat)}
-            className={`bg-white border ${cat.border} rounded-2xl p-4 text-left flex flex-col gap-3 shadow-card hover:shadow-md transition-all active:scale-[0.97]`}
+            className={`w-full bg-white border ${cat.border} rounded-2xl px-4 py-3.5 text-left flex items-center gap-4 shadow-card hover:shadow-md transition-all active:scale-[0.98]`}
           >
-            <div className={`w-10 h-10 rounded-xl ${cat.bg} flex items-center justify-center`}>
+            <div className={`w-11 h-11 rounded-xl ${cat.bg} flex items-center justify-center flex-shrink-0`}>
               <cat.icon size={20} className={cat.color} />
             </div>
-            <div>
+            <div className="flex-1 min-w-0">
               <p className="font-semibold text-royal text-sm">{cat.tag}</p>
-              <p className="text-xs text-muted-foreground mt-0.5">{cat.items.length} тем</p>
+              <p className="text-xs text-muted-foreground mt-0.5 leading-snug">{cat.description}</p>
             </div>
-            <div className="flex items-center gap-1">
-              <TrendingUp size={11} className={cat.color} />
-              <span className={`text-xs font-medium ${cat.color}`}>В тренде</span>
-            </div>
+            <span className={`text-sm font-medium flex-shrink-0 ${cat.color}`}>→</span>
           </motion.button>
         ))}
       </div>
