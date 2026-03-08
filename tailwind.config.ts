@@ -15,6 +15,16 @@ export default {
         display: ["Raleway", "sans-serif"],
         body: ["Inter", "sans-serif"],
       },
+      fontSize: {
+        xs:   ["0.875rem",  { lineHeight: "1.4" }],   // было 0.75 → 0.875
+        sm:   ["1rem",      { lineHeight: "1.5" }],   // было 0.875 → 1
+        base: ["1.125rem",  { lineHeight: "1.6" }],   // было 1 → 1.125
+        lg:   ["1.25rem",   { lineHeight: "1.5" }],   // было 1.125 → 1.25
+        xl:   ["1.375rem",  { lineHeight: "1.4" }],   // было 1.25 → 1.375
+        "2xl":["1.625rem",  { lineHeight: "1.3" }],   // было 1.5 → 1.625
+        "3xl":["2rem",      { lineHeight: "1.2" }],   // было 1.875 → 2
+        "4xl":["2.375rem",  { lineHeight: "1.1" }],   // было 2.25 → 2.375
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

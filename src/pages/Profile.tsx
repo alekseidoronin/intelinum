@@ -61,14 +61,14 @@ export default function Profile() {
           <motion.button key={item.label} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }}
             onClick={() => navigate(item.path)}
             className="w-full bg-white border border-border rounded-2xl px-4 py-3.5 flex items-center gap-3 text-left shadow-card hover:border-sapphire/40 transition-all active:scale-[0.98]">
-            <div className="w-9 h-9 rounded-xl bg-background flex items-center justify-center border border-border">
-              <item.icon size={16} className="text-sapphire" />
+            <div className="w-10 h-10 rounded-xl bg-background flex items-center justify-center border border-border">
+              <item.icon size={20} className="text-sapphire" />
             </div>
             <div className="flex-1">
-              <p className="text-sm font-medium text-royal">{item.label}</p>
-              <p className="text-xs text-muted-foreground">{item.desc}</p>
+              <p className="text-base font-medium text-royal">{item.label}</p>
+              <p className="text-sm text-muted-foreground">{item.desc}</p>
             </div>
-            <ChevronRight size={16} className="text-muted-foreground" />
+            <ChevronRight size={20} className="text-muted-foreground" />
           </motion.button>
         ))}
 
