@@ -18,24 +18,31 @@ export function BottomNav() {
       className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-border shadow-card"
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >
-      <div className="flex items-center justify-around px-2 py-2 w-full max-w-lg mx-auto">
+      <div className="flex items-stretch justify-around w-full max-w-lg mx-auto">
         {items.map((item) => {
           const isActive = location.pathname === item.path;
           return (
             <button
               key={item.path}
               onClick={() => navigate(item.path)}
-              className="flex flex-col items-center gap-1 px-4 py-2 rounded-xl transition-all relative"
+              className="flex flex-col items-center justify-center gap-1.5 flex-1 py-3 px-1 transition-all relative"
             >
               {isActive && (
                 <motion.div
                   layoutId="nav-pill"
-                  className="absolute inset-0 bg-royal/8 rounded-xl"
+                  className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-1 rounded-full bg-royal"
                   transition={{ type: "spring", bounce: 0.3, duration: 0.5 }}
                 />
               )}
-              <item.icon size={24} className={isActive ? "text-royal" : "text-muted-foreground"} />
-              <span className={`text-xs font-body ${isActive ? "text-royal font-medium" : "text-muted-foreground"}`}>
+              <item.icon
+                size={26}
+                className={isActive ? "text-royal" : "text-muted-foreground"}
+              />
+              <span
+                className={`text-[11px] leading-none font-medium font-body whitespace-nowrap ${
+                  isActive ? "text-royal" : "text-muted-foreground"
+                }`}
+              >
                 {item.label}
               </span>
             </button>
