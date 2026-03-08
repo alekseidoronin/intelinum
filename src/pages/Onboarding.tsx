@@ -84,8 +84,6 @@ export default function Onboarding() {
   };
 
   // Steps: 0=welcome, 1=auth, 2=name, 3=texts, 4=style, 5=loading
-  const totalSteps = 4; // 0-3 shown in progress
-  const progressStep = step <= 4 ? step : 4;
 
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-center px-5 relative overflow-hidden">
