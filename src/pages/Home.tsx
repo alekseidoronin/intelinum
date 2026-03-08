@@ -106,7 +106,7 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3 }}
-            className="flex-1 px-4 py-4 overflow-y-auto scrollbar-hide">
+            className="px-4 py-4">
             <p className="text-sm text-white/85 leading-relaxed whitespace-pre-line">
               {todayPost}
             </p>
