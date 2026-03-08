@@ -183,3 +183,7 @@
     scrollbar-color: hsl(var(--shell)) transparent;
   }
 }
+
+/* Hide scrollbar utility (used in font picker etc.) */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
