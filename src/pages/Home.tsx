@@ -68,7 +68,7 @@ export default function Home() {
     <div className="min-h-dvh flex flex-col bg-background">
       <TopBar />
 
-      <div className="flex-1 flex flex-col px-4 pt-3 gap-3 pb-24">
+      <div className="flex-1 flex flex-col px-4 pt-3 gap-3 pb-24 md:pb-6">
 
         {/* Контент дня */}
         <div className="rounded-2xl overflow-hidden flex flex-col max-h-80"
