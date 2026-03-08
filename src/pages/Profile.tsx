@@ -13,6 +13,7 @@ const menuItems = [
 
 export default function Profile() {
   const navigate = useNavigate();
+  const userName = localStorage.getItem("userName") || "Пользователь";
 
   return (
     <div className="min-h-screen bg-background pb-32">
@@ -21,23 +22,24 @@ export default function Profile() {
       {/* User card */}
       <div className="px-5 pt-3 mb-5">
         <div
-          className="rounded-3xl p-5 overflow-hidden"
+          className="rounded-3xl p-5"
           style={{ background: "linear-gradient(145deg, hsl(224 65% 19%), hsl(221 35% 30%))" }}>
 
-          <div className="flex items-center gap-4">
-            <div className="w-16 h-16 rounded-2xl bg-white/15 flex items-center justify-center text-3xl border border-white/20 flex-shrink-0">
+          {/* Avatar + name row */}
+          <div className="flex items-center gap-3">
+            <div className="w-14 h-14 rounded-2xl bg-white/15 flex items-center justify-center text-2xl border border-white/20 flex-shrink-0">
               🔮
             </div>
             <div className="flex-1 min-w-0">
-              <h2 className="font-display text-xl text-swan leading-snug">Анастасия</h2>
-              <p className="text-sm text-swan/60 truncate">anastasia@mail.ru</p>
-            </div>
-            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/15 border border-white/20 flex-shrink-0">
-              <Crown size={14} className="text-gold" />
-              <span className="text-sm text-gold font-medium">Бесплатный</span>
+              <h2 className="font-display text-xl text-swan truncate">{userName}</h2>
+              <div className="flex items-center gap-1.5 mt-0.5 w-fit px-2.5 py-1 rounded-lg bg-white/15 border border-white/20">
+                <Crown size={12} className="text-gold flex-shrink-0" />
+                <span className="text-xs text-gold font-medium whitespace-nowrap">Бесплатный</span>
+              </div>
             </div>
           </div>
 
+          {/* Usage bar */}
           <div className="mt-4 pt-4 border-t border-white/15">
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm text-swan/60">Контент-пакеты в этом месяце</span>

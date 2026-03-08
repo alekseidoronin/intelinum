@@ -31,6 +31,7 @@ export default function Onboarding() {
 
   const goNext = () => {
     if (step === 1) {
+      localStorage.setItem("userName", name.trim());
       navigate("/home");
     } else {
       setStep((s) => s + 1);
