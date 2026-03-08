@@ -85,8 +85,12 @@ export default function Result() {
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [regenerating, setRegenerating] = useState(false);
   const [targetChars, setTargetChars] = useState<string>("");
+  const [texts, setTexts] = useState<Record<string, string>>(
+    Object.fromEntries(platforms.map(p => [p.id, p.text]))
+  );
 
   const cur = platforms.find(p => p.id === activeTab)!;
+  const currentText = texts[activeTab] ?? cur.text;
 
   const handleCopy = (id: string, text: string) => {
     navigator.clipboard.writeText(text);
@@ -106,9 +110,29 @@ export default function Result() {
     }, 1200);
   };
 
+  const handleGenerateByChars = async () => {
+    if (!targetChars) return;
+    setRegenerating(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("rewrite-text", {
+        body: { text: currentText, targetChars: Number(targetChars), platform: cur.name },
+      });
+      if (error) throw error;
+      if (data?.error) throw new Error(data.error);
+      setTexts(prev => ({ ...prev, [activeTab]: data.text }));
+      toast({ description: `Текст переписан: ${data.text.length} симв. ✨` });
+      setTargetChars("");
+    } catch (e: any) {
+      toast({ description: e?.message ?? "Ошибка генерации", variant: "destructive" });
+    } finally {
+      setRegenerating(false);
+    }
+  };
+
   const handlePdf = () => {
     toast({ description: "PDF-гайд будет создан в следующем обновлении 📄" });
   };
+
 
   return (
     <div className="min-h-screen bg-background pb-32 md:pb-8">
