@@ -90,6 +90,8 @@ export default function Result() {
   const [texts, setTexts] = useState<Record<string, string>>(
     Object.fromEntries(platforms.map(p => [p.id, p.text]))
   );
+  const [editOpen, setEditOpen] = useState(false);
+  const [editDraft, setEditDraft] = useState("");
 
   const cur = platforms.find(p => p.id === activeTab)!;
   const currentText = texts[activeTab] ?? cur.text;
@@ -101,8 +103,16 @@ export default function Result() {
   };
 
   const handleEdit = () => {
-    toast({ description: "Редактирование будет доступно в следующем обновлении" });
+    setEditDraft(currentText);
+    setEditOpen(true);
   };
+
+  const handleSaveEdit = () => {
+    setTexts(prev => ({ ...prev, [activeTab]: editDraft }));
+    setEditOpen(false);
+    toast({ description: "Текст сохранён ✅" });
+  };
+
 
   const handleRegenerate = () => {
     setRegenerating(true);
