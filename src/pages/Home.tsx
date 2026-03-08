@@ -107,7 +107,7 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3 }}
             className="flex-1 px-4 py-4 overflow-y-auto scrollbar-hide">
-            <p className="text-xs text-white/85 leading-relaxed whitespace-pre-line">
+            <p className="text-sm text-white/85 leading-relaxed whitespace-pre-line">
               {todayPost}
             </p>
           </motion.div>
