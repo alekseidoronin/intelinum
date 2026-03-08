@@ -146,7 +146,7 @@ export default function CarouselEditor() {
             disabled={currentIndex === 0}
             className="absolute left-0 top-1/2 -translate-y-1/2 w-8 h-8 rounded-xl bg-white border border-border shadow-card flex items-center justify-center text-sapphire disabled:opacity-30 z-10 transition-all active:scale-95">
             
-            <ChevronLeft size={16} />
+            <span className="text-xs font-semibold">{currentIndex}</span>
           </button>
 
           <AnimatePresence mode="wait">
