@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { ChevronRight, Crown, Palette, FileText, Bell, LogOut, Shield, HelpCircle, Pencil, Check, X, Eye, EyeOff } from "lucide-react";
+import { ChevronRight, Crown, Palette, FileText, Bell, LogOut, Shield, HelpCircle, Pencil, Check, X, Eye, EyeOff, Camera } from "lucide-react";
 import { BottomNav } from "@/components/BottomNav";
 import { TopBar } from "@/components/TopBar";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+
+const AVATARS = ["🔮", "🌙", "⭐", "🌟", "🦋", "🌸", "🔥", "💎", "🌊", "🦄", "🌺", "✨"];
 
 const menuItems = [
   { icon: FileText, label: "Мой стиль письма", desc: "Обновить тексты-примеры", path: "/profile/style" },
