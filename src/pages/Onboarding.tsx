@@ -158,14 +158,13 @@ export default function Onboarding() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7, duration: 0.45 }}
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97, boxShadow: "0 0 48px hsl(var(--gold) / 0.65), 0 8px 32px hsl(var(--gold) / 0.4)" }}
-                className="w-full py-5 rounded-2xl font-bold text-lg relative overflow-hidden flex items-center justify-center gap-2"
+                whileHover={{ scale: 1.015, boxShadow: "0 0 36px hsl(var(--gold) / 0.55), 0 6px 20px hsl(var(--gold) / 0.3)" }}
+                whileTap={{ scale: 0.985, boxShadow: "0 0 52px hsl(var(--gold) / 0.75), 0 8px 28px hsl(var(--gold) / 0.5)" }}
+                className="w-full py-5 rounded-2xl font-bold text-lg flex items-center justify-center gap-2"
                 style={{
                   background: "var(--gradient-gold)",
                   color: "hsl(var(--royal))",
                   fontSize: 17,
-                  transition: "transform 0.2s ease",
                 }}
               >
                 <Sparkles size={18} />
@@ -221,8 +220,8 @@ export default function Onboarding() {
               <motion.button
                 onClick={goNext}
                 disabled={!canProceed()}
-                whileHover={canProceed() ? { scale: 1.03 } : {}}
-                whileTap={canProceed() ? { scale: 0.97, boxShadow: "0 0 48px hsl(var(--gold) / 0.65)" } : {}}
+                whileHover={canProceed() ? { scale: 1.015, boxShadow: "0 0 36px hsl(var(--gold) / 0.55), 0 6px 20px hsl(var(--gold) / 0.3)" } : {}}
+                whileTap={canProceed() ? { scale: 0.985, boxShadow: "0 0 52px hsl(var(--gold) / 0.75)" } : {}}
                 className="w-full mt-5 py-4 rounded-2xl font-bold text-lg disabled:opacity-40 disabled:cursor-not-allowed"
                 style={{
                   background: "var(--gradient-gold)",
