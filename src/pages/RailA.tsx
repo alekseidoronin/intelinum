@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Upload, FileAudio, X, Sparkles, CheckCircle2 } from "lucide-react";
+import { Upload, ChevronLeft, FileAudio, X, Sparkles, CheckCircle2 } from "lucide-react";
 import { BottomNav } from "@/components/BottomNav";
 import { TopBar } from "@/components/TopBar";
 

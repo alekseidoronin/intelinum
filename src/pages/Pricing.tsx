@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Check, Crown, Zap, Building2 } from "lucide-react";
+import { ChevronLeft, Check, Crown, Zap, Building2 } from "lucide-react";
 import { TopBar } from "@/components/TopBar";
 
 const plans = [
