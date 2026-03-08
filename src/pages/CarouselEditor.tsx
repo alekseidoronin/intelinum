@@ -302,10 +302,7 @@ export default function CarouselEditor() {
                 {/* Font family – scrollable */}
                 <div className="px-3 py-2 border-b border-border">
                   <p className="text-xs text-muted-foreground mb-1.5">Шрифт</p>
-                  <div
-                    className="flex gap-1.5 overflow-x-auto pb-1"
-                    style={{ scrollbarWidth: "none" }}
-                  >
+                  <div className="flex gap-1.5 overflow-x-auto pb-1 no-scrollbar">
                     {FONTS.map((f) => (
                       <button
                         key={f}
