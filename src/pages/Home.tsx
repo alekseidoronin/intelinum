@@ -146,9 +146,9 @@ export default function Home() {
               <Mic size={18} className="text-royal" />
             </div>
             <div className="flex-1 min-w-0">
-              <div className="font-semibold text-royal text-sm mb-0.5">У меня есть запись</div>
-              <div className="text-xs text-muted-foreground">Загрузите аудио или видео — получите пакет постов</div>
-              <div className="mt-0.5 text-[10px] text-sapphire/70">mp3, wav, mp4, mov · до 500 МБ</div>
+            <div className="font-semibold text-royal text-base mb-0.5">У меня есть запись</div>
+              <div className="text-sm text-muted-foreground">Загрузите аудио или видео — получите пакет постов</div>
+              <div className="mt-0.5 text-xs text-sapphire/70">mp3, wav, mp4, mov · до 500 МБ</div>
             </div>
             <ChevronRight size={16} className="text-sapphire flex-shrink-0" />
           </div>
