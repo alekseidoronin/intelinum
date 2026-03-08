@@ -157,7 +157,7 @@ export default function CarouselEditor() {
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.2 }}
               style={{ width: previewW, height: previewH }}
-              className="mx-8 rounded-2xl bg-gradient-to-br from-royal via-sapphire to-royal/80 border border-border shadow-card flex flex-col justify-center p-5 overflow-hidden">
+              className="mx-12 rounded-2xl bg-gradient-to-br from-royal via-sapphire to-royal/80 border border-border shadow-card flex flex-col justify-center p-5 overflow-hidden">
               
               <div
                 className={`text-swan mb-2 ${buildTextClass(getTitleStyle())}`}
