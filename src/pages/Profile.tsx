@@ -20,7 +20,7 @@ export default function Profile() {
       <TopBar />
 
       {/* User card — Royal Blue background */}
-      <div className="px-5 mb-5">
+      <div className="px-5 pt-3 mb-5">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           className="rounded-3xl p-5 overflow-hidden"
           style={{ background: "linear-gradient(145deg, hsl(224 65% 19%), hsl(221 35% 30%))" }}>

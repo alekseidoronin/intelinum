@@ -30,7 +30,7 @@ export default function Library() {
     <div className="min-h-screen bg-background pb-32">
       <TopBar />
 
-      <div className="px-5 mb-4">
+      <div className="px-5 pt-3 mb-4">
         <div className="relative">
           <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
           <input
