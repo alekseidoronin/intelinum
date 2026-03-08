@@ -182,18 +182,7 @@ export default function Onboarding() {
 
           {/* ── Step 1 — Name ── */}
           {step === 1 && (
-            <div className="pt-20">
-              {/* Logo small */}
-              <div className="flex flex-col items-center mb-10">
-                <img src={logoImg} alt="ИНТЕЛИНУМ" className="w-12 h-12 object-contain mb-3" />
-                <span
-                  className="font-display font-bold tracking-[0.2em] uppercase text-sm"
-                  style={{ color: "hsl(var(--gold))" }}
-                >
-                  ИНТЕЛИНУМ
-                </span>
-              </div>
-
+          <div className="pt-20">
               <h2
                 className="font-display text-3xl font-bold mb-2"
                 style={{ color: "hsl(var(--swan))" }}
