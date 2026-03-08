@@ -141,11 +141,11 @@ export default function Onboarding() {
             )}
 
 
-            {/* Step 3 — Style */}
-            {step === 3 && (
+            {/* Step 2 — Style */}
+            {step === 2 && (
               <div>
-                <h2 className="font-display text-3xl text-royal mb-2">{steps[step].title}</h2>
-                <p className="text-sapphire/80 mb-5 text-sm">{steps[step].subtitle}</p>
+                <h2 className="font-display text-3xl text-royal mb-2">{steps[2].title}</h2>
+                <p className="text-sapphire/80 mb-5 text-sm">{steps[2].subtitle}</p>
                 <div className="grid grid-cols-2 gap-3 mb-5">
                   {styles.map(s => (
                     <button
