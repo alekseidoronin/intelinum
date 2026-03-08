@@ -65,12 +65,12 @@ export default function Home() {
   const num = (dayNum - 1) % 9 + 1;
 
   return (
-    <div className="h-dvh flex flex-col bg-background overflow-hidden">
+    <div className="min-h-dvh flex flex-col bg-background">
       {/* Header */}
       <TopBar />
 
       {/* Scrollable content */}
-      <div className="flex-1 flex flex-col px-4 pt-3 gap-3 overflow-hidden">
+      <div className="flex-1 flex flex-col px-4 pt-3 gap-3 pb-24">
 
         {/* Контент дня widget */}
         <motion.div
