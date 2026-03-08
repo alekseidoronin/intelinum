@@ -34,6 +34,8 @@ const App = () => (
           <Route path="/rail-b" element={<RailB />} />
           <Route path="/result" element={<Result />} />
           <Route path="/library" element={<Library />} />
+          <Route path="/image-editor" element={<ImageEditor />} />
+          <Route path="/carousel-editor" element={<CarouselEditor />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/education" element={<Education />} />
