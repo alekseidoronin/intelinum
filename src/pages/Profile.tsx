@@ -127,7 +127,7 @@ export default function Profile() {
       {/* User card */}
       <div className="px-5 pt-3 mb-5">
         <div
-          className="rounded-3xl p-5"
+          className="rounded-3xl p-5 relative"
           style={{ background: "linear-gradient(145deg, hsl(224 65% 19%), hsl(221 35% 30%))" }}>
 
           <div className="flex items-center gap-4">
