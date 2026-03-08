@@ -26,6 +26,7 @@ const categories = [
   },
   {
     tag: "Деньги",
+    description: "Привлечение дохода, финансовые блоки и числа изобилия",
     icon: DollarSign,
     color: "text-emerald-500",
     bg: "bg-emerald-50",
@@ -44,6 +45,7 @@ const categories = [
   },
   {
     tag: "Отношения",
+    description: "Совместимость, кармические связи и поиск партнёра",
     icon: Heart,
     color: "text-rose-500",
     bg: "bg-rose-50",
@@ -62,6 +64,7 @@ const categories = [
   },
   {
     tag: "Успех",
+    description: "Карьера, цели и числовой код достижений",
     icon: Trophy,
     color: "text-amber-500",
     bg: "bg-amber-50",
@@ -80,6 +83,7 @@ const categories = [
   },
   {
     tag: "Развитие",
+    description: "Потенциал, миссия и духовный рост через числа",
     icon: Star,
     color: "text-blue-500",
     bg: "bg-blue-50",
@@ -98,6 +102,7 @@ const categories = [
   },
   {
     tag: "Личное",
+    description: "Самооценка, призвание и принятие себя",
     icon: User,
     color: "text-sapphire",
     bg: "bg-sky-50",
