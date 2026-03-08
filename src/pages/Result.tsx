@@ -244,7 +244,7 @@ export default function Result() {
               <FileText size={20} className="text-sapphire" />
             </div>
             <div className="flex-1">
-              <p className="text-base font-medium text-royal">Сделать бесплатный PDF-гайд</p>
+              <p className="text-base font-medium text-royal">Сделать PDF-гайд</p>
               <p className="text-sm text-muted-foreground">Красивый гайд на 3–7 страниц для привлечения клиентов</p>
             </div>
           </button>
