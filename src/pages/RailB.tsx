@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ChevronLeft, TrendingUp, Sparkles, Brain, DollarSign, Heart, Trophy, Star, User } from "lucide-react";
+import { ChevronLeft, Sparkles, Brain, DollarSign, Heart, Trophy, Star, User } from "lucide-react";
 import { BottomNav } from "@/components/BottomNav";
 
 const categories = [
