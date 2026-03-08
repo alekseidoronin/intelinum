@@ -67,12 +67,7 @@ export default function Home() {
   return (
     <div className="h-dvh flex flex-col bg-background overflow-hidden">
       {/* Header */}
-      <div className="shrink-0 z-30 bg-background px-4 py-3">
-        <div className="flex items-center justify-between">
-          <Logo size="sm" vertical={false} />
-          <SideMenuButton />
-        </div>
-      </div>
+      <TopBar showLogo />
 
       {/* Scrollable content */}
       <div className="flex-1 flex flex-col px-4 gap-3 overflow-hidden">

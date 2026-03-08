@@ -17,9 +17,7 @@ export default function Profile() {
 
   return (
     <div className="min-h-screen bg-background pb-24">
-      <div className="px-5 pt-12 pb-5">
-        <Logo size="sm" showText={false} />
-      </div>
+      <TopBar showLogo />
 
       {/* User card — Royal Blue background */}
       <div className="px-5 mb-5">
