@@ -57,8 +57,14 @@ export default function Library() {
         {filtered.map((item, i) => {
           const Icon = typeIcons[item.type as keyof typeof typeIcons];
           return (
-            <motion.div key={item.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
-              className="bg-white border border-border rounded-2xl px-4 py-4 flex items-center gap-3 shadow-card">
+            <motion.button
+              key={item.id}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.05 }}
+              onClick={() => alert(`Открываем: ${item.title}`)}
+              className="w-full bg-white border border-border rounded-2xl px-4 py-4 flex items-center gap-3 shadow-card active:scale-[0.98] transition-all text-left"
+            >
               <div className="w-10 h-10 rounded-xl bg-sapphire/10 flex items-center justify-center flex-shrink-0">
                 <Icon size={18} className="text-sapphire" />
               </div>
@@ -70,7 +76,7 @@ export default function Library() {
                   <span className="text-xs text-muted-foreground">{typeLabels[item.type as keyof typeof typeLabels]}</span>
                 </div>
               </div>
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1" onClick={e => e.stopPropagation()}>
                 <button className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${item.starred ? "text-gold-dark" : "text-muted-foreground hover:text-gold-dark"}`}>
                   <Star size={15} fill={item.starred ? "currentColor" : "none"} />
                 </button>
@@ -78,7 +84,7 @@ export default function Library() {
                   <Copy size={15} />
                 </button>
               </div>
-            </motion.div>
+            </motion.button>
           );
         })}
         {filtered.length === 0 && (
