@@ -140,33 +140,6 @@ export default function Onboarding() {
               </div>
             )}
 
-            {/* Step 2 — Texts */}
-            {step === 2 && (
-              <div>
-                <h2 className="font-display text-3xl text-royal mb-2">{steps[step].title}</h2>
-                <p className="text-sapphire/80 mb-6 text-sm">{steps[step].subtitle}</p>
-                <textarea
-                  value={texts}
-                  onChange={e => setTexts(e.target.value)}
-                  placeholder="Вставьте сюда 3–5 ваших постов, статей или текстов. Наш помощник изучит ваш стиль и будет писать именно так, как пишете вы..."
-                  rows={8}
-                  className="w-full px-5 py-4 rounded-2xl bg-white border border-border text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:border-sapphire focus:ring-1 focus:ring-sapphire/30 transition-all resize-none leading-relaxed"
-                />
-                <div className="flex gap-3 mt-4">
-                  <button className="flex-1 py-3 rounded-xl border border-border text-sapphire flex items-center justify-center gap-2 text-sm active:scale-95 transition-all bg-white hover:border-sapphire">
-                    <Upload size={15} />
-                    Загрузить файл
-                  </button>
-                  <button
-                    onClick={goNext}
-                    disabled={!canProceed()}
-                    className="flex-1 py-3 rounded-xl bg-royal text-swan font-semibold shadow-card transition-all active:scale-95 disabled:opacity-40 hover:bg-sapphire"
-                  >
-                    Продолжить
-                  </button>
-                </div>
-              </div>
-            )}
 
             {/* Step 3 — Style */}
             {step === 3 && (
