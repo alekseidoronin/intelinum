@@ -211,8 +211,9 @@ export default function Profile() {
               <div className="h-2 rounded-full bg-gradient-gold" style={{ width: "67%" }} />
             </div>
             <button onClick={() => navigate("/pricing")}
-              className="mt-3 w-full py-3 rounded-xl bg-white/15 border border-white/20 text-swan text-base font-semibold flex items-center justify-center gap-2 active:scale-95 transition-all hover:bg-white/25">
-              <Crown size={16} className="text-gold" />
+              className="mt-3 w-full py-3 rounded-xl text-base font-semibold flex items-center justify-center gap-2 active:scale-95 transition-all"
+              style={{ background: "var(--gradient-gold)", color: "hsl(var(--royal))" }}>
+              <Crown size={16} />
               Улучшить план
             </button>
           </div>
