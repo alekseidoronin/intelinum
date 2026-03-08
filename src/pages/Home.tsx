@@ -132,7 +132,7 @@ export default function Home() {
         </motion.div>
 
         {/* Section label */}
-        <h2 className="font-display text-base font-semibold text-royal shrink-0">Создать контент</h2>
+        <h2 className="font-display text-lg font-semibold text-royal shrink-0">Создать контент</h2>
 
         {/* Rail A */}
         <motion.button
