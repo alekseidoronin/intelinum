@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Copy, Edit3, Mic, TrendingUp, RefreshCw, ChevronRight, Bell, Zap } from "lucide-react";
+import { Copy, Edit3, Mic, TrendingUp, RefreshCw, ChevronRight, Zap } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { BottomNav } from "@/components/BottomNav";
+import { SideMenuButton } from "@/components/SideMenu";
 import { useToast } from "@/hooks/use-toast";
 
 const posts = [
@@ -60,10 +61,6 @@ export default function Home() {
     toast({ description: "Редактирование будет доступно в следующем обновлении" });
   };
 
-  const handleBell = () => {
-    toast({ description: "Уведомлений пока нет 🔔" });
-  };
-
   const today = new Date();
   const dayNum = today.getDate() + today.getMonth() + 1;
   const num = (dayNum - 1) % 9 + 1;
@@ -74,11 +71,7 @@ export default function Home() {
       <div className="px-4 pt-14 pb-3 py-[20px]">
         <div className="flex items-center justify-between">
           <Logo size="sm" vertical={false} />
-          <button
-            onClick={handleBell}
-            className="w-9 h-9 rounded-xl border border-border bg-card flex items-center justify-center text-sapphire hover:border-sapphire transition-colors shadow-card active:scale-90">
-            <Bell size={17} />
-          </button>
+          <SideMenuButton />
         </div>
       </div>
 
