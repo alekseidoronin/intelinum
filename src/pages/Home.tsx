@@ -27,7 +27,7 @@ export default function Home() {
 
   const today = new Date();
   const dayNum = today.getDate() + today.getMonth() + 1;
-  const num = ((dayNum - 1) % 9) + 1;
+  const num = (dayNum - 1) % 9 + 1;
 
   return (
     <div className="min-h-screen bg-background pb-24">
@@ -48,8 +48,8 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="rounded-2xl overflow-hidden"
-          style={{ background: "linear-gradient(145deg, hsl(224 65% 19%), hsl(221 35% 30%))" }}
-        >
+          style={{ background: "linear-gradient(145deg, hsl(224 65% 19%), hsl(221 35% 30%))" }}>
+          
           {/* Widget Header */}
           <div className="px-4 pt-4 pb-3 flex items-center justify-between border-b border-white/10">
             <div className="flex items-center gap-2">
@@ -80,25 +80,21 @@ export default function Home() {
             <button
               onClick={handleCopy}
               className={`py-2.5 rounded-xl text-xs font-medium flex items-center justify-center gap-1.5 transition-all active:scale-95 min-w-0 ${
-                copied ? "bg-gold/30 text-gold" : "bg-white/15 text-white hover:bg-white/25"
-              }`}
-            >
+              copied ? "bg-gold/30 text-gold" : "bg-white/15 text-white hover:bg-white/25"}`
+              }>
+              
               <Copy size={13} className="flex-shrink-0" />
               <span className="truncate">{copied ? "Скопировано" : "Копировать"}</span>
             </button>
             <button
-              onClick={() => navigate("/result")}
-              className="py-2.5 rounded-xl bg-white/15 text-white text-xs font-medium flex items-center justify-center hover:bg-white/25 transition-all active:scale-95"
-            >
+              onClick={() => {}}
+              className="py-2.5 rounded-xl bg-white/15 text-white text-xs font-medium flex items-center justify-center hover:bg-white/25 transition-all active:scale-95">
+              
               Редактировать
             </button>
-            <button
-              onClick={() => navigate("/library")}
-              className="w-full py-2.5 rounded-xl bg-white/15 text-white text-xs font-medium flex items-center justify-center gap-1.5 hover:bg-white/25 transition-all active:scale-95"
-            >
-              <LayoutGrid size={13} className="flex-shrink-0" />
-              <span className="truncate">Шаблоны</span>
-            </button>
+            
+
+            
           </div>
         </motion.div>
 
@@ -111,8 +107,8 @@ export default function Home() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.4, delay: 0.1 }}
           onClick={() => navigate("/rail-a")}
-          className="w-full bg-card rounded-2xl p-4 text-left shadow-card border border-border hover:border-sapphire/40 transition-all active:scale-[0.98]"
-        >
+          className="w-full bg-card rounded-2xl p-4 text-left shadow-card border border-border hover:border-sapphire/40 transition-all active:scale-[0.98]">
+          
           <div className="flex items-center gap-3">
             <div className="w-11 h-11 rounded-2xl bg-royal/10 flex items-center justify-center flex-shrink-0">
               <Mic size={20} className="text-royal" />
@@ -134,8 +130,8 @@ export default function Home() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.4, delay: 0.2 }}
           onClick={() => navigate("/rail-b")}
-          className="w-full bg-card rounded-2xl p-4 text-left shadow-card border border-border hover:border-sapphire/40 transition-all active:scale-[0.98]"
-        >
+          className="w-full bg-card rounded-2xl p-4 text-left shadow-card border border-border hover:border-sapphire/40 transition-all active:scale-[0.98]">
+          
           <div className="flex items-center gap-3">
             <div className="w-11 h-11 rounded-2xl bg-sapphire/10 flex items-center justify-center flex-shrink-0">
               <TrendingUp size={20} className="text-sapphire" />
@@ -156,8 +152,8 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
-          className="bg-card rounded-2xl px-4 py-3 border border-border shadow-card"
-        >
+          className="bg-card rounded-2xl px-4 py-3 border border-border shadow-card">
+          
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs text-muted-foreground">Пакеты в этом месяце</span>
             <span className="text-xs text-sapphire font-medium">2 / 3</span>
@@ -169,8 +165,8 @@ export default function Home() {
             Бесплатный план ·{" "}
             <button
               onClick={() => navigate("/pricing")}
-              className="text-sapphire font-medium active:opacity-70"
-            >
+              className="text-sapphire font-medium active:opacity-70">
+              
               Расширить
             </button>
           </div>
@@ -178,6 +174,6 @@ export default function Home() {
       </div>
 
       <BottomNav />
-    </div>
-  );
+    </div>);
+
 }
