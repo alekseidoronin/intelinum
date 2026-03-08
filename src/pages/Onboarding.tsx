@@ -218,14 +218,15 @@ export default function Onboarding() {
                 onKeyDown={(e) => e.key === "Enter" && canProceed() && goNext()}
                 autoFocus
               />
-              <button
+              <motion.button
                 onClick={goNext}
                 disabled={!canProceed()}
-                className="w-full mt-5 py-4 rounded-2xl font-bold text-lg transition-all active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
+                whileHover={canProceed() ? { scale: 1.03 } : {}}
+                whileTap={canProceed() ? { scale: 0.97, boxShadow: "0 0 48px hsl(var(--gold) / 0.65)" } : {}}
+                className="w-full mt-5 py-4 rounded-2xl font-bold text-lg disabled:opacity-40 disabled:cursor-not-allowed"
                 style={{
                   background: "var(--gradient-gold)",
                   color: "hsl(var(--royal))",
-                  boxShadow: canProceed() ? "0 0 30px hsl(var(--gold) / 0.4)" : "none",
                   fontSize: 17,
                 }}
               >
