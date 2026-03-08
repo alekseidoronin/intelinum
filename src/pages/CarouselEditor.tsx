@@ -372,20 +372,23 @@ export default function CarouselEditor() {
                     />
                   )}
 
-                  {/* Rgba swatches for text background */}
+                  {/* Full color picker for text background */}
                   {colorTarget === "textBg" && (
-                    <div className="grid grid-cols-4 gap-1.5">
-                      {TEXT_BG_COLORS.map((c) => (
-                        <button key={c} onClick={() => updateStyle({ bgColor: c })}
-                          className={`h-10 rounded-xl border-2 transition-all ${
-                            style?.bgColor === c ? "border-royal scale-[1.04]" : "border-border hover:border-sapphire/50"
-                          }`}
-                          style={{
-                            backgroundColor: c === "transparent" ? undefined : c,
-                            backgroundImage: c === "transparent" ? CHECKER : undefined,
-                            backgroundSize: "8px 8px",
-                          }} />
-                      ))}
+                    <div className="space-y-2">
+                      <button
+                        onClick={() => updateStyle({ bgColor: "transparent" })}
+                        className={`w-full h-9 rounded-xl border-2 flex items-center justify-center text-xs text-muted-foreground transition-all ${
+                          style?.bgColor === "transparent" ? "border-royal text-royal font-medium" : "border-border hover:border-sapphire/50"
+                        }`}
+                        style={{ backgroundImage: CHECKER, backgroundSize: "8px 8px" }}
+                      >
+                        Прозрачный
+                      </button>
+                      <ColorPicker
+                        key={selectedId + "-bg"}
+                        color={style?.bgColor === "transparent" ? "#000000" : (style?.bgColor || "#000000")}
+                        onChange={(c) => updateStyle({ bgColor: c })}
+                      />
                     </div>
                   )}
                 </div>
