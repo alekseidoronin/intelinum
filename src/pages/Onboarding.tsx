@@ -69,9 +69,9 @@ export default function Onboarding() {
           <Logo size="lg" vertical />
         </div>
 
-        {step < 4 && (
+        {step < 3 && (
           <div className="flex justify-center gap-2 mb-8">
-            {[0, 1, 2, 3].map(i => (
+            {[0, 1, 2].map(i => (
               <div
                 key={i}
                 className={`h-1 rounded-full transition-all duration-500 ${
