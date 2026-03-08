@@ -2,9 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Copy, Edit3, Mic, TrendingUp, RefreshCw, ChevronRight, Zap } from "lucide-react";
-import { Logo } from "@/components/Logo";
 import { BottomNav } from "@/components/BottomNav";
-import { SideMenuButton } from "@/components/SideMenu";
+import { TopBar } from "@/components/TopBar";
 import { useToast } from "@/hooks/use-toast";
 
 const posts = [
@@ -68,12 +67,7 @@ export default function Home() {
   return (
     <div className="h-dvh flex flex-col bg-background overflow-hidden">
       {/* Header */}
-      <div className="shrink-0 z-30 bg-background px-4 py-3">
-        <div className="flex items-center justify-between">
-          <Logo size="sm" vertical={false} />
-          <SideMenuButton />
-        </div>
-      </div>
+      <TopBar showLogo />
 
       {/* Scrollable content */}
       <div className="flex-1 flex flex-col px-4 gap-3 overflow-hidden">

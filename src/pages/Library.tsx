@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Search, Star, Download, Copy, FileText, LayoutGrid } from "lucide-react";
+import { Search, Star, Copy, FileText, LayoutGrid } from "lucide-react";
 import { BottomNav } from "@/components/BottomNav";
+import { TopBar } from "@/components/TopBar";
 
 const items = [
   { id: 1, title: "Число 7: духовный поиск", date: "Сегодня", type: "pack", starred: true },
@@ -27,10 +28,7 @@ export default function Library() {
 
   return (
     <div className="min-h-screen bg-background pb-24">
-      <div className="px-5 pt-12 pb-4">
-        <h1 className="font-display text-3xl text-royal mb-0.5">Библиотека</h1>
-        <p className="text-sm text-muted-foreground">Все ваши материалы</p>
-      </div>
+      <TopBar title="Библиотека" />
 
       <div className="px-5 mb-4">
         <div className="relative">

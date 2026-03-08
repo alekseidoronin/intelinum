@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Copy, Edit3, Download, RefreshCw, ChevronLeft, Check, FileText, LayoutGrid, Sparkles, Image } from "lucide-react";
+import { Copy, Edit3, Download, RefreshCw, Check, FileText, LayoutGrid, Sparkles, Image } from "lucide-react";
 import { BottomNav } from "@/components/BottomNav";
+import { TopBar } from "@/components/TopBar";
 import { useToast } from "@/hooks/use-toast";
 
 const platforms = [
@@ -112,18 +113,7 @@ export default function Result() {
 
   return (
     <div className="min-h-screen bg-background pb-24">
-      <div className="px-5 pt-12 pb-4 flex items-center gap-3">
-        <button onClick={() => navigate(-1)} className="w-9 h-9 rounded-xl border border-border bg-white flex items-center justify-center text-sapphire shadow-card">
-          <ChevronLeft size={18} />
-        </button>
-        <div className="flex-1">
-          <div className="flex items-center gap-2">
-            <Check size={16} className="text-sapphire" />
-            <h1 className="font-display text-xl text-royal">Контент-пакет готов</h1>
-          </div>
-          <p className="text-xs text-muted-foreground">Число 7: духовный поиск</p>
-        </div>
-      </div>
+      <TopBar title="Контент-пакет готов" showBack />
 
       <motion.div initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }}
         className="mx-5 mb-4 bg-royal rounded-2xl px-4 py-3 flex items-center gap-3">

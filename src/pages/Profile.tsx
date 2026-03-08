@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ChevronRight, Crown, Palette, FileText, Bell, LogOut, Shield, HelpCircle } from "lucide-react";
-import { Logo } from "@/components/Logo";
 import { BottomNav } from "@/components/BottomNav";
+import { TopBar } from "@/components/TopBar";
 
 const menuItems = [
   { icon: FileText, label: "Мой стиль письма", desc: "Обновить тексты-примеры", path: "/profile/style" },
@@ -17,9 +17,7 @@ export default function Profile() {
 
   return (
     <div className="min-h-screen bg-background pb-24">
-      <div className="px-5 pt-12 pb-5">
-        <Logo size="sm" showText={false} />
-      </div>
+      <TopBar showLogo />
 
       {/* User card — Royal Blue background */}
       <div className="px-5 mb-5">

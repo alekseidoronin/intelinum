@@ -1,8 +1,9 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Upload, ChevronLeft, FileAudio, X, Sparkles, CheckCircle2 } from "lucide-react";
+import { Upload, FileAudio, X, Sparkles, CheckCircle2 } from "lucide-react";
 import { BottomNav } from "@/components/BottomNav";
+import { TopBar } from "@/components/TopBar";
 
 type Step = "upload" | "transcribing" | "transcript" | "generating" | "done";
 
@@ -52,15 +53,7 @@ export default function RailA() {
 
   return (
     <div className="min-h-screen bg-background pb-24">
-      <div className="px-5 pt-12 pb-4 flex items-center gap-3">
-        <button onClick={() => navigate(-1)} className="w-9 h-9 rounded-xl border border-border bg-white flex items-center justify-center text-sapphire shadow-card">
-          <ChevronLeft size={18} />
-        </button>
-        <div>
-          <h1 className="font-display text-xl text-royal">У меня есть запись</h1>
-          <p className="text-xs text-muted-foreground">Загрузите аудио или видео</p>
-        </div>
-      </div>
+      <TopBar title="У меня есть запись" showBack />
 
       {/* Steps progress */}
       <div className="px-5 mb-6">
