@@ -1,0 +1,238 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronRight, Upload, Check, Sparkles } from "lucide-react";
+import { Logo } from "@/components/Logo";
+
+const styles = [
+  { id: "realistic", emoji: "📸", name: "Реалистичный", desc: "Живые люди, природа, доверие" },
+  { id: "minimal", emoji: "◻️", name: "Минимализм", desc: "Чистые линии, пространство" },
+  { id: "cozy", emoji: "🕯️", name: "Тёплый уют", desc: "Свечи, текстуры, личные истории" },
+  { id: "gloss", emoji: "✨", name: "Глянец", desc: "Яркие градиенты, продажи" },
+  { id: "cosmic", emoji: "🌌", name: "Космический", desc: "Звёзды, прогнозы, предсказания" },
+  { id: "geo", emoji: "🔷", name: "Геометрический", desc: "Мандалы, нумерологические разборы" },
+];
+
+const steps = [
+  { title: "Добро пожаловать", subtitle: "AI-платформа для нумерологов" },
+  { title: "Как вас зовут?", subtitle: "Мы будем обращаться по имени" },
+  { title: "Ваш стиль письма", subtitle: "Загрузите 3–5 своих постов или текстов" },
+  { title: "Стиль визуала", subtitle: "Выберите, как будут выглядеть ваши картинки" },
+  { title: "Изучаем ваш стиль...", subtitle: "Это займёт около 30 секунд" },
+];
+
+export default function Onboarding() {
+  const navigate = useNavigate();
+  const [step, setStep] = useState(0);
+  const [name, setName] = useState("");
+  const [texts, setTexts] = useState("");
+  const [selectedStyle, setSelectedStyle] = useState("");
+  const [loadingProgress, setLoadingProgress] = useState(0);
+
+  const goNext = () => {
+    if (step === 3) {
+      setStep(4);
+      let p = 0;
+      const interval = setInterval(() => {
+        p += Math.random() * 15 + 5;
+        if (p >= 100) {
+          p = 100;
+          clearInterval(interval);
+          setTimeout(() => navigate("/home"), 600);
+        }
+        setLoadingProgress(Math.min(p, 100));
+      }, 400);
+    } else {
+      setStep(s => s + 1);
+    }
+  };
+
+  const canProceed = () => {
+    if (step === 1) return name.trim().length > 0;
+    if (step === 2) return texts.trim().length > 10;
+    if (step === 3) return selectedStyle !== "";
+    return true;
+  };
+
+  return (
+    <div className="min-h-screen gradient-hero flex flex-col items-center justify-center px-5 relative overflow-hidden">
+      {/* Background ornament */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full bg-primary/5 blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-64 h-64 rounded-full bg-sapphire/10 blur-3xl" />
+      </div>
+
+      <div className="w-full max-w-md relative z-10">
+        {/* Logo */}
+        <div className="flex justify-center mb-8">
+          <Logo size="lg" />
+        </div>
+
+        {/* Step indicator */}
+        {step < 4 && (
+          <div className="flex justify-center gap-2 mb-8">
+            {[0, 1, 2, 3].map(i => (
+              <div
+                key={i}
+                className={`h-1 rounded-full transition-all duration-500 ${
+                  i <= step ? "bg-primary w-8" : "bg-muted w-4"
+                }`}
+              />
+            ))}
+          </div>
+        )}
+
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={step}
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -24 }}
+            transition={{ duration: 0.4 }}
+          >
+            {/* Step 0 — Welcome */}
+            {step === 0 && (
+              <div className="text-center">
+                <h1 className="font-display text-4xl gradient-text-gold mb-3 leading-tight">
+                  Ваш контент-конвейер<br />на каждый день
+                </h1>
+                <p className="text-muted-foreground mb-8 leading-relaxed">
+                  Записи эфиров или актуальные темы → готовый пакет постов для всех площадок за 2 минуты
+                </p>
+                <div className="space-y-3 mb-8">
+                  {["Посты под все площадки в вашем стиле", "Картинки без промптов", "Темы из трендов каждый день"].map(f => (
+                    <div key={f} className="flex items-center gap-3 glass-card rounded-xl px-4 py-3">
+                      <Check size={16} className="text-gold flex-shrink-0" />
+                      <span className="text-sm text-foreground/90">{f}</span>
+                    </div>
+                  ))}
+                </div>
+                <button
+                  onClick={goNext}
+                  className="w-full py-4 rounded-2xl bg-gradient-gold text-background font-semibold text-lg shadow-gold transition-all active:scale-95"
+                >
+                  Начать бесплатно
+                </button>
+              </div>
+            )}
+
+            {/* Step 1 — Name */}
+            {step === 1 && (
+              <div>
+                <h2 className="font-display text-3xl gradient-text-gold mb-2">{steps[step].title}</h2>
+                <p className="text-muted-foreground mb-6">{steps[step].subtitle}</p>
+                <input
+                  type="text"
+                  value={name}
+                  onChange={e => setName(e.target.value)}
+                  placeholder="Ваше имя"
+                  className="w-full px-5 py-4 rounded-2xl bg-muted/50 border border-border/50 text-foreground placeholder:text-muted-foreground text-lg focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/30 transition-all"
+                  onKeyDown={e => e.key === "Enter" && canProceed() && goNext()}
+                  autoFocus
+                />
+                <button
+                  onClick={goNext}
+                  disabled={!canProceed()}
+                  className="w-full mt-5 py-4 rounded-2xl bg-gradient-gold text-background font-semibold text-lg shadow-gold transition-all active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                  Продолжить
+                </button>
+              </div>
+            )}
+
+            {/* Step 2 — Texts */}
+            {step === 2 && (
+              <div>
+                <h2 className="font-display text-3xl gradient-text-gold mb-2">{steps[step].title}</h2>
+                <p className="text-muted-foreground mb-6">{steps[step].subtitle}</p>
+                <textarea
+                  value={texts}
+                  onChange={e => setTexts(e.target.value)}
+                  placeholder="Вставьте сюда 3–5 ваших постов, статей или текстов. Наш помощник изучит ваш стиль и будет писать именно так, как пишете вы..."
+                  rows={8}
+                  className="w-full px-5 py-4 rounded-2xl bg-muted/50 border border-border/50 text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/30 transition-all resize-none leading-relaxed"
+                />
+                <div className="flex gap-3 mt-4">
+                  <button className="flex-1 py-3 rounded-xl border border-border/70 text-muted-foreground flex items-center justify-center gap-2 text-sm active:scale-95 transition-all">
+                    <Upload size={15} />
+                    Загрузить файл
+                  </button>
+                  <button
+                    onClick={goNext}
+                    disabled={!canProceed()}
+                    className="flex-2 flex-grow py-3 rounded-xl bg-gradient-gold text-background font-semibold shadow-gold transition-all active:scale-95 disabled:opacity-40"
+                  >
+                    Продолжить
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Step 3 — Style */}
+            {step === 3 && (
+              <div>
+                <h2 className="font-display text-3xl gradient-text-gold mb-2">{steps[step].title}</h2>
+                <p className="text-muted-foreground mb-5">{steps[step].subtitle}</p>
+                <div className="grid grid-cols-2 gap-3 mb-5">
+                  {styles.map(s => (
+                    <button
+                      key={s.id}
+                      onClick={() => setSelectedStyle(s.id)}
+                      className={`p-4 rounded-2xl text-left transition-all active:scale-95 relative ${
+                        selectedStyle === s.id
+                          ? "gold-border bg-primary/10 shadow-gold"
+                          : "border border-border/40 bg-muted/30 hover:border-border"
+                      }`}
+                    >
+                      {selectedStyle === s.id && (
+                        <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-primary flex items-center justify-center">
+                          <Check size={11} className="text-background" />
+                        </div>
+                      )}
+                      <div className="text-2xl mb-2">{s.emoji}</div>
+                      <div className="text-sm font-medium text-foreground">{s.name}</div>
+                      <div className="text-xs text-muted-foreground mt-0.5">{s.desc}</div>
+                    </button>
+                  ))}
+                </div>
+                <button
+                  onClick={goNext}
+                  disabled={!canProceed()}
+                  className="w-full py-4 rounded-2xl bg-gradient-gold text-background font-semibold text-lg shadow-gold transition-all active:scale-95 disabled:opacity-40"
+                >
+                  Готово
+                </button>
+              </div>
+            )}
+
+            {/* Step 4 — Loading */}
+            {step === 4 && (
+              <div className="text-center py-8">
+                <div className="relative w-24 h-24 mx-auto mb-6">
+                  <div className="absolute inset-0 rounded-full border-2 border-primary/20" />
+                  <div
+                    className="absolute inset-0 rounded-full border-2 border-primary border-t-transparent animate-spin"
+                    style={{ animationDuration: "1.5s" }}
+                  />
+                  <Sparkles className="absolute inset-0 m-auto text-gold animate-pulse" size={32} />
+                </div>
+                <h2 className="font-display text-3xl gradient-text-gold mb-3">Изучаем ваш стиль...</h2>
+                <p className="text-muted-foreground mb-6 text-sm">
+                  Наш помощник анализирует ваши тексты и готовит первый пост
+                </p>
+                <div className="w-full bg-muted rounded-full h-2 mb-2">
+                  <motion.div
+                    className="h-2 rounded-full bg-gradient-gold"
+                    animate={{ width: `${loadingProgress}%` }}
+                    transition={{ duration: 0.4 }}
+                  />
+                </div>
+                <div className="text-xs text-muted-foreground">{Math.round(loadingProgress)}%</div>
+              </div>
+            )}
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+}
