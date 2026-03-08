@@ -162,50 +162,53 @@ export default function Result() {
           </div>
           <div className="px-4 pb-4 border-t border-border pt-3 space-y-2">
             {/* Length controls */}
-            <div className="flex items-center gap-2">
+            <div className="grid grid-cols-2 gap-2">
               <button
                 onClick={() => { toast({ description: "Текст сокращается… ✂️" }); }}
-                className="flex-1 py-2.5 rounded-xl bg-background border border-border text-royal text-xs font-medium flex items-center justify-center gap-1.5 hover:border-sapphire/50 transition-all active:scale-95"
+                className="py-2.5 rounded-xl bg-background border border-border text-royal text-sm font-medium flex items-center justify-center gap-1.5 hover:border-sapphire/50 transition-all active:scale-95"
               >
-                <ChevronsUp size={14} /> Короче
+                <ChevronsUp size={15} /> Короче
               </button>
               <button
                 onClick={() => { toast({ description: "Текст расширяется… 📝" }); }}
-                className="flex-1 py-2.5 rounded-xl bg-background border border-border text-royal text-xs font-medium flex items-center justify-center gap-1.5 hover:border-sapphire/50 transition-all active:scale-95"
+                className="py-2.5 rounded-xl bg-background border border-border text-royal text-sm font-medium flex items-center justify-center gap-1.5 hover:border-sapphire/50 transition-all active:scale-95"
               >
-                <ChevronsDown size={14} /> Длиннее
+                <ChevronsDown size={15} /> Длиннее
               </button>
             </div>
             {/* Custom char target */}
-            <div className="flex items-center gap-2">
-              <div className="flex-1 flex items-center gap-1.5 border border-border rounded-xl bg-background px-3 h-10">
-                <input
-                  type="number"
-                  value={targetChars}
-                  onChange={(e) => setTargetChars(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" && targetChars) {
-                      setRegenerating(true);
-                      setTimeout(() => { setRegenerating(false); toast({ description: `Текст перегенерирован: ${targetChars} симв. ✨` }); }, 1200);
-                    }
+            <div className="flex flex-col gap-1.5">
+              <label className="text-xs text-muted-foreground">Нужное количество символов:</label>
+              <div className="flex items-center gap-2">
+                <div className="flex-1 flex items-center gap-1.5 border border-border rounded-xl bg-background px-3 h-11">
+                  <input
+                    type="number"
+                    value={targetChars}
+                    onChange={(e) => setTargetChars(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" && targetChars) {
+                        setRegenerating(true);
+                        setTimeout(() => { setRegenerating(false); toast({ description: `Текст перегенерирован: ${targetChars} симв. ✨` }); }, 1200);
+                      }
+                    }}
+                    placeholder={cur.charLimit.toString()}
+                    className="flex-1 bg-transparent text-sm text-royal focus:outline-none"
+                  />
+                  <span className="text-xs text-muted-foreground whitespace-nowrap">симв.</span>
+                </div>
+                <button
+                  disabled={!targetChars || regenerating}
+                  onClick={() => {
+                    if (!targetChars) return;
+                    setRegenerating(true);
+                    setTimeout(() => { setRegenerating(false); toast({ description: `Текст перегенерирован: ${targetChars} симв. ✨` }); }, 1200);
                   }}
-                  placeholder={cur.charLimit.toString()}
-                  className="flex-1 bg-transparent text-sm text-royal focus:outline-none text-center"
-                />
-                <span className="text-xs text-muted-foreground whitespace-nowrap">симв.</span>
+                  className="h-11 px-4 rounded-xl bg-royal text-swan text-sm font-medium flex items-center gap-1.5 transition-all active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed whitespace-nowrap"
+                >
+                  <Sparkles size={14} className={regenerating ? "animate-spin" : ""} />
+                  Сгенерировать
+                </button>
               </div>
-              <button
-                disabled={!targetChars || regenerating}
-                onClick={() => {
-                  if (!targetChars) return;
-                  setRegenerating(true);
-                  setTimeout(() => { setRegenerating(false); toast({ description: `Текст перегенерирован: ${targetChars} симв. ✨` }); }, 1200);
-                }}
-                className="h-10 px-3.5 rounded-xl bg-royal text-swan text-xs font-medium flex items-center gap-1.5 transition-all active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed whitespace-nowrap"
-              >
-                <Sparkles size={13} className={regenerating ? "animate-spin" : ""} />
-                Сгенерировать
-              </button>
             </div>
 
             {/* Action buttons */}
