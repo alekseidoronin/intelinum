@@ -157,7 +157,7 @@ export default function Onboarding() {
                   <button
                     onClick={goNext}
                     disabled={!canProceed()}
-                    className="flex-grow py-3 rounded-xl bg-royal text-swan font-semibold shadow-card transition-all active:scale-95 disabled:opacity-40 hover:bg-sapphire"
+                    className="flex-1 py-3 rounded-xl bg-royal text-swan font-semibold shadow-card transition-all active:scale-95 disabled:opacity-40 hover:bg-sapphire"
                   >
                     Продолжить
                   </button>
