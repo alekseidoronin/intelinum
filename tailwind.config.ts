@@ -68,6 +68,7 @@ export default {
         sapphire: "hsl(var(--sapphire))",
         royal: "hsl(var(--royal))",
         swan: "hsl(var(--swan))",
+        shell: "hsl(var(--shell))",
         bg2: "hsl(var(--background-2))",
         bg3: "hsl(var(--background-3))",
       },
