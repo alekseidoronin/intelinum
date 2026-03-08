@@ -4,12 +4,10 @@ import { Logo } from "@/components/Logo";
 import { SideMenuButton } from "@/components/SideMenu";
 
 interface TopBarProps {
-  title?: string;
   showBack?: boolean;
-  showLogo?: boolean;
 }
 
-export function TopBar({ title, showBack = false, showLogo = false }: TopBarProps) {
+export function TopBar({ showBack = false }: TopBarProps) {
   const navigate = useNavigate();
 
   return (
@@ -22,12 +20,10 @@ export function TopBar({ title, showBack = false, showLogo = false }: TopBarProp
             <ChevronLeft size={18} />
           </button>
         )}
-        {showLogo && <Logo size="sm" vertical={false} />}
-        {title && (
-          <h1 className="font-display text-xl text-royal">{title}</h1>
-        )}
+        <Logo size="sm" vertical={false} />
       </div>
       <SideMenuButton />
     </div>
   );
 }
+

@@ -113,7 +113,7 @@ export default function Result() {
 
   return (
     <div className="min-h-screen bg-background pb-24">
-      <TopBar title="Контент-пакет готов" showBack />
+      <TopBar showBack />
 
       <motion.div initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }}
         className="mx-5 mb-4 bg-royal rounded-2xl px-4 py-3 flex items-center gap-3">

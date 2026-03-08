@@ -31,7 +31,7 @@ export default function Pricing() {
 
   return (
     <div className="min-h-screen bg-background pb-10">
-      <TopBar title="Тарифы" showBack />
+      <TopBar showBack />
 
       <div className="px-5">
         <p className="text-sm text-muted-foreground mb-5 text-center">Годовая подписка — скидка 20%</p>

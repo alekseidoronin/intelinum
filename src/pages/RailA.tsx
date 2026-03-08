@@ -53,7 +53,7 @@ export default function RailA() {
 
   return (
     <div className="min-h-screen bg-background pb-24">
-      <TopBar title="У меня есть запись" showBack />
+      <TopBar showBack />
 
       {/* Steps progress */}
       <div className="px-5 mb-6">
