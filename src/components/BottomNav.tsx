@@ -34,7 +34,7 @@ export function BottomNav() {
                   transition={{ type: "spring", bounce: 0.3, duration: 0.5 }}
                 />
               )}
-              <item.icon size={20} className={isActive ? "text-royal" : "text-muted-foreground"} />
+              <item.icon size={24} className={isActive ? "text-royal" : "text-muted-foreground"} />
               <span className={`text-xs font-body ${isActive ? "text-royal font-medium" : "text-muted-foreground"}`}>
                 {item.label}
               </span>
