@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Onboarding from "./pages/Onboarding";
+import WritingStyle from "./pages/WritingStyle";
 import Home from "./pages/Home";
 import RailA from "./pages/RailA";
 import RailB from "./pages/RailB";
@@ -29,6 +30,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Navigate to="/onboarding" replace />} />
           <Route path="/onboarding" element={<Onboarding />} />
+          <Route path="/profile/style" element={<WritingStyle />} />
           <Route path="/home" element={<Home />} />
           <Route path="/rail-a" element={<RailA />} />
           <Route path="/rail-b" element={<RailB />} />

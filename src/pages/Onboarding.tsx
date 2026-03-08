@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronRight, Upload, Check, Sparkles } from "lucide-react";
+import { Check, Sparkles } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import styleRealistic from "@/assets/style-realistic.jpg";
 import styleMinimal from "@/assets/style-minimal.jpg";
@@ -22,22 +22,20 @@ const styles = [
 const steps = [
   { title: "Добро пожаловать", subtitle: "AI-платформа для нумерологов" },
   { title: "Как вас зовут?", subtitle: "Мы будем обращаться по имени" },
-  { title: "Ваш стиль письма", subtitle: "Загрузите 3–5 своих постов или текстов" },
   { title: "Стиль визуала", subtitle: "Выберите, как будут выглядеть ваши картинки" },
-  { title: "Изучаем ваш стиль...", subtitle: "Это займёт около 30 секунд" },
+  { title: "Всё готово!", subtitle: "" },
 ];
 
 export default function Onboarding() {
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [name, setName] = useState("");
-  const [texts, setTexts] = useState("");
   const [selectedStyle, setSelectedStyle] = useState("");
   const [loadingProgress, setLoadingProgress] = useState(0);
 
   const goNext = () => {
-    if (step === 3) {
-      setStep(4);
+    if (step === 2) {
+      setStep(3);
       let p = 0;
       const interval = setInterval(() => {
         p += Math.random() * 15 + 5;
@@ -55,8 +53,7 @@ export default function Onboarding() {
 
   const canProceed = () => {
     if (step === 1) return name.trim().length > 0;
-    if (step === 2) return texts.trim().length > 10;
-    if (step === 3) return selectedStyle !== "";
+    if (step === 2) return selectedStyle !== "";
     return true;
   };
 
@@ -143,33 +140,6 @@ export default function Onboarding() {
               </div>
             )}
 
-            {/* Step 2 — Texts */}
-            {step === 2 && (
-              <div>
-                <h2 className="font-display text-3xl text-royal mb-2">{steps[step].title}</h2>
-                <p className="text-sapphire/80 mb-6 text-sm">{steps[step].subtitle}</p>
-                <textarea
-                  value={texts}
-                  onChange={e => setTexts(e.target.value)}
-                  placeholder="Вставьте сюда 3–5 ваших постов, статей или текстов. Наш помощник изучит ваш стиль и будет писать именно так, как пишете вы..."
-                  rows={8}
-                  className="w-full px-5 py-4 rounded-2xl bg-white border border-border text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:border-sapphire focus:ring-1 focus:ring-sapphire/30 transition-all resize-none leading-relaxed"
-                />
-                <div className="flex gap-3 mt-4">
-                  <button className="flex-1 py-3 rounded-xl border border-border text-sapphire flex items-center justify-center gap-2 text-sm active:scale-95 transition-all bg-white hover:border-sapphire">
-                    <Upload size={15} />
-                    Загрузить файл
-                  </button>
-                  <button
-                    onClick={goNext}
-                    disabled={!canProceed()}
-                    className="flex-1 py-3 rounded-xl bg-royal text-swan font-semibold shadow-card transition-all active:scale-95 disabled:opacity-40 hover:bg-sapphire"
-                  >
-                    Продолжить
-                  </button>
-                </div>
-              </div>
-            )}
 
             {/* Step 3 — Style */}
             {step === 3 && (
