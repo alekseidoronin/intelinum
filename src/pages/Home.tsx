@@ -116,16 +116,16 @@ export default function Home() {
           <div className="px-4 pb-4 grid grid-cols-2 gap-2 shrink-0">
             <button
               onClick={handleCopy}
-              className={`py-2.5 rounded-xl text-xs font-medium flex items-center justify-center gap-1.5 transition-all active:scale-95 ${
-                copied ? "bg-gold/30 text-gold" : "bg-white/15 text-white hover:bg-white/25"
+              className={`py-3 rounded-xl text-sm font-medium flex items-center justify-center gap-1.5 transition-all active:scale-95 ${
+                 copied ? "bg-gold/30 text-gold" : "bg-white/15 text-white hover:bg-white/25"
               }`}>
-              <Copy size={13} className="flex-shrink-0" />
+              <Copy size={15} className="flex-shrink-0" />
               <span>{copied ? "Скопировано" : "Копировать"}</span>
             </button>
             <button
               onClick={handleEdit}
-              className="py-2.5 rounded-xl bg-white/15 text-white text-xs font-medium flex items-center justify-center gap-1.5 hover:bg-white/25 transition-all active:scale-95">
-              <Edit3 size={13} className="flex-shrink-0" />
+              className="py-3 rounded-xl bg-white/15 text-white text-sm font-medium flex items-center justify-center gap-1.5 hover:bg-white/25 transition-all active:scale-95">
+              <Edit3 size={15} className="flex-shrink-0" />
               Редактировать
             </button>
           </div>
