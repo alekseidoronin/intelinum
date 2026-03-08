@@ -61,26 +61,22 @@ export default function Onboarding() {
 
               {/* Logo block — large and prominent */}
               <motion.div
-                className="flex flex-col items-center mb-10"
+                className="flex flex-col items-center mb-8"
                 initial={{ opacity: 0, scale: 0.85 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               >
-                <div
-                  className="w-24 h-24 rounded-3xl flex items-center justify-center mb-5"
-                  style={{
-                    background: "hsl(var(--gold) / 0.15)",
-                    border: "1.5px solid hsl(var(--gold) / 0.35)",
-                    boxShadow: "0 0 60px hsl(var(--gold) / 0.25)",
-                  }}
-                >
-                  <img src={logoImg} alt="ИНТЕЛИНУМ" className="w-14 h-14 object-contain" />
-                </div>
+                <img
+                  src={logoImg}
+                  alt="ИНТЕЛИНУМ"
+                  className="object-contain mb-5"
+                  style={{ width: 110, height: 110, filter: "drop-shadow(0 0 24px hsl(var(--gold) / 0.5))" }}
+                />
 
                 <span
                   className="font-display font-bold tracking-[0.22em] uppercase"
                   style={{
-                    fontSize: 22,
+                    fontSize: 26,
                     background: "var(--gradient-gold)",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
