@@ -57,7 +57,16 @@ serve(async (req) => {
     }
 
     const data = await response.json();
-    const rewrittenText = data.choices?.[0]?.message?.content ?? "";
+    let rewrittenText: string = data.choices?.[0]?.message?.content ?? "";
+
+    // Hard trim: if AI returned too much, cut to target
+    const target = Number(targetChars);
+    if (rewrittenText.length > Math.round(target * 1.03)) {
+      rewrittenText = rewrittenText.slice(0, target);
+      // Trim to last space to avoid cutting mid-word
+      const lastSpace = rewrittenText.lastIndexOf(" ");
+      if (lastSpace > target * 0.9) rewrittenText = rewrittenText.slice(0, lastSpace);
+    }
 
     return new Response(JSON.stringify({ text: rewrittenText }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
