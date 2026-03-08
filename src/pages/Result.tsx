@@ -82,6 +82,7 @@ export default function Result() {
   const [activeTab, setActiveTab] = useState("instagram");
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [regenerating, setRegenerating] = useState(false);
+  const [targetChars, setTargetChars] = useState<string>("");
 
   const cur = platforms.find(p => p.id === activeTab)!;
 
