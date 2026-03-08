@@ -87,8 +87,8 @@ export default function Home() {
                 <Zap size={13} className="text-gold" />
               </div>
               <div>
-                <div className="text-[10px] text-white/60 leading-tight">Контент дня</div>
-                <div className="text-xs font-medium text-white leading-tight">
+               <div className="text-xs text-white/60 leading-tight">Контент дня</div>
+                <div className="text-sm font-medium text-white leading-tight">
                   Число {num} — {today.toLocaleDateString("ru", { day: "numeric", month: "long" })}
                 </div>
               </div>
@@ -107,7 +107,7 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3 }}
             className="flex-1 px-4 py-4 overflow-y-auto scrollbar-hide">
-            <p className="text-xs text-white/85 leading-relaxed whitespace-pre-line">
+            <p className="text-sm text-white/85 leading-relaxed whitespace-pre-line">
               {todayPost}
             </p>
           </motion.div>
@@ -116,23 +116,23 @@ export default function Home() {
           <div className="px-4 pb-4 grid grid-cols-2 gap-2 shrink-0">
             <button
               onClick={handleCopy}
-              className={`py-2.5 rounded-xl text-xs font-medium flex items-center justify-center gap-1.5 transition-all active:scale-95 ${
-                copied ? "bg-gold/30 text-gold" : "bg-white/15 text-white hover:bg-white/25"
+              className={`py-3 rounded-xl text-sm font-medium flex items-center justify-center gap-1.5 transition-all active:scale-95 ${
+                 copied ? "bg-gold/30 text-gold" : "bg-white/15 text-white hover:bg-white/25"
               }`}>
-              <Copy size={13} className="flex-shrink-0" />
+              <Copy size={15} className="flex-shrink-0" />
               <span>{copied ? "Скопировано" : "Копировать"}</span>
             </button>
             <button
               onClick={handleEdit}
-              className="py-2.5 rounded-xl bg-white/15 text-white text-xs font-medium flex items-center justify-center gap-1.5 hover:bg-white/25 transition-all active:scale-95">
-              <Edit3 size={13} className="flex-shrink-0" />
+              className="py-3 rounded-xl bg-white/15 text-white text-sm font-medium flex items-center justify-center gap-1.5 hover:bg-white/25 transition-all active:scale-95">
+              <Edit3 size={15} className="flex-shrink-0" />
               Редактировать
             </button>
           </div>
         </motion.div>
 
         {/* Section label */}
-        <h2 className="font-display text-base font-semibold text-royal shrink-0">Создать контент</h2>
+        <h2 className="font-display text-lg font-semibold text-royal shrink-0">Создать контент</h2>
 
         {/* Rail A */}
         <motion.button
@@ -146,9 +146,9 @@ export default function Home() {
               <Mic size={18} className="text-royal" />
             </div>
             <div className="flex-1 min-w-0">
-              <div className="font-semibold text-royal text-sm mb-0.5">У меня есть запись</div>
-              <div className="text-xs text-muted-foreground">Загрузите аудио или видео — получите пакет постов</div>
-              <div className="mt-0.5 text-[10px] text-sapphire/70">mp3, wav, mp4, mov · до 500 МБ</div>
+            <div className="font-semibold text-royal text-base mb-0.5">У меня есть запись</div>
+              <div className="text-sm text-muted-foreground">Загрузите аудио или видео — получите пакет постов</div>
+              <div className="mt-0.5 text-xs text-sapphire/70">mp3, wav, mp4, mov · до 500 МБ</div>
             </div>
             <ChevronRight size={16} className="text-sapphire flex-shrink-0" />
           </div>
@@ -166,9 +166,9 @@ export default function Home() {
               <TrendingUp size={18} className="text-sapphire" />
             </div>
             <div className="flex-1 min-w-0">
-              <div className="font-semibold text-royal text-sm mb-0.5">Хочу найти тему</div>
-              <div className="text-xs text-muted-foreground">Актуальные темы из трендов — один тап и контент готов</div>
-              <div className="mt-0.5 text-[10px] text-sapphire/70">Обновляется каждый день</div>
+              <div className="font-semibold text-royal text-base mb-0.5">Хочу найти тему</div>
+              <div className="text-sm text-muted-foreground">Актуальные темы из трендов — один тап и контент готов</div>
+              <div className="mt-0.5 text-xs text-sapphire/70">Обновляется каждый день</div>
             </div>
             <ChevronRight size={16} className="text-sapphire flex-shrink-0" />
           </div>
@@ -181,13 +181,13 @@ export default function Home() {
           transition={{ delay: 0.4 }}
           className="shrink-0 bg-card rounded-2xl px-4 py-3 border border-border shadow-card mb-2">
           <div className="flex items-center justify-between mb-1.5">
-            <span className="text-xs text-muted-foreground">Пакеты в этом месяце</span>
-            <span className="text-xs text-sapphire font-medium">2 / 3</span>
+            <span className="text-sm text-muted-foreground">Пакеты в этом месяце</span>
+            <span className="text-sm text-sapphire font-medium">2 / 3</span>
           </div>
           <div className="w-full bg-shell rounded-full h-1.5">
             <div className="h-1.5 rounded-full bg-sapphire" style={{ width: "67%" }} />
           </div>
-          <div className="mt-1.5 text-xs text-muted-foreground">
+          <div className="mt-1.5 text-sm text-muted-foreground">
             Бесплатный план ·{" "}
             <button onClick={() => navigate("/pricing")} className="text-sapphire font-medium active:opacity-70">
               Расширить
