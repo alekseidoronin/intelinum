@@ -30,13 +30,12 @@ export default function Onboarding() {
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [name, setName] = useState("");
-  const [texts, setTexts] = useState("");
   const [selectedStyle, setSelectedStyle] = useState("");
   const [loadingProgress, setLoadingProgress] = useState(0);
 
   const goNext = () => {
-    if (step === 3) {
-      setStep(4);
+    if (step === 2) {
+      setStep(3);
       let p = 0;
       const interval = setInterval(() => {
         p += Math.random() * 15 + 5;
@@ -54,8 +53,7 @@ export default function Onboarding() {
 
   const canProceed = () => {
     if (step === 1) return name.trim().length > 0;
-    if (step === 2) return texts.trim().length > 10;
-    if (step === 3) return selectedStyle !== "";
+    if (step === 2) return selectedStyle !== "";
     return true;
   };
 
