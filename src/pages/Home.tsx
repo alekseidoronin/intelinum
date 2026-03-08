@@ -83,7 +83,7 @@ export default function Home() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="min-h-0 max-h-[42vh] rounded-2xl overflow-hidden flex flex-col"
+          className="min-h-0 max-h-[38vh] rounded-2xl overflow-hidden flex flex-col"
           style={{ background: "linear-gradient(145deg, hsl(224 65% 19%), hsl(221 35% 30%))" }}>
 
           {/* Widget Header */}
