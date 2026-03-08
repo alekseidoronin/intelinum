@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import WritingStyle from "./pages/WritingStyle";
 import VisualStyle from "./pages/VisualStyle";
+import Onboarding from "./pages/Onboarding";
 import Home from "./pages/Home";
 import RailA from "./pages/RailA";
 import RailB from "./pages/RailB";
