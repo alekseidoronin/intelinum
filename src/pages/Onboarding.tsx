@@ -3,14 +3,20 @@ import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight, Upload, Check, Sparkles } from "lucide-react";
 import { Logo } from "@/components/Logo";
+import styleRealistic from "@/assets/style-realistic.jpg";
+import styleMinimal from "@/assets/style-minimal.jpg";
+import styleCozy from "@/assets/style-cozy.jpg";
+import styleGloss from "@/assets/style-gloss.jpg";
+import styleCosmic from "@/assets/style-cosmic.jpg";
+import styleGeo from "@/assets/style-geo.jpg";
 
 const styles = [
-  { id: "realistic", emoji: "📸", name: "Реалистичный", desc: "Живые люди, природа, доверие" },
-  { id: "minimal", emoji: "◻️", name: "Минимализм", desc: "Чистые линии, пространство" },
-  { id: "cozy", emoji: "🕯️", name: "Тёплый уют", desc: "Свечи, текстуры, личные истории" },
-  { id: "gloss", emoji: "✨", name: "Глянец", desc: "Яркие градиенты, продажи" },
-  { id: "cosmic", emoji: "🌌", name: "Космический", desc: "Звёзды, прогнозы, предсказания" },
-  { id: "geo", emoji: "🔷", name: "Геометрический", desc: "Мандалы, нумерологические разборы" },
+  { id: "realistic", name: "Реалистичный", desc: "Живые люди, природа, доверие", img: styleRealistic },
+  { id: "minimal", name: "Минимализм", desc: "Чистые линии, пространство", img: styleMinimal },
+  { id: "cozy", name: "Тёплый уют", desc: "Свечи, текстуры, личные истории", img: styleCozy },
+  { id: "gloss", name: "Глянец", desc: "Яркие градиенты, продажи", img: styleGloss },
+  { id: "cosmic", name: "Космический", desc: "Звёзды, прогнозы, предсказания", img: styleCosmic },
+  { id: "geo", name: "Геометрический", desc: "Мандалы, нумерологические разборы", img: styleGeo },
 ];
 
 const steps = [
