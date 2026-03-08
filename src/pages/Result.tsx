@@ -112,8 +112,8 @@ export default function Result() {
       </motion.div>
 
       {/* Platform tabs */}
-      <div className="mb-4 overflow-x-auto [&::-webkit-scrollbar]:h-[3px] [&::-webkit-scrollbar-track]:bg-border [&::-webkit-scrollbar-thumb]:bg-sapphire/40 [&::-webkit-scrollbar-thumb]:rounded-full pb-1">
-        <div className="flex gap-2 w-max px-5">
+      <div className="mb-4 px-5">
+        <div className="flex flex-wrap gap-2">
           {platforms.map(p => (
             <button key={p.id} onClick={() => setActiveTab(p.id)}
               className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition-all ${
