@@ -87,12 +87,15 @@ export default function Home() {
               <span className="truncate">{copied ? "Скопировано" : "Копировать"}</span>
             </button>
             <button
-              onClick={() => {}}
+              onClick={() => navigate("/result")}
               className="py-2.5 rounded-xl bg-white/15 text-white text-xs font-medium flex items-center justify-center hover:bg-white/25 transition-all active:scale-95"
             >
               Редактировать
             </button>
-            <button className="w-full py-2.5 rounded-xl bg-white/15 text-white text-xs font-medium flex items-center justify-center gap-1.5 hover:bg-white/25 transition-all active:scale-95">
+            <button
+              onClick={() => navigate("/library")}
+              className="w-full py-2.5 rounded-xl bg-white/15 text-white text-xs font-medium flex items-center justify-center gap-1.5 hover:bg-white/25 transition-all active:scale-95"
+            >
               <LayoutGrid size={13} className="flex-shrink-0" />
               <span className="truncate">Шаблоны</span>
             </button>
