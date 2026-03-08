@@ -128,7 +128,7 @@ export default function Result() {
       <div className="px-5 space-y-4">
         <motion.div key={activeTab} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="bg-white border border-border rounded-2xl overflow-hidden shadow-card">
           <div className="px-4 py-3 border-b border-border flex items-center justify-between bg-background">
-            <span className="text-sm font-medium text-royal">{cur.emoji} {cur.name}</span>
+            <span className="text-sm font-medium text-royal">{cur.name}</span>
             <span className="text-xs text-muted-foreground">{cur.text.length} / {cur.charLimit.toLocaleString()} симв.</span>
           </div>
           <div className="px-4 py-4 max-h-64 overflow-y-auto scrollbar-hide">
