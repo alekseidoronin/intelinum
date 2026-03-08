@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ChevronRight, Crown, Palette, FileText, Bell, LogOut, Shield, HelpCircle } from "lucide-react";
-import { Logo } from "@/components/Logo";
 import { BottomNav } from "@/components/BottomNav";
+import { TopBar } from "@/components/TopBar";
 
 const menuItems = [
   { icon: FileText, label: "Мой стиль письма", desc: "Обновить тексты-примеры", path: "/profile/style" },

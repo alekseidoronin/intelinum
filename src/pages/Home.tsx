@@ -2,9 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Copy, Edit3, Mic, TrendingUp, RefreshCw, ChevronRight, Zap } from "lucide-react";
-import { Logo } from "@/components/Logo";
 import { BottomNav } from "@/components/BottomNav";
-import { SideMenuButton } from "@/components/SideMenu";
+import { TopBar } from "@/components/TopBar";
 import { useToast } from "@/hooks/use-toast";
 
 const posts = [
