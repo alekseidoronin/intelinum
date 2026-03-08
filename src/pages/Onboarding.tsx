@@ -158,13 +158,14 @@ export default function Onboarding() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7, duration: 0.45 }}
-                whileTap={{ scale: 0.97 }}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97, boxShadow: "0 0 48px hsl(var(--gold) / 0.65), 0 8px 32px hsl(var(--gold) / 0.4)" }}
                 className="w-full py-5 rounded-2xl font-bold text-lg relative overflow-hidden flex items-center justify-center gap-2"
                 style={{
                   background: "var(--gradient-gold)",
                   color: "hsl(var(--royal))",
-                  boxShadow: "0 0 40px hsl(var(--gold) / 0.5), 0 8px 32px hsl(var(--gold) / 0.3)",
                   fontSize: 17,
+                  transition: "transform 0.2s ease",
                 }}
               >
                 <Sparkles size={18} />
@@ -217,19 +218,20 @@ export default function Onboarding() {
                 onKeyDown={(e) => e.key === "Enter" && canProceed() && goNext()}
                 autoFocus
               />
-              <button
+              <motion.button
                 onClick={goNext}
                 disabled={!canProceed()}
-                className="w-full mt-5 py-4 rounded-2xl font-bold text-lg transition-all active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
+                whileHover={canProceed() ? { scale: 1.03 } : {}}
+                whileTap={canProceed() ? { scale: 0.97, boxShadow: "0 0 48px hsl(var(--gold) / 0.65)" } : {}}
+                className="w-full mt-5 py-4 rounded-2xl font-bold text-lg disabled:opacity-40 disabled:cursor-not-allowed"
                 style={{
                   background: "var(--gradient-gold)",
                   color: "hsl(var(--royal))",
-                  boxShadow: canProceed() ? "0 0 30px hsl(var(--gold) / 0.4)" : "none",
                   fontSize: 17,
                 }}
               >
                 Войти в приложение
-              </button>
+              </motion.button>
             </div>
           )}
         </motion.div>
