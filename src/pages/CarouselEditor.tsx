@@ -139,7 +139,7 @@ export default function CarouselEditor() {
 
       {/* Slide preview */}
       <div className="flex justify-center px-5 mb-3">
-        <div className="relative" style={{ width: previewW + 64 }}>
+        <div className="relative" style={{ width: previewW + 96 }}>
           {/* Prev */}
           <button
             onClick={() => setCurrentIndex((i) => Math.max(0, i - 1))}
@@ -157,7 +157,7 @@ export default function CarouselEditor() {
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.2 }}
               style={{ width: previewW, height: previewH }}
-              className="mx-8 rounded-2xl bg-gradient-to-br from-royal via-sapphire to-royal/80 border border-border shadow-card flex flex-col justify-center p-5 overflow-hidden">
+              className="mx-12 rounded-2xl bg-gradient-to-br from-royal via-sapphire to-royal/80 border border-border shadow-card flex flex-col justify-center p-5 overflow-hidden">
               
               <div
                 className={`text-swan mb-2 ${buildTextClass(getTitleStyle())}`}
