@@ -92,8 +92,9 @@ export default function Home() {
             >
               Редактировать
             </button>
-            <button className="py-2.5 rounded-xl bg-white/15 text-white text-xs flex items-center justify-center hover:bg-white/25 transition-all active:scale-95">
-              <LayoutGrid size={13} />
+            <button className="w-full py-2.5 rounded-xl bg-white/15 text-white text-xs font-medium flex items-center justify-center gap-1.5 hover:bg-white/25 transition-all active:scale-95">
+              <LayoutGrid size={13} className="flex-shrink-0" />
+              <span className="truncate">Шаблоны</span>
             </button>
           </div>
         </motion.div>
