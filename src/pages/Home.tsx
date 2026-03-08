@@ -69,8 +69,8 @@ export default function Home() {
           </div>
 
           {/* Post text */}
-          <div className="px-4 py-3">
-            <p className="text-xs text-white/85 leading-relaxed whitespace-pre-line line-clamp-5">
+          <div className="px-4 py-3 max-h-32 overflow-y-auto scrollbar-hide">
+            <p className="text-xs text-white/85 leading-relaxed whitespace-pre-line">
               {todayPost}
             </p>
           </div>
