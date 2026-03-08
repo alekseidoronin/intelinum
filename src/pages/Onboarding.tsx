@@ -231,7 +231,7 @@ export default function Onboarding() {
                 }}
               >
                 Войти в приложение
-              </button>
+              </motion.button>
             </div>
           )}
         </motion.div>
