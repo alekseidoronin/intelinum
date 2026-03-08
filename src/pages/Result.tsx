@@ -198,7 +198,7 @@ export default function Result() {
                     onChange={(e) => setTargetChars(e.target.value)}
                     onKeyDown={(e) => { if (e.key === "Enter") handleGenerateByChars(); }}
                     placeholder={cur.charLimit.toString()}
-                    className="w-full bg-transparent text-sm text-royal focus:outline-none"
+                    className="w-full bg-transparent text-sm text-royal focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                   />
                   <span className="text-xs text-muted-foreground shrink-0">симв.</span>
                 </div>
