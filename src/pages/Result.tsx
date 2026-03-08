@@ -175,17 +175,37 @@ export default function Result() {
               >
                 <ChevronsDown size={14} /> Длиннее
               </button>
-              <div className="flex items-center gap-1 border border-border rounded-xl bg-background px-2.5 h-10">
+            </div>
+            {/* Custom char target */}
+            <div className="flex items-center gap-2">
+              <div className="flex-1 flex items-center gap-1.5 border border-border rounded-xl bg-background px-3 h-10">
                 <input
                   type="number"
                   value={targetChars}
                   onChange={(e) => setTargetChars(e.target.value)}
-                  onKeyDown={(e) => { if (e.key === "Enter" && targetChars) toast({ description: `Текст перепишется на ${targetChars} символов ✨` }); }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && targetChars) {
+                      setRegenerating(true);
+                      setTimeout(() => { setRegenerating(false); toast({ description: `Текст перегенерирован: ${targetChars} симв. ✨` }); }, 1200);
+                    }
+                  }}
                   placeholder={cur.charLimit.toString()}
-                  className="w-16 bg-transparent text-xs text-royal focus:outline-none text-center"
+                  className="flex-1 bg-transparent text-sm text-royal focus:outline-none text-center"
                 />
-                <span className="text-xs text-muted-foreground">симв.</span>
+                <span className="text-xs text-muted-foreground whitespace-nowrap">симв.</span>
               </div>
+              <button
+                disabled={!targetChars || regenerating}
+                onClick={() => {
+                  if (!targetChars) return;
+                  setRegenerating(true);
+                  setTimeout(() => { setRegenerating(false); toast({ description: `Текст перегенерирован: ${targetChars} симв. ✨` }); }, 1200);
+                }}
+                className="h-10 px-3.5 rounded-xl bg-royal text-swan text-xs font-medium flex items-center gap-1.5 transition-all active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed whitespace-nowrap"
+              >
+                <Sparkles size={13} className={regenerating ? "animate-spin" : ""} />
+                Сгенерировать
+              </button>
             </div>
 
             {/* Action buttons */}
