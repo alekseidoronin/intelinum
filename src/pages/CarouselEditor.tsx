@@ -139,7 +139,7 @@ export default function CarouselEditor() {
 
       {/* Slide preview */}
       <div className="flex justify-center px-5 mb-3">
-        <div className="relative" style={{ width: previewW + 64 }}>
+        <div className="relative" style={{ width: previewW + 96 }}>
           {/* Prev */}
           <button
             onClick={() => setCurrentIndex((i) => Math.max(0, i - 1))}
