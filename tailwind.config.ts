@@ -12,7 +12,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ["Cormorant Garamond", "serif"],
+        display: ["Raleway", "sans-serif"],
         body: ["Inter", "sans-serif"],
       },
       colors: {
