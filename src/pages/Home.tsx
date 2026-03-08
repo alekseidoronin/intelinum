@@ -66,26 +66,28 @@ export default function Home() {
   const num = (dayNum - 1) % 9 + 1;
 
   return (
-    <div className="min-h-screen bg-background pb-24">
-      {/* Header — fixed */}
-      <div className="sticky top-0 z-30 bg-background px-4 py-3">
+    <div className="h-dvh flex flex-col bg-background overflow-hidden">
+      {/* Header */}
+      <div className="shrink-0 z-30 bg-background px-4 py-3">
         <div className="flex items-center justify-between">
           <Logo size="sm" vertical={false} />
           <SideMenuButton />
         </div>
       </div>
 
-      <div className="px-4 space-y-3">
+      {/* Scrollable content */}
+      <div className="flex-1 flex flex-col px-4 gap-3 overflow-hidden">
+
         {/* Контент дня widget */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="rounded-2xl overflow-hidden"
+          className="flex-1 rounded-2xl overflow-hidden flex flex-col"
           style={{ background: "linear-gradient(145deg, hsl(224 65% 19%), hsl(221 35% 30%))" }}>
 
           {/* Widget Header */}
-          <div className="px-4 pt-4 pb-3 flex items-center justify-between border-b border-white/10">
+          <div className="px-4 pt-4 pb-3 flex items-center justify-between border-b border-white/10 shrink-0">
             <div className="flex items-center gap-2">
               <div className="w-7 h-7 rounded-lg bg-white/15 flex items-center justify-center flex-shrink-0">
                 <Zap size={13} className="text-gold" />
@@ -110,14 +112,14 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3 }}
-            className="px-4 py-5 max-h-56 overflow-y-auto scrollbar-hide">
+            className="flex-1 px-4 py-4 overflow-y-auto scrollbar-hide">
             <p className="text-xs text-white/85 leading-relaxed whitespace-pre-line">
               {todayPost}
             </p>
           </motion.div>
 
           {/* Actions */}
-          <div className="px-4 pb-4 grid grid-cols-2 gap-2">
+          <div className="px-4 pb-4 grid grid-cols-2 gap-2 shrink-0">
             <button
               onClick={handleCopy}
               className={`py-2.5 rounded-xl text-xs font-medium flex items-center justify-center gap-1.5 transition-all active:scale-95 ${
@@ -136,7 +138,7 @@ export default function Home() {
         </motion.div>
 
         {/* Section label */}
-        <h2 className="font-display text-lg font-semibold text-royal pt-0.5">Создать контент</h2>
+        <h2 className="font-display text-base font-semibold text-royal shrink-0">Создать контент</h2>
 
         {/* Rail A */}
         <motion.button
@@ -144,17 +146,15 @@ export default function Home() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.4, delay: 0.1 }}
           onClick={() => navigate("/rail-a")}
-          className="w-full bg-card rounded-2xl p-4 text-left shadow-card border border-border hover:border-sapphire/40 transition-all active:scale-[0.98]">
+          className="shrink-0 w-full bg-card rounded-2xl p-3.5 text-left shadow-card border border-border hover:border-sapphire/40 transition-all active:scale-[0.98]">
           <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-2xl bg-royal/10 flex items-center justify-center flex-shrink-0">
-              <Mic size={20} className="text-royal" />
+            <div className="w-10 h-10 rounded-2xl bg-royal/10 flex items-center justify-center flex-shrink-0">
+              <Mic size={18} className="text-royal" />
             </div>
             <div className="flex-1 min-w-0">
               <div className="font-semibold text-royal text-sm mb-0.5">У меня есть запись</div>
-              <div className="text-xs text-muted-foreground leading-relaxed">
-                Загрузите аудио или видео — получите пакет постов
-              </div>
-              <div className="mt-1 text-[10px] text-sapphire/70">mp3, wav, mp4, mov · до 500 МБ</div>
+              <div className="text-xs text-muted-foreground">Загрузите аудио или видео — получите пакет постов</div>
+              <div className="mt-0.5 text-[10px] text-sapphire/70">mp3, wav, mp4, mov · до 500 МБ</div>
             </div>
             <ChevronRight size={16} className="text-sapphire flex-shrink-0" />
           </div>
@@ -166,17 +166,15 @@ export default function Home() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.4, delay: 0.2 }}
           onClick={() => navigate("/rail-b")}
-          className="w-full bg-card rounded-2xl p-4 text-left shadow-card border border-border hover:border-sapphire/40 transition-all active:scale-[0.98]">
+          className="shrink-0 w-full bg-card rounded-2xl p-3.5 text-left shadow-card border border-border hover:border-sapphire/40 transition-all active:scale-[0.98]">
           <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-2xl bg-sapphire/10 flex items-center justify-center flex-shrink-0">
-              <TrendingUp size={20} className="text-sapphire" />
+            <div className="w-10 h-10 rounded-2xl bg-sapphire/10 flex items-center justify-center flex-shrink-0">
+              <TrendingUp size={18} className="text-sapphire" />
             </div>
             <div className="flex-1 min-w-0">
               <div className="font-semibold text-royal text-sm mb-0.5">Хочу найти тему</div>
-              <div className="text-xs text-muted-foreground leading-relaxed">
-                Актуальные темы из трендов — один тап и контент готов
-              </div>
-              <div className="mt-1 text-[10px] text-sapphire/70">Обновляется каждый день</div>
+              <div className="text-xs text-muted-foreground">Актуальные темы из трендов — один тап и контент готов</div>
+              <div className="mt-0.5 text-[10px] text-sapphire/70">Обновляется каждый день</div>
             </div>
             <ChevronRight size={16} className="text-sapphire flex-shrink-0" />
           </div>
@@ -187,19 +185,17 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
-          className="bg-card rounded-2xl px-4 py-3 border border-border shadow-card">
-          <div className="flex items-center justify-between mb-2">
+          className="shrink-0 bg-card rounded-2xl px-4 py-3 border border-border shadow-card mb-2">
+          <div className="flex items-center justify-between mb-1.5">
             <span className="text-xs text-muted-foreground">Пакеты в этом месяце</span>
             <span className="text-xs text-sapphire font-medium">2 / 3</span>
           </div>
           <div className="w-full bg-shell rounded-full h-1.5">
             <div className="h-1.5 rounded-full bg-sapphire" style={{ width: "67%" }} />
           </div>
-          <div className="mt-2 text-xs text-muted-foreground">
+          <div className="mt-1.5 text-xs text-muted-foreground">
             Бесплатный план ·{" "}
-            <button
-              onClick={() => navigate("/pricing")}
-              className="text-sapphire font-medium active:opacity-70">
+            <button onClick={() => navigate("/pricing")} className="text-sapphire font-medium active:opacity-70">
               Расширить
             </button>
           </div>
