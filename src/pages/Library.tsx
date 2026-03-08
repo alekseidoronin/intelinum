@@ -63,6 +63,7 @@ export default function Library() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.05 }}
               onClick={() => alert(`Открываем: ${item.title}`)}
+              style={{ touchAction: "pan-y" }}
               className="w-full bg-white border border-border rounded-2xl px-4 py-4 flex items-center gap-3 shadow-card active:scale-[0.98] transition-all text-left"
             >
               <div className="w-10 h-10 rounded-xl bg-sapphire/10 flex items-center justify-center flex-shrink-0">
