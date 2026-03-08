@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronRight, Upload, Check, Sparkles, Mail, Lock, Eye, EyeOff } from "lucide-react";
+import { Upload, Check, Sparkles, Mail, Lock, Eye, EyeOff, User } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { supabase } from "@/lib/supabase";
 import styleRealistic from "@/assets/style-realistic.jpg";
@@ -22,16 +22,18 @@ const styles = [
 
 type AuthMode = "signup" | "login";
 
+// Steps: 0=welcome, 1=auth, 2=texts, 3=style, 4=loading
+
 export default function Onboarding() {
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [authMode, setAuthMode] = useState<AuthMode>("signup");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [authError, setAuthError] = useState("");
   const [authLoading, setAuthLoading] = useState(false);
-  const [name, setName] = useState("");
   const [texts, setTexts] = useState("");
   const [selectedStyle, setSelectedStyle] = useState("");
   const [loadingProgress, setLoadingProgress] = useState(0);
@@ -41,17 +43,27 @@ export default function Onboarding() {
     setAuthLoading(true);
     try {
       if (authMode === "signup") {
-        const { error } = await supabase.auth.signUp({
+        const { data, error } = await supabase.auth.signUp({
           email,
           password,
-          options: { emailRedirectTo: window.location.origin },
+          options: {
+            emailRedirectTo: window.location.origin,
+            data: { display_name: name.trim() },
+          },
         });
         if (error) throw error;
+        // Update profile with display_name
+        if (data.user) {
+          await supabase.from("profiles").upsert({
+            user_id: data.user.id,
+            display_name: name.trim(),
+          });
+        }
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
       }
-      setStep(s => s + 1);
+      setStep(2);
     } catch (err: any) {
       setAuthError(
         err.message === "Invalid login credentials"
@@ -66,8 +78,8 @@ export default function Onboarding() {
   };
 
   const goNext = () => {
-    if (step === 4) {
-      setStep(5);
+    if (step === 3) {
+      setStep(4);
       let p = 0;
       const interval = setInterval(() => {
         p += Math.random() * 15 + 5;
@@ -83,7 +95,9 @@ export default function Onboarding() {
     }
   };
 
-  // Steps: 0=welcome, 1=auth, 2=name, 3=texts, 4=style, 5=loading
+  const signupReady = authMode === "login"
+    ? email.length > 3 && password.length >= 6
+    : name.trim().length > 0 && email.length > 3 && password.length >= 6;
 
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-center px-5 relative overflow-hidden">
@@ -97,9 +111,9 @@ export default function Onboarding() {
           <Logo size="lg" vertical />
         </div>
 
-        {step > 0 && step < 5 && (
+        {step >= 1 && step <= 3 && (
           <div className="flex justify-center gap-2 mb-8">
-            {[1, 2, 3, 4].map(i => (
+            {[1, 2, 3].map(i => (
               <div
                 key={i}
                 className={`h-1 rounded-full transition-all duration-500 ${
@@ -154,13 +168,26 @@ export default function Onboarding() {
             {step === 1 && (
               <div>
                 <h2 className="font-display text-3xl text-royal mb-1">
-                  {authMode === "signup" ? "Создать аккаунт" : "Добро пожаловать"}
+                  {authMode === "signup" ? "Создать аккаунт" : "С возвращением"}
                 </h2>
                 <p className="text-sapphire/80 mb-6 text-sm">
-                  {authMode === "signup" ? "Введите email и пароль" : "Войдите в свой аккаунт"}
+                  {authMode === "signup" ? "Введите ваши данные для регистрации" : "Войдите в свой аккаунт"}
                 </p>
 
                 <div className="space-y-3 mb-4">
+                  {authMode === "signup" && (
+                    <div className="relative">
+                      <User size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                      <input
+                        type="text"
+                        value={name}
+                        onChange={e => setName(e.target.value)}
+                        placeholder="Ваше имя"
+                        autoFocus
+                        className="w-full pl-11 pr-4 py-4 rounded-2xl bg-white border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-sapphire focus:ring-1 focus:ring-sapphire/30 transition-all"
+                      />
+                    </div>
+                  )}
                   <div className="relative">
                     <Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
                     <input
@@ -168,7 +195,7 @@ export default function Onboarding() {
                       value={email}
                       onChange={e => setEmail(e.target.value)}
                       placeholder="Email"
-                      autoFocus
+                      autoFocus={authMode === "login"}
                       className="w-full pl-11 pr-4 py-4 rounded-2xl bg-white border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-sapphire focus:ring-1 focus:ring-sapphire/30 transition-all"
                     />
                   </div>
@@ -178,8 +205,8 @@ export default function Onboarding() {
                       type={showPassword ? "text" : "password"}
                       value={password}
                       onChange={e => setPassword(e.target.value)}
-                      placeholder="Пароль"
-                      onKeyDown={e => e.key === "Enter" && email && password.length >= 6 && handleAuth()}
+                      placeholder="Пароль (мин. 6 символов)"
+                      onKeyDown={e => e.key === "Enter" && signupReady && handleAuth()}
                       className="w-full pl-11 pr-11 py-4 rounded-2xl bg-white border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-sapphire focus:ring-1 focus:ring-sapphire/30 transition-all"
                     />
                     <button
@@ -198,7 +225,7 @@ export default function Onboarding() {
 
                 <button
                   onClick={handleAuth}
-                  disabled={!email || password.length < 6 || authLoading}
+                  disabled={!signupReady || authLoading}
                   className="w-full py-4 rounded-2xl bg-royal text-swan font-semibold text-lg shadow-card transition-all active:scale-95 disabled:opacity-40 hover:bg-sapphire mb-4"
                 >
                   {authLoading ? "Загрузка..." : authMode === "signup" ? "Зарегистрироваться" : "Войти"}
@@ -216,32 +243,8 @@ export default function Onboarding() {
               </div>
             )}
 
-            {/* Step 2 — Name */}
+            {/* Step 2 — Texts */}
             {step === 2 && (
-              <div>
-                <h2 className="font-display text-3xl text-royal mb-2">Как вас зовут?</h2>
-                <p className="text-sapphire/80 mb-6 text-sm">Мы будем обращаться по имени</p>
-                <input
-                  type="text"
-                  value={name}
-                  onChange={e => setName(e.target.value)}
-                  placeholder="Ваше имя"
-                  className="w-full px-5 py-4 rounded-2xl bg-white border border-border text-foreground placeholder:text-muted-foreground text-lg focus:outline-none focus:border-sapphire focus:ring-1 focus:ring-sapphire/30 transition-all"
-                  onKeyDown={e => e.key === "Enter" && name.trim() && goNext()}
-                  autoFocus
-                />
-                <button
-                  onClick={goNext}
-                  disabled={!name.trim()}
-                  className="w-full mt-5 py-4 rounded-2xl bg-royal text-swan font-semibold text-lg shadow-card transition-all active:scale-95 disabled:opacity-40 hover:bg-sapphire"
-                >
-                  Продолжить
-                </button>
-              </div>
-            )}
-
-            {/* Step 3 — Texts */}
-            {step === 3 && (
               <div>
                 <h2 className="font-display text-3xl text-royal mb-2">Ваш стиль письма</h2>
                 <p className="text-sapphire/80 mb-6 text-sm">Загрузите 3–5 своих постов или текстов</p>
@@ -268,8 +271,8 @@ export default function Onboarding() {
               </div>
             )}
 
-            {/* Step 4 — Style */}
-            {step === 4 && (
+            {/* Step 3 — Style */}
+            {step === 3 && (
               <div>
                 <h2 className="font-display text-3xl text-royal mb-2">Стиль визуала</h2>
                 <p className="text-sapphire/80 mb-5 text-sm">Выберите, как будут выглядеть ваши картинки</p>
@@ -307,8 +310,8 @@ export default function Onboarding() {
               </div>
             )}
 
-            {/* Step 5 — Loading */}
-            {step === 5 && (
+            {/* Step 4 — Loading */}
+            {step === 4 && (
               <div className="text-center py-8">
                 <div className="relative w-24 h-24 mx-auto mb-6">
                   <div className="absolute inset-0 rounded-full border-2 border-shell" />
