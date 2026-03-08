@@ -71,7 +71,7 @@ export default function Home() {
       <div className="flex-1 flex flex-col px-4 pt-3 gap-3 pb-24">
 
         {/* Контент дня */}
-        <div className="rounded-2xl overflow-hidden flex flex-col max-h-52"
+        <div className="rounded-2xl overflow-hidden flex flex-col max-h-80"
           style={{ background: "linear-gradient(145deg, hsl(224 65% 19%), hsl(221 35% 30%))" }}>
 
           <div className="px-4 pt-3 pb-2.5 flex items-center justify-between border-b border-white/10 shrink-0">
