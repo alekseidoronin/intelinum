@@ -10,6 +10,8 @@ import RailB from "./pages/RailB";
 import Result from "./pages/Result";
 import Library from "./pages/Library";
 import Profile from "./pages/Profile";
+import ImageEditor from "./pages/ImageEditor";
+import CarouselEditor from "./pages/CarouselEditor";
 import Pricing from "./pages/Pricing";
 import Education from "./pages/Education";
 import Solutions from "./pages/Solutions";
