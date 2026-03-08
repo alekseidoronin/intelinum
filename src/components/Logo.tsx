@@ -13,24 +13,24 @@ export function Logo({ size = "md", showText = true, vertical = true }: LogoProp
 
   if (vertical) {
     return (
-      <div className="flex flex-col items-center gap-3">
+      <div className="flex flex-col items-center gap-3 my-[10px] pt-0">
         <img
           src={logoImg}
           alt="ИНТЕЛИНУМ логотип"
           width={px}
           height={px}
-          className="object-contain"
-        />
-        {showText && (
-          <span
-            className="font-display text-royal tracking-widest uppercase font-semibold"
-            style={{ fontSize: textSizes[size], letterSpacing: "0.18em" }}
-          >
+          className="object-contain" />
+        
+        {showText &&
+        <span
+          className="font-display text-royal tracking-widest uppercase font-semibold"
+          style={{ fontSize: textSizes[size], letterSpacing: "0.18em" }}>
+          
             ИНТЕЛИНУМ
           </span>
-        )}
-      </div>
-    );
+        }
+      </div>);
+
   }
 
   return (
@@ -40,16 +40,16 @@ export function Logo({ size = "md", showText = true, vertical = true }: LogoProp
         alt="ИНТЕЛИНУМ логотип"
         width={px}
         height={px}
-        className="object-contain"
-      />
-      {showText && (
-        <span
-          className="font-display text-royal tracking-widest uppercase font-semibold"
-          style={{ fontSize: textSizes[size], letterSpacing: "0.18em" }}
-        >
+        className="object-contain" />
+      
+      {showText &&
+      <span
+        className="font-display text-royal tracking-widest uppercase font-semibold"
+        style={{ fontSize: textSizes[size], letterSpacing: "0.18em" }}>
+        
           ИНТЕЛИНУМ
         </span>
-      )}
-    </div>
-  );
+      }
+    </div>);
+
 }

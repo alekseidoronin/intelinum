@@ -11,18 +11,18 @@ import styleCosmic from "@/assets/style-cosmic.jpg";
 import styleGeo from "@/assets/style-geo.jpg";
 
 const styles = [
-  { id: "realistic", name: "Реалистичный", desc: "Живые люди, природа, доверие", img: styleRealistic },
-  { id: "minimal", name: "Минимализм", desc: "Чистые линии, пространство", img: styleMinimal },
-  { id: "cozy", name: "Тёплый уют", desc: "Свечи, текстуры, личные истории", img: styleCozy },
-  { id: "gloss", name: "Глянец", desc: "Яркие градиенты, продажи", img: styleGloss },
-  { id: "cosmic", name: "Космический", desc: "Звёзды, прогнозы, предсказания", img: styleCosmic },
-  { id: "geo", name: "Геометрический", desc: "Мандалы, нумерологические разборы", img: styleGeo },
-];
+{ id: "realistic", name: "Реалистичный", desc: "Живые люди, природа, доверие", img: styleRealistic },
+{ id: "minimal", name: "Минимализм", desc: "Чистые линии, пространство", img: styleMinimal },
+{ id: "cozy", name: "Тёплый уют", desc: "Свечи, текстуры, личные истории", img: styleCozy },
+{ id: "gloss", name: "Глянец", desc: "Яркие градиенты, продажи", img: styleGloss },
+{ id: "cosmic", name: "Космический", desc: "Звёзды, прогнозы, предсказания", img: styleCosmic },
+{ id: "geo", name: "Геометрический", desc: "Мандалы, нумерологические разборы", img: styleGeo }];
+
 
 const steps = [
-  { title: "Добро пожаловать", subtitle: "AI-платформа для нумерологов" },
-  { title: "Как вас зовут?", subtitle: "Мы будем обращаться по имени" },
-];
+{ title: "Добро пожаловать", subtitle: "AI-платформа для нумерологов" },
+{ title: "Как вас зовут?", subtitle: "Мы будем обращаться по имени" }];
+
 
 export default function Onboarding() {
   const navigate = useNavigate();
@@ -33,7 +33,7 @@ export default function Onboarding() {
     if (step === 1) {
       navigate("/home");
     } else {
-      setStep(s => s + 1);
+      setStep((s) => s + 1);
     }
   };
 
@@ -50,24 +50,24 @@ export default function Onboarding() {
       </div>
 
       <div className="w-full max-w-md relative z-10">
-        <div className="flex justify-center mb-8">
+        <div className="mb-8 flex items-start justify-center py-0 pt-0">
           <Logo size="lg" vertical />
         </div>
 
-        {step === 1 && (
-          <div className="flex justify-center gap-2 mb-8">
-            {[0, 1].map(i => (
-              <div key={i} className={`h-1 rounded-full transition-all duration-500 ${i <= step ? "bg-royal w-8" : "bg-shell w-4"}`} />
-            ))}
-          </div>
-        )}
+        {step === 1
+
+
+
+
+
+        }
 
         <AnimatePresence mode="wait">
           <motion.div key={step} initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -24 }} transition={{ duration: 0.4 }}>
 
             {/* Step 0 — Welcome */}
-            {step === 0 && (
-              <div className="text-center">
+            {step === 0 &&
+            <div className="text-center">
                 <h1 className="font-display text-4xl text-royal mb-3 leading-tight">
                   Ваш контент-конвейер<br />на каждый день
                 </h1>
@@ -75,43 +75,43 @@ export default function Onboarding() {
                   Записи эфиров или актуальные темы → готовый пакет постов для всех площадок за 2 минуты
                 </p>
                 <div className="space-y-3 mb-8">
-                  {["Посты под все площадки в вашем стиле", "Картинки без промптов", "Темы из трендов каждый день"].map(f => (
-                    <div key={f} className="flex items-center gap-3 bg-white rounded-xl px-4 py-3 shadow-card border border-border">
+                  {["Посты под все площадки в вашем стиле", "Картинки без промптов", "Темы из трендов каждый день"].map((f) =>
+                <div key={f} className="flex items-center gap-3 bg-white rounded-xl px-4 py-3 shadow-card border border-border">
                       <Check size={16} className="text-sapphire flex-shrink-0" />
                       <span className="text-sm text-foreground">{f}</span>
                     </div>
-                  ))}
+                )}
                 </div>
                 <button onClick={goNext} className="w-full py-4 rounded-2xl bg-royal text-swan font-semibold text-lg shadow-card transition-all active:scale-95 hover:bg-sapphire">
                   Начать бесплатно
                 </button>
               </div>
-            )}
+            }
 
             {/* Step 1 — Name */}
-            {step === 1 && (
-              <div>
+            {step === 1 &&
+            <div>
                 <h2 className="font-display text-3xl text-royal mb-2">{steps[1].title}</h2>
                 <p className="text-sapphire/80 mb-6 text-sm">{steps[1].subtitle}</p>
                 <input
-                  type="text"
-                  value={name}
-                  onChange={e => setName(e.target.value)}
-                  placeholder="Ваше имя"
-                  className="w-full px-5 py-4 rounded-2xl bg-white border border-border text-foreground placeholder:text-muted-foreground text-lg focus:outline-none focus:border-sapphire focus:ring-1 focus:ring-sapphire/30 transition-all"
-                  onKeyDown={e => e.key === "Enter" && canProceed() && goNext()}
-                  autoFocus
-                />
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Ваше имя"
+                className="w-full px-5 py-4 rounded-2xl bg-white border border-border text-foreground placeholder:text-muted-foreground text-lg focus:outline-none focus:border-sapphire focus:ring-1 focus:ring-sapphire/30 transition-all"
+                onKeyDown={(e) => e.key === "Enter" && canProceed() && goNext()}
+                autoFocus />
+              
                 <button onClick={goNext} disabled={!canProceed()}
-                  className="w-full mt-5 py-4 rounded-2xl bg-royal text-swan font-semibold text-lg shadow-card transition-all active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-sapphire">
+              className="w-full mt-5 py-4 rounded-2xl bg-royal text-swan font-semibold text-lg shadow-card transition-all active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-sapphire">
                   Войти в приложение
                 </button>
               </div>
-            )}
+            }
 
           </motion.div>
         </AnimatePresence>
       </div>
-    </div>
-  );
+    </div>);
+
 }
