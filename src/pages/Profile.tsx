@@ -135,7 +135,7 @@ export default function Profile() {
                 <p className="text-sm text-swan/50 truncate mt-0.5">{email}</p>
               ) : null}
               <div className="flex items-center gap-1.5 mt-1 w-fit px-2.5 py-1 rounded-lg bg-white/15 border border-white/20">
-                <Crown size={12} className="text-gold flex-shrink-0" />
+                
                 <span className="text-xs text-gold font-medium whitespace-nowrap">Бесплатный</span>
               </div>
             </div>
