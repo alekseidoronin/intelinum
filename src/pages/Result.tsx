@@ -119,7 +119,6 @@ export default function Result() {
               className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition-all ${
                 activeTab === p.id ? "bg-royal text-swan" : "bg-white text-sapphire border border-border hover:border-sapphire/50 shadow-card"
               }`}>
-              <span>{p.emoji}</span>
               {p.name}
             </button>
           ))}
