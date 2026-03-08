@@ -68,7 +68,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background pb-24">
       {/* Header — fixed */}
-      <div className="sticky top-0 z-30 bg-background px-4 pt-14 pb-3 py-[20px]">
+      <div className="sticky top-0 z-30 bg-background px-4 py-3">
         <div className="flex items-center justify-between">
           <Logo size="sm" vertical={false} />
           <SideMenuButton />
