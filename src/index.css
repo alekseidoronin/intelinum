@@ -4,72 +4,88 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+  ПАЛИТРА (строго из ТЗ):
+  ROYAL BLUE   #112250  → hsl(224 65% 19%)   — основной тёмный, текст, кнопки
+  SAPPHIRE     #3C507D  → hsl(221 35% 36%)   — средний синий, акцент
+  QUICKSAND    #E0C58F  → hsl(40 57% 72%)    — золотисто-песочный, тёплый акцент
+  SWAN WING    #F5F0E9  → hsl(35 38% 94%)    — фон страниц
+  SHELLSTONE   #D9CBC2  → hsl(23 23% 81%)    — вторичные поверхности, карточки
+*/
+
 @layer base {
   :root {
-    /* Swan Wing light theme */
-    --background: 40 30% 97%;
-    --background-2: 40 25% 94%;
-    --background-3: 38 20% 90%;
+    /* ─── Фон ─── */
+    --background:   35 38% 94%;   /* SWAN WING   #F5F0E9 */
+    --background-2: 23 23% 88%;   /* SHELLSTONE светлее */
+    --background-3: 23 23% 81%;   /* SHELLSTONE  #D9CBC2 */
 
-    --foreground: 228 47% 14%;
+    /* ─── Текст ─── */
+    --foreground:         224 65% 12%;   /* ROYAL BLUE темнее */
+    --card-foreground:    224 65% 12%;
+    --popover-foreground: 224 65% 12%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 228 47% 14%;
-
+    /* ─── Карточки ─── */
+    --card:    0 0% 100%;
     --popover: 0 0% 100%;
-    --popover-foreground: 228 47% 14%;
 
-    /* Gold accent */
-    --primary: 36 52% 44%;
-    --primary-foreground: 0 0% 100%;
-    --primary-glow: 38 58% 56%;
+    /* ─── Первичный акцент — ROYAL BLUE ─── */
+    --primary:            224 65% 19%;   /* #112250 */
+    --primary-foreground: 35 38% 94%;    /* SWAN WING на синем */
 
-    /* Sapphire */
-    --secondary: 220 39% 40%;
-    --secondary-foreground: 0 0% 100%;
+    /* ─── Вторичный — SAPPHIRE ─── */
+    --secondary:            221 35% 36%;   /* #3C507D */
+    --secondary-foreground: 35 38% 94%;
 
-    --muted: 38 22% 91%;
-    --muted-foreground: 220 14% 48%;
+    /* ─── Приглушённое ─── */
+    --muted:            23 23% 88%;    /* светлый SHELLSTONE */
+    --muted-foreground: 221 25% 40%;   /* SAPPHIRE темнее — читаемый */
 
-    --accent: 36 52% 44%;
-    --accent-foreground: 0 0% 100%;
+    /* ─── Акцент — QUICKSAND ─── */
+    --accent:            40 57% 72%;   /* #E0C58F */
+    --accent-foreground: 224 65% 14%;  /* тёмный текст на золоте */
 
-    --destructive: 0 70% 50%;
-    --destructive-foreground: 0 0% 100%;
+    /* ─── Разрушительное ─── */
+    --destructive:            0 70% 50%;
+    --destructive-foreground: 35 38% 94%;
 
-    --border: 38 18% 85%;
-    --border-gold: 36 42% 62%;
-    --input: 38 18% 89%;
-    --ring: 36 52% 44%;
+    /* ─── Границы и инпуты ─── */
+    --border:      23 23% 76%;    /* SHELLSTONE темнее */
+    --border-gold: 40 40% 62%;    /* QUICKSAND приглушённый */
+    --input:       23 23% 88%;
+    --ring:        221 35% 36%;   /* SAPPHIRE */
 
     --radius: 0.75rem;
 
-    /* Sidebar */
-    --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 228 47% 15%;
-    --sidebar-primary: 36 52% 44%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 38 20% 93%;
-    --sidebar-accent-foreground: 228 47% 15%;
-    --sidebar-border: 38 18% 86%;
-    --sidebar-ring: 36 52% 44%;
+    /* ─── Sidebar ─── */
+    --sidebar-background:        0 0% 100%;
+    --sidebar-foreground:        224 65% 19%;
+    --sidebar-primary:           224 65% 19%;
+    --sidebar-primary-foreground: 35 38% 94%;
+    --sidebar-accent:            23 23% 88%;
+    --sidebar-accent-foreground: 224 65% 19%;
+    --sidebar-border:            23 23% 82%;
+    --sidebar-ring:              221 35% 36%;
 
-    /* Custom tokens */
-    --gold: 36 52% 44%;
-    --gold-light: 38 56% 58%;
-    --gold-dark: 34 48% 34%;
-    --sapphire: 220 39% 40%;
-    --royal: 228 65% 19%;
-    --swan: 40 30% 97%;
+    /* ─── Именованные токены из палитры ─── */
+    --royal:     224 65% 19%;   /* #112250 */
+    --sapphire:  221 35% 36%;   /* #3C507D */
+    --gold:      40 57% 72%;    /* #E0C58F  QUICKSAND */
+    --gold-dark: 38 45% 54%;    /* темнее для контраста */
+    --gold-light:40 65% 82%;
+    --swan:      35 38% 94%;    /* #F5F0E9 */
+    --shell:     23 23% 81%;    /* #D9CBC2 */
 
-    --gradient-hero: linear-gradient(135deg, hsl(228 60% 22%) 0%, hsl(225 52% 30%) 50%, hsl(220 48% 38%) 100%);
-    --gradient-gold: linear-gradient(135deg, hsl(34 48% 34%) 0%, hsl(36 52% 44%) 60%, hsl(38 56% 58%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(40 25% 97%) 100%);
-    --gradient-rail: linear-gradient(145deg, hsl(228 55% 22%) 0%, hsl(225 52% 30%) 100%);
+    /* ─── Градиенты ─── */
+    --gradient-hero: linear-gradient(135deg, hsl(224 65% 19%) 0%, hsl(221 35% 30%) 60%, hsl(221 35% 36%) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(38 45% 54%) 0%, hsl(40 57% 72%) 60%, hsl(40 65% 82%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(35 30% 97%) 100%);
+    --gradient-rail: linear-gradient(145deg, hsl(224 65% 19%) 0%, hsl(221 35% 30%) 100%);
 
-    --shadow-gold: 0 0 20px hsl(36 52% 44% / 0.15), 0 4px 16px hsl(36 52% 44% / 0.10);
-    --shadow-card: 0 4px 20px hsl(228 30% 20% / 0.07);
-    --shadow-glow: 0 0 40px hsl(36 52% 44% / 0.10);
+    /* ─── Тени ─── */
+    --shadow-gold: 0 4px 20px hsl(40 57% 72% / 0.25), 0 2px 8px hsl(40 57% 72% / 0.15);
+    --shadow-card: 0 4px 20px hsl(224 65% 19% / 0.08), 0 1px 4px hsl(224 65% 19% / 0.05);
+    --shadow-glow: 0 0 40px hsl(40 57% 72% / 0.15);
   }
 }
 
@@ -86,56 +102,61 @@
 
   h1, h2, h3, .font-display {
     font-family: 'Cormorant Garamond', serif;
+    color: hsl(var(--royal));
   }
 }
 
 @layer utilities {
-  .text-gold {
-    color: hsl(var(--gold));
-  }
-  .text-gold-light {
-    color: hsl(var(--gold-light));
-  }
-  .bg-gold {
-    background: hsl(var(--gold));
-  }
-  .border-gold {
-    border-color: hsl(var(--border-gold));
-  }
+  /* Цвета палитры */
+  .text-gold        { color: hsl(var(--gold-dark)); }
+  .text-gold-light  { color: hsl(var(--gold)); }
+  .text-royal       { color: hsl(var(--royal)); }
+  .text-sapphire    { color: hsl(var(--sapphire)); }
+  .bg-gold          { background: hsl(var(--gold)); }
+  .bg-royal         { background: hsl(var(--royal)); }
+  .bg-sapphire      { background: hsl(var(--sapphire)); }
+  .bg-shell         { background: hsl(var(--shell)); }
+  .border-gold      { border-color: hsl(var(--border-gold)); }
+
+  /* Градиентный текст — ROYAL BLUE → SAPPHIRE */
   .gradient-text-gold {
     background: var(--gradient-gold);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-  .shadow-gold {
-    box-shadow: var(--shadow-gold);
+  .gradient-text-royal {
+    background: linear-gradient(135deg, hsl(var(--royal)), hsl(var(--sapphire)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
-  .shadow-card {
-    box-shadow: var(--shadow-card);
-  }
-  .gradient-hero {
-    background: var(--gradient-hero);
-  }
-  .gradient-card {
-    background: var(--gradient-card);
-  }
-  .gradient-rail {
-    background: var(--gradient-rail);
-  }
+
+  /* Утилиты теней */
+  .shadow-gold { box-shadow: var(--shadow-gold); }
+  .shadow-card { box-shadow: var(--shadow-card); }
+
+  /* Фоны */
+  .gradient-hero { background: var(--gradient-hero); }
+  .gradient-card { background: var(--gradient-card); }
+  .gradient-rail { background: var(--gradient-rail); }
+
+  /* Карточка — белая с нежной тенью */
   .glass-card {
     background: hsl(var(--card));
     border: 1px solid hsl(var(--border));
     box-shadow: var(--shadow-card);
   }
+
+  /* Золотая рамка */
   .gold-border {
-    border: 1px solid hsl(var(--border-gold) / 0.5);
+    border: 1px solid hsl(var(--border-gold));
   }
+
+  /* Скрыть скроллбар */
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
 }

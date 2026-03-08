@@ -34,50 +34,36 @@ export default function RailB() {
 
   return (
     <div className="min-h-screen bg-background pb-24">
-      {/* Header */}
       <div className="px-5 pt-12 pb-4 flex items-center gap-3">
-        <button
-          onClick={() => navigate(-1)}
-          className="w-9 h-9 rounded-xl border border-border/50 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-        >
+        <button onClick={() => navigate(-1)} className="w-9 h-9 rounded-xl border border-border bg-white flex items-center justify-center text-sapphire shadow-card">
           <ChevronLeft size={18} />
         </button>
         <div>
-          <h1 className="font-display text-xl gradient-text-gold">Что сейчас обсуждают</h1>
+          <h1 className="font-display text-xl text-royal">Что сейчас обсуждают</h1>
           <p className="text-xs text-muted-foreground">Актуальные темы под нумерологию</p>
         </div>
       </div>
 
       {generating && selected ? (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="px-5 py-12 text-center"
-        >
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-            className="w-24 h-24 mx-auto mb-6 opacity-80"
-          >
-            <div className="w-full h-full rounded-full border-2 border-primary/40 flex items-center justify-center">
-              <Sparkles size={32} className="text-gold" />
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="px-5 py-12 text-center">
+          <motion.div animate={{ rotate: 360 }} transition={{ duration: 8, repeat: Infinity, ease: "linear" }} className="w-24 h-24 mx-auto mb-6">
+            <div className="w-full h-full rounded-full border-2 border-sapphire/30 flex items-center justify-center">
+              <Sparkles size={32} className="text-sapphire" />
             </div>
           </motion.div>
-          <h2 className="font-display text-2xl gradient-text-gold mb-3">Создаём контент под вас...</h2>
-          <div className="glass-card rounded-2xl px-5 py-3 inline-block mb-6">
-            <p className="text-sm text-foreground/80">«{selected}»</p>
+          <h2 className="font-display text-2xl text-royal mb-3">Создаём контент под вас...</h2>
+          <div className="bg-white border border-border rounded-2xl px-5 py-3 inline-block mb-6 shadow-card">
+            <p className="text-sm text-royal">«{selected}»</p>
           </div>
-          <p className="text-sm text-muted-foreground max-w-xs mx-auto leading-relaxed">
-            Пишем посты в вашем стиле, генерируем картинку и карусель
-          </p>
+          <p className="text-sm text-muted-foreground max-w-xs mx-auto leading-relaxed">Пишем посты в вашем стиле, генерируем картинку и карусель</p>
         </motion.div>
       ) : (
         <div className="px-5 space-y-6">
           {/* Trends */}
           <div>
             <div className="flex items-center gap-2 mb-3">
-              <TrendingUp size={16} className="text-gold" />
-              <h2 className="text-sm font-semibold text-foreground/80 tracking-wide uppercase">Тренды сегодня</h2>
+              <TrendingUp size={16} className="text-sapphire" />
+              <h2 className="text-sm font-semibold text-royal tracking-wide uppercase">Тренды сегодня</h2>
               <span className="ml-auto text-xs text-muted-foreground">Обновлено 2ч назад</span>
             </div>
             <div className="space-y-2">
@@ -88,17 +74,13 @@ export default function RailB() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.06 }}
                   onClick={() => handleSelect(trend.title)}
-                  className="w-full glass-card rounded-2xl px-4 py-3.5 text-left flex items-center justify-between group hover:border-primary/40 transition-all active:scale-[0.98]"
+                  className="w-full bg-white border border-border rounded-2xl px-4 py-3.5 text-left flex items-center justify-between hover:border-sapphire/50 shadow-card transition-all active:scale-[0.98]"
                 >
                   <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-muted text-muted-foreground">{trend.tag}</span>
-                    </div>
-                    <p className="text-sm text-foreground/90 leading-snug">{trend.title}</p>
+                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-shell text-sapphire font-medium">{trend.tag}</span>
+                    <p className="text-sm text-royal leading-snug mt-1.5">{trend.title}</p>
                   </div>
-                  <div className="flex items-center gap-2 ml-3">
-                    <span className="text-xs font-medium text-gold bg-primary/10 px-2 py-1 rounded-lg">{trend.growth}</span>
-                  </div>
+                  <span className="text-xs font-semibold text-sapphire bg-sapphire/10 px-2 py-1 rounded-lg ml-3 flex-shrink-0">{trend.growth}</span>
                 </motion.button>
               ))}
             </div>
@@ -106,9 +88,9 @@ export default function RailB() {
 
           {/* Quick prompts */}
           <div>
-            <h2 className="text-sm font-semibold text-foreground/80 tracking-wide uppercase mb-3">Быстрые темы</h2>
+            <h2 className="text-sm font-semibold text-royal tracking-wide uppercase mb-3">Быстрые темы</h2>
             <div className="space-y-4">
-              {prompts.map((group) => (
+              {prompts.map(group => (
                 <div key={group.category}>
                   <p className="text-xs text-muted-foreground mb-2">{group.category}</p>
                   <div className="flex flex-wrap gap-2">
@@ -116,7 +98,7 @@ export default function RailB() {
                       <button
                         key={item}
                         onClick={() => handleSelect(item)}
-                        className="px-4 py-2 rounded-xl bg-muted/50 border border-border/40 text-sm text-foreground/80 hover:border-primary/40 hover:text-gold hover:bg-primary/10 transition-all active:scale-95"
+                        className="px-4 py-2 rounded-xl bg-white border border-border text-sm text-royal hover:border-sapphire hover:text-sapphire hover:bg-sapphire/5 transition-all active:scale-95 shadow-card"
                       >
                         {item}
                       </button>
@@ -128,7 +110,6 @@ export default function RailB() {
           </div>
         </div>
       )}
-
       <BottomNav />
     </div>
   );
