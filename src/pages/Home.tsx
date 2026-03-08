@@ -76,25 +76,20 @@ export default function Home() {
           </div>
 
           {/* Actions — три кнопки в ряд, текст в одну строку */}
-          <div className="px-4 pb-4 grid grid-cols-3 gap-2">
+          <div className="px-4 pb-4 grid grid-cols-2 gap-2">
             <button
               onClick={handleCopy}
-              className={`py-2.5 rounded-xl text-xs font-medium flex items-center justify-center gap-1.5 transition-all active:scale-95 min-w-0 ${
-              copied ? "bg-gold/30 text-gold" : "bg-white/15 text-white hover:bg-white/25"}`
-              }>
-              
+              className={`py-2.5 rounded-xl text-xs font-medium flex items-center justify-center gap-1.5 transition-all active:scale-95 ${
+              copied ? "bg-gold/30 text-gold" : "bg-white/15 text-white hover:bg-white/25"}`}>
               <Copy size={13} className="flex-shrink-0" />
-              <span className="truncate">{copied ? "Скопировано" : "Копировать"}</span>
+              <span>{copied ? "Скопировано" : "Копировать"}</span>
             </button>
             <button
               onClick={() => {}}
-              className="py-2.5 rounded-xl bg-white/15 text-white text-xs font-medium flex items-center justify-center hover:bg-white/25 transition-all active:scale-95">
-              
+              className="py-2.5 rounded-xl bg-white/15 text-white text-xs font-medium flex items-center justify-center gap-1.5 hover:bg-white/25 transition-all active:scale-95">
+              <Edit3 size={13} className="flex-shrink-0" />
               Редактировать
             </button>
-            
-
-            
           </div>
         </motion.div>
 
