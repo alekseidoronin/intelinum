@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Copy, Edit3, RefreshCw, ChevronLeft, ChevronRight, Check, FileText, LayoutGrid, Sparkles, Image } from "lucide-react";
@@ -83,8 +85,12 @@ export default function Result() {
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [regenerating, setRegenerating] = useState(false);
   const [targetChars, setTargetChars] = useState<string>("");
+  const [texts, setTexts] = useState<Record<string, string>>(
+    Object.fromEntries(platforms.map(p => [p.id, p.text]))
+  );
 
   const cur = platforms.find(p => p.id === activeTab)!;
+  const currentText = texts[activeTab] ?? cur.text;
 
   const handleCopy = (id: string, text: string) => {
     navigator.clipboard.writeText(text);
@@ -104,9 +110,29 @@ export default function Result() {
     }, 1200);
   };
 
+  const handleGenerateByChars = async () => {
+    if (!targetChars) return;
+    setRegenerating(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("rewrite-text", {
+        body: { text: currentText, targetChars: Number(targetChars), platform: cur.name },
+      });
+      if (error) throw error;
+      if (data?.error) throw new Error(data.error);
+      setTexts(prev => ({ ...prev, [activeTab]: data.text }));
+      toast({ description: `Текст переписан: ${data.text.length} симв. ✨` });
+      setTargetChars("");
+    } catch (e: any) {
+      toast({ description: e?.message ?? "Ошибка генерации", variant: "destructive" });
+    } finally {
+      setRegenerating(false);
+    }
+  };
+
   const handlePdf = () => {
     toast({ description: "PDF-гайд будет создан в следующем обновлении 📄" });
   };
+
 
   return (
     <div className="min-h-screen bg-background pb-32 md:pb-8">
@@ -155,10 +181,10 @@ export default function Result() {
         <motion.div key={activeTab} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="bg-white border border-border rounded-2xl overflow-hidden shadow-card">
           <div className="px-4 py-3 border-b border-border flex items-center justify-between bg-background">
             <span className="text-base font-medium text-royal">{cur.name}</span>
-            <span className="text-sm text-muted-foreground">{cur.text.length} / {cur.charLimit.toLocaleString()} симв.</span>
+            <span className="text-sm text-muted-foreground">{currentText.length} / {cur.charLimit.toLocaleString()} симв.</span>
           </div>
           <div className="px-4 py-4 max-h-64 overflow-y-auto scrollbar-hide">
-            <p className="text-base text-foreground leading-relaxed whitespace-pre-line">{cur.text}</p>
+            <p className="text-base text-foreground leading-relaxed whitespace-pre-line">{currentText}</p>
           </div>
           <div className="px-4 pb-4 border-t border-border pt-3 space-y-2">
             {/* Custom char target */}
@@ -170,12 +196,7 @@ export default function Result() {
                     type="number"
                     value={targetChars}
                     onChange={(e) => setTargetChars(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" && targetChars) {
-                        setRegenerating(true);
-                        setTimeout(() => { setRegenerating(false); toast({ description: `Текст перегенерирован: ${targetChars} симв. ✨` }); }, 1200);
-                      }
-                    }}
+                    onKeyDown={(e) => { if (e.key === "Enter") handleGenerateByChars(); }}
                     placeholder={cur.charLimit.toString()}
                     className="w-full bg-transparent text-sm text-royal focus:outline-none"
                   />
@@ -183,22 +204,18 @@ export default function Result() {
                 </div>
                 <button
                   disabled={!targetChars || regenerating}
-                  onClick={() => {
-                    if (!targetChars) return;
-                    setRegenerating(true);
-                    setTimeout(() => { setRegenerating(false); toast({ description: `Текст перегенерирован: ${targetChars} симв. ✨` }); }, 1200);
-                  }}
+                  onClick={handleGenerateByChars}
                   className="h-11 px-4 rounded-xl bg-royal text-swan text-sm font-medium flex items-center gap-1.5 transition-all active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed shrink-0"
                 >
                   <Sparkles size={14} className={regenerating ? "animate-spin" : ""} />
-                  Сгенерировать
+                  {regenerating ? "Пишу…" : "Сгенерировать"}
                 </button>
               </div>
             </div>
 
             {/* Action buttons */}
             <div className="grid grid-cols-2 gap-2">
-              <button onClick={() => handleCopy(activeTab, cur.text)}
+              <button onClick={() => handleCopy(activeTab, currentText)}
                 className={`py-3 rounded-xl text-sm font-medium flex items-center justify-center gap-1.5 transition-all active:scale-95 ${
                   copiedId === activeTab ? "bg-sapphire/10 text-sapphire" : "bg-background text-royal border border-border hover:border-sapphire/50"
                 }`}>

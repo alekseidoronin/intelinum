@@ -1,1 +1,4 @@
 project_id = "xirzlbqmmbwjumzzourz"
+
+[functions.rewrite-text]
+verify_jwt = false
