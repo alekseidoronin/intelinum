@@ -34,7 +34,7 @@ export default function Home() {
       {/* Header — прижат к safe area сверху */}
       <div className="px-4 pt-14 pb-3">
         <div className="flex items-center justify-between">
-          <Logo size="sm" />
+          <Logo size="sm" vertical={false} />
           <button className="w-9 h-9 rounded-xl border border-border bg-card flex items-center justify-center text-sapphire hover:border-sapphire transition-colors shadow-card">
             <Bell size={17} />
           </button>
