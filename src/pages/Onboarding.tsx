@@ -220,8 +220,8 @@ export default function Onboarding() {
               <motion.button
                 onClick={goNext}
                 disabled={!canProceed()}
-                whileHover={canProceed() ? { scale: 1.03 } : {}}
-                whileTap={canProceed() ? { scale: 0.97, boxShadow: "0 0 48px hsl(var(--gold) / 0.65)" } : {}}
+                whileHover={canProceed() ? { scale: 1.015, boxShadow: "0 0 36px hsl(var(--gold) / 0.55), 0 6px 20px hsl(var(--gold) / 0.3)" } : {}}
+                whileTap={canProceed() ? { scale: 0.985, boxShadow: "0 0 52px hsl(var(--gold) / 0.75)" } : {}}
                 className="w-full mt-5 py-4 rounded-2xl font-bold text-lg disabled:opacity-40 disabled:cursor-not-allowed"
                 style={{
                   background: "var(--gradient-gold)",
