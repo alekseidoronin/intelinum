@@ -25,11 +25,11 @@ serve(async (req) => {
         messages: [
           {
             role: "system",
-            content: `Ты — копирайтер по нумерологии и астрологии для социальных сетей. Перепиши текст так, чтобы он был ровно около ${targetChars} символов (±5%). Сохрани смысл, стиль и тон оригинала. Верни ТОЛЬКО переписанный текст без каких-либо пояснений, заголовков или дополнений.`,
+            content: `Ты — копирайтер для социальных сетей. Твоя задача: переписать текст, уложившись СТРОГО в ${targetChars} символов (±3%, то есть от ${Math.round(Number(targetChars) * 0.97)} до ${Math.round(Number(targetChars) * 1.03)} символов включительно). Считай символы точно. Не добавляй лишнего. Не объясняй ничего. Верни ТОЛЬКО готовый текст без каких-либо комментариев, заголовков или пояснений. Если текст длиннее нужного — сокращай. Если короче — расширяй.`,
           },
           {
             role: "user",
-            content: `Перепиши этот текст для платформы ${platform} так, чтобы он был ~${targetChars} символов:\n\n${text}`,
+            content: `Перепиши этот текст для платформы ${platform}. Целевое количество символов: ${targetChars} (допустимо от ${Math.round(Number(targetChars) * 0.97)} до ${Math.round(Number(targetChars) * 1.03)}). Проверь длину перед ответом и убедись, что она в допустимом диапазоне.\n\nТекст:\n${text}`,
           },
         ],
       }),
@@ -57,7 +57,16 @@ serve(async (req) => {
     }
 
     const data = await response.json();
-    const rewrittenText = data.choices?.[0]?.message?.content ?? "";
+    let rewrittenText: string = data.choices?.[0]?.message?.content ?? "";
+
+    // Hard trim: if AI returned too much, cut to target
+    const target = Number(targetChars);
+    if (rewrittenText.length > Math.round(target * 1.03)) {
+      rewrittenText = rewrittenText.slice(0, target);
+      // Trim to last space to avoid cutting mid-word
+      const lastSpace = rewrittenText.lastIndexOf(" ");
+      if (lastSpace > target * 0.9) rewrittenText = rewrittenText.slice(0, lastSpace);
+    }
 
     return new Response(JSON.stringify({ text: rewrittenText }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
