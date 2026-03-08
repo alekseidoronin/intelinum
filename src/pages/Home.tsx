@@ -61,10 +61,6 @@ export default function Home() {
     toast({ description: "Редактирование будет доступно в следующем обновлении" });
   };
 
-  const handleBell = () => {
-    toast({ description: "Уведомлений пока нет 🔔" });
-  };
-
   const today = new Date();
   const dayNum = today.getDate() + today.getMonth() + 1;
   const num = (dayNum - 1) % 9 + 1;
