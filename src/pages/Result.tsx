@@ -77,8 +77,10 @@ const platforms = [
 
 export default function Result() {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [activeTab, setActiveTab] = useState("instagram");
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [regenerating, setRegenerating] = useState(false);
 
   const cur = platforms.find(p => p.id === activeTab)!;
 
@@ -86,6 +88,26 @@ export default function Result() {
     navigator.clipboard.writeText(text);
     setCopiedId(id);
     setTimeout(() => setCopiedId(null), 2000);
+  };
+
+  const handleEdit = () => {
+    toast({ description: "Редактирование будет доступно в следующем обновлении" });
+  };
+
+  const handleDownload = (type: string) => {
+    toast({ description: `${type} будет доступен в следующем обновлении` });
+  };
+
+  const handleRegenerate = () => {
+    setRegenerating(true);
+    setTimeout(() => {
+      setRegenerating(false);
+      toast({ description: "Пакет перегенерирован ✨" });
+    }, 1200);
+  };
+
+  const handlePdf = () => {
+    toast({ description: "PDF-гайд будет создан в следующем обновлении 📄" });
   };
 
   return (
