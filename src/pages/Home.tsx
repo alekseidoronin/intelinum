@@ -187,7 +187,7 @@ export default function Home() {
           <div className="w-full bg-shell rounded-full h-1.5">
             <div className="h-1.5 rounded-full bg-sapphire" style={{ width: "67%" }} />
           </div>
-          <div className="mt-1.5 text-xs text-muted-foreground">
+          <div className="mt-1.5 text-sm text-muted-foreground">
             Бесплатный план ·{" "}
             <button onClick={() => navigate("/pricing")} className="text-sapphire font-medium active:opacity-70">
               Расширить
