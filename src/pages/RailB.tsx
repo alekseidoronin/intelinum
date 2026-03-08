@@ -35,7 +35,16 @@ export default function RailB() {
 
   return (
     <div className="min-h-screen bg-background pb-24">
-      <TopBar showBack />
+      <TopBar />
+      <div className="px-5 pb-4 flex items-center gap-3">
+        <button onClick={() => navigate(-1)} className="w-9 h-9 rounded-xl border border-border bg-white flex items-center justify-center text-sapphire shadow-card">
+          <ChevronLeft size={18} />
+        </button>
+        <div>
+          <h1 className="font-display text-xl text-royal">Что сейчас обсуждают</h1>
+          <p className="text-xs text-muted-foreground">Актуальные темы под нумерологию</p>
+        </div>
+      </div>
 
       {generating && selected ? (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="px-5 py-12 text-center">
