@@ -225,7 +225,7 @@ export default function Result() {
               <RefreshCw size={20} className={`text-sapphire ${regenerating ? "animate-spin" : ""}`} />
             </div>
             <div className="flex-1">
-              <p className="text-base font-medium text-royal">Перегенерировать</p>
+              <p className="text-base font-medium text-royal">Переписать</p>
               <p className="text-sm text-muted-foreground">Создать новый вариант всего пакета</p>
             </div>
           </button>
