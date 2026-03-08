@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ChevronLeft, TrendingUp, Sparkles } from "lucide-react";
+import { ChevronLeft, TrendingUp, Sparkles, Brain, DollarSign, Heart, Trophy, Star, User } from "lucide-react";
 import { BottomNav } from "@/components/BottomNav";
 
 const categories = [
   {
     tag: "Психология",
+    icon: Brain,
+    color: "text-violet-500",
+    bg: "bg-violet-50",
+    border: "border-violet-200",
     items: [
       "Как избавиться от тревоги по числам",
       "Почему я постоянно сомневаюсь в себе",
@@ -21,6 +25,10 @@ const categories = [
   },
   {
     tag: "Деньги",
+    icon: DollarSign,
+    color: "text-emerald-500",
+    bg: "bg-emerald-50",
+    border: "border-emerald-200",
     items: [
       "Число судьбы и финансовое благополучие",
       "Числа миллионеров — что общего",
@@ -35,6 +43,10 @@ const categories = [
   },
   {
     tag: "Отношения",
+    icon: Heart,
+    color: "text-rose-500",
+    bg: "bg-rose-50",
+    border: "border-rose-200",
     items: [
       "Совместимость по матрице судьбы",
       "Почему одни отношения разрушаются",
@@ -49,6 +61,10 @@ const categories = [
   },
   {
     tag: "Успех",
+    icon: Trophy,
+    color: "text-amber-500",
+    bg: "bg-amber-50",
+    border: "border-amber-200",
     items: [
       "Как изменить свою судьбу через числа",
       "Число успеха: как его раскрыть",
@@ -63,6 +79,10 @@ const categories = [
   },
   {
     tag: "Развитие",
+    icon: Star,
+    color: "text-blue-500",
+    bg: "bg-blue-50",
+    border: "border-blue-200",
     items: [
       "Как раскрыть свой потенциал через числа",
       "Число таланта: что вы умеете лучше всего",
@@ -77,6 +97,10 @@ const categories = [
   },
   {
     tag: "Личное",
+    icon: User,
+    color: "text-sapphire",
+    bg: "bg-sky-50",
+    border: "border-sky-200",
     items: [
       "Почему всё идёт не так, как хочу",
       "Число, которое мешает вам быть собой",
@@ -93,6 +117,7 @@ const categories = [
 
 export default function RailB() {
   const navigate = useNavigate();
+  const [activeCategory, setActiveCategory] = useState<typeof categories[0] | null>(null);
   const [selected, setSelected] = useState<string | null>(null);
   const [generating, setGenerating] = useState(false);
 
@@ -102,26 +127,14 @@ export default function RailB() {
     setTimeout(() => navigate("/result"), 3000);
   };
 
-  return (
-    <div className="min-h-screen bg-background pb-24">
-      <div className="px-5 pt-12 pb-4 flex items-center gap-3">
-        <button
-          onClick={() => navigate(-1)}
-          className="w-9 h-9 rounded-xl border border-border bg-white flex items-center justify-center text-sapphire shadow-card"
-        >
-          <ChevronLeft size={18} />
-        </button>
-        <div>
-          <h1 className="font-display text-xl text-royal">Что сейчас обсуждают</h1>
-          <p className="text-xs text-muted-foreground">Актуальные темы под нумерологию</p>
-        </div>
-      </div>
-
-      {generating && selected ? (
+  // Generating screen
+  if (generating && selected) {
+    return (
+      <div className="min-h-screen bg-background pb-24">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="px-5 py-12 text-center"
+          className="px-5 py-20 text-center"
         >
           <motion.div
             animate={{ rotate: 360 }}
@@ -140,35 +153,93 @@ export default function RailB() {
             Пишем посты в вашем стиле, генерируем картинку и карусель
           </p>
         </motion.div>
-      ) : (
-        <div className="px-5 space-y-8">
-          {categories.map((cat, ci) => (
-            <div key={cat.tag}>
-              <div className="flex items-center gap-2 mb-3">
-                <TrendingUp size={15} className="text-sapphire" />
-                <h2 className="text-sm font-semibold text-royal tracking-wide uppercase">
-                  {cat.tag}
-                </h2>
-              </div>
-              <div className="space-y-2">
-                {cat.items.map((topic, i) => (
-                  <motion.button
-                    key={topic}
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: ci * 0.04 + i * 0.03 }}
-                    onClick={() => handleSelect(topic)}
-                    className="w-full bg-white border border-border rounded-2xl px-4 py-3 text-left flex items-center justify-between hover:border-sapphire/50 shadow-card transition-all active:scale-[0.98]"
-                  >
-                    <p className="text-sm text-royal leading-snug flex-1">{topic}</p>
-                    <span className="text-xs font-medium text-sapphire ml-3 flex-shrink-0">→</span>
-                  </motion.button>
-                ))}
-              </div>
-            </div>
+        <BottomNav />
+      </div>
+    );
+  }
+
+  // Topics screen
+  if (activeCategory) {
+    return (
+      <div className="min-h-screen bg-background pb-24">
+        <div className="px-5 pt-12 pb-4 flex items-center gap-3">
+          <button
+            onClick={() => setActiveCategory(null)}
+            className="w-9 h-9 rounded-xl border border-border bg-white flex items-center justify-center text-sapphire shadow-card"
+          >
+            <ChevronLeft size={18} />
+          </button>
+          <div className={`w-9 h-9 rounded-xl ${activeCategory.bg} ${activeCategory.border} border flex items-center justify-center`}>
+            <activeCategory.icon size={18} className={activeCategory.color} />
+          </div>
+          <div>
+            <h1 className="font-display text-xl text-royal">{activeCategory.tag}</h1>
+            <p className="text-xs text-muted-foreground">{activeCategory.items.length} темы</p>
+          </div>
+        </div>
+
+        <div className="px-5 space-y-2">
+          {activeCategory.items.map((topic, i) => (
+            <motion.button
+              key={topic}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.04 }}
+              onClick={() => handleSelect(topic)}
+              className="w-full bg-white border border-border rounded-2xl px-4 py-3 text-left flex items-center justify-between hover:border-sapphire/50 shadow-card transition-all active:scale-[0.98]"
+            >
+              <span className={`text-xs font-bold mr-3 flex-shrink-0 ${activeCategory.color}`}>{i + 1}</span>
+              <p className="text-sm text-royal leading-snug flex-1">{topic}</p>
+              <span className="text-xs font-medium text-sapphire ml-3 flex-shrink-0">→</span>
+            </motion.button>
           ))}
         </div>
-      )}
+
+        <BottomNav />
+      </div>
+    );
+  }
+
+  // Categories screen
+  return (
+    <div className="min-h-screen bg-background pb-24">
+      <div className="px-5 pt-12 pb-4 flex items-center gap-3">
+        <button
+          onClick={() => navigate(-1)}
+          className="w-9 h-9 rounded-xl border border-border bg-white flex items-center justify-center text-sapphire shadow-card"
+        >
+          <ChevronLeft size={18} />
+        </button>
+        <div>
+          <h1 className="font-display text-xl text-royal">Что сейчас обсуждают</h1>
+          <p className="text-xs text-muted-foreground">Выберите категорию</p>
+        </div>
+      </div>
+
+      <div className="px-5 grid grid-cols-2 gap-3">
+        {categories.map((cat, i) => (
+          <motion.button
+            key={cat.tag}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: i * 0.06 }}
+            onClick={() => setActiveCategory(cat)}
+            className={`bg-white border ${cat.border} rounded-2xl p-4 text-left flex flex-col gap-3 shadow-card hover:shadow-md transition-all active:scale-[0.97]`}
+          >
+            <div className={`w-10 h-10 rounded-xl ${cat.bg} flex items-center justify-center`}>
+              <cat.icon size={20} className={cat.color} />
+            </div>
+            <div>
+              <p className="font-semibold text-royal text-sm">{cat.tag}</p>
+              <p className="text-xs text-muted-foreground mt-0.5">{cat.items.length} тем</p>
+            </div>
+            <div className="flex items-center gap-1">
+              <TrendingUp size={11} className={cat.color} />
+              <span className={`text-xs font-medium ${cat.color}`}>В тренде</span>
+            </div>
+          </motion.button>
+        ))}
+      </div>
 
       <BottomNav />
     </div>
