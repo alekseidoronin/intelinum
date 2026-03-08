@@ -180,6 +180,28 @@ export default function Profile() {
             </div>
           </div>
 
+          {/* Avatar picker */}
+          {showAvatarPicker && (
+            <div className="mt-3 bg-white/10 backdrop-blur rounded-2xl p-4 border border-white/20">
+              <p className="text-sm font-medium text-swan mb-3">Выбери персонажа или загрузи фото</p>
+              <div className="grid grid-cols-6 gap-2 mb-3">
+                {AVATARS.map(em => (
+                  <button key={em} onClick={() => handleSelectEmoji(em)}
+                    className={`w-10 h-10 rounded-xl text-2xl flex items-center justify-center transition-all active:scale-90 ${avatarEmoji === em && !avatarPhoto ? "bg-white/30 ring-2 ring-white" : "hover:bg-white/20"}`}>
+                    {em}
+                  </button>
+                ))}
+              </div>
+              <button
+                onClick={() => fileInputRef.current?.click()}
+                className="w-full py-2.5 rounded-xl bg-white/15 border border-white/30 text-sm font-medium text-swan flex items-center justify-center gap-2 hover:bg-white/25 transition-all active:scale-95">
+                <Camera size={15} />
+                Загрузить фото
+              </button>
+              <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handlePhotoUpload} />
+            </div>
+          )}
+
           <div className="mt-4 pt-4 border-t border-white/15">
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm text-swan/60">Контент-пакеты в этом месяце</span>
