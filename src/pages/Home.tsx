@@ -7,7 +7,7 @@ import { TopBar } from "@/components/TopBar";
 import { useToast } from "@/hooks/use-toast";
 
 const posts = [
-  `Число 9 сегодня — это число завершений и мудрости. 
+`Число 9 сегодня — это число завершений и мудрости. 
 
 Если что-то в вашей жизни никак не заканчивается — отношения, проект, привычка — сегодня энергия помогает отпустить. Не бороться, а отпустить.
 
@@ -16,21 +16,21 @@ const posts = [
 Девятка учит нас, что пространство для нового появляется только тогда, когда мы освобождаем место.
 
 #нумерология #числодня #энергиядня`,
-  `Число 3 — это день творчества и самовыражения.
+`Число 3 — это день творчества и самовыражения.
 
 Сегодня лучшее время для новых идей, общения и лёгкости. Не планируйте тяжёлые задачи — доверьтесь потоку.
 
 Тройка говорит: выражай себя, будь искренним, радуйся мелочам.
 
 #нумерология #числодня #творчество`,
-  `Число 6 — день заботы и гармонии.
+`Число 6 — день заботы и гармонии.
 
 Шестёрка приносит тепло в отношения. Сделайте что-то приятное для близкого человека — это вернётся к вам.
 
 Главная задача дня: найти баланс между давать и получать.
 
-#нумерология #числодня #гармония`,
-];
+#нумерология #числодня #гармония`];
+
 
 export default function Home() {
   const navigate = useNavigate();
@@ -72,7 +72,7 @@ export default function Home() {
 
         {/* Контент дня */}
         <div className="rounded-2xl overflow-hidden flex flex-col max-h-80"
-          style={{ background: "linear-gradient(145deg, hsl(224 65% 19%), hsl(221 35% 30%))" }}>
+        style={{ background: "linear-gradient(145deg, hsl(224 65% 19%), hsl(221 35% 30%))" }}>
 
           <div className="px-4 pt-3 pb-2.5 flex items-center justify-between border-b border-white/10 shrink-0">
             <div className="flex items-center gap-2">
@@ -104,7 +104,7 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="px-4 pb-4 grid grid-cols-2 gap-2">
+          <div className="pb-4 grid grid-cols-2 gap-2 px-[10px]">
             <button
               onClick={handleCopy}
               className="py-3 rounded-xl bg-gradient-gold text-royal text-sm font-semibold flex items-center justify-center gap-1.5 transition-all active:scale-95 hover:opacity-90 shadow-md">
@@ -177,6 +177,6 @@ export default function Home() {
       </div>
 
       <BottomNav />
-    </div>
-  );
+    </div>);
+
 }
