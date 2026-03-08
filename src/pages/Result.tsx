@@ -11,9 +11,9 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sh
 
 
 const platforms = [
-  {
-    id: "instagram", name: "Instagram", emoji: "📸", charLimit: 2200,
-    text: `✨ Число 7 - почему эти люди всегда ищут истину?
+{
+  id: "instagram", name: "Instagram", emoji: "📸", charLimit: 2200,
+  text: `✨ Число 7 - почему эти люди всегда ищут истину?
 
 Если у вас семёрка в матрице судьбы, вы, наверное, не раз слышали: «Ты слишком много думаешь». И знаете что? Это правда. Но это ваш дар.
 
@@ -26,11 +26,11 @@ const platforms = [
 
 Если это про вас - напишите «7» в комментарии 👇
 
-#нумерология #числосудьбы #матрицасудьбы #число7`,
-  },
-  {
-    id: "telegram", name: "Telegram", emoji: "✈️", charLimit: 4096,
-    text: `**Число 7: почему эти люди никогда не перестают искать**
+#нумерология #числосудьбы #матрицасудьбы #число7`
+},
+{
+  id: "telegram", name: "Telegram", emoji: "✈️", charLimit: 4096,
+  text: `**Число 7: почему эти люди никогда не перестают искать**
 
 Люди с числом 7 в матрице судьбы отличаются особым устройством ума. Они не могут просто принять что-то на веру - им нужно понять механизм, найти закономерность.
 
@@ -40,11 +40,11 @@ const platforms = [
 
 **Главная задача семёрки** - научиться доверять своей интуиции. Парадокс: при всём аналитическом уме, интуиция у них феноменальная.
 
-Если хотите узнать, есть ли семёрка в вашей матрице - записывайтесь на разбор.`,
-  },
-  {
-    id: "vk", name: "ВКонтакте", emoji: "🔵", charLimit: 3000,
-    text: `Число 7 в нумерологии - разбор для тех, кто узнаёт себя
+Если хотите узнать, есть ли семёрка в вашей матрице - записывайтесь на разбор.`
+},
+{
+  id: "vk", name: "ВКонтакте", emoji: "🔵", charLimit: 3000,
+  text: `Число 7 в нумерологии - разбор для тех, кто узнаёт себя
 
 Давайте поговорим о людях с семёркой. Их легко вычислить: они всегда «в своей голове» и редко довольствуются поверхностными ответами.
 
@@ -54,19 +54,19 @@ const platforms = [
 2. Их интуиция работает лучше логики.
 3. Их главный урок - доверие к себе и жизни.
 
-Провожу полные разборы матрицы судьбы. Пишите в личные.`,
-  },
-  {
-    id: "dzen", name: "Яндекс Дзен", emoji: "📰", charLimit: 10000,
-    text: `Число 7 в нумерологии: полный разбор характера и жизненного пути
+Провожу полные разборы матрицы судьбы. Пишите в личные.`
+},
+{
+  id: "dzen", name: "Яндекс Дзен", emoji: "📰", charLimit: 10000,
+  text: `Число 7 в нумерологии: полный разбор характера и жизненного пути
 
 Нумерология позволяет через числа понять глубинные черты личности. Число 7 занимает особое место - это число духовного поиска, аналитического ума и внутреннего знания...
 
-[Полная SEO-статья на 3000+ слов будет сгенерирована]`,
-  },
-  {
-    id: "reels", name: "Reels / Скрипт", emoji: "🎬", charLimit: 500,
-    text: `[0-3 сек] «Если у вас число 7 - вы это узнаете по одной вещи»
+[Полная SEO-статья на 3000+ слов будет сгенерирована]`
+},
+{
+  id: "reels", name: "Reels / Скрипт", emoji: "🎬", charLimit: 500,
+  text: `[0-3 сек] «Если у вас число 7 - вы это узнаете по одной вещи»
 
 [3-8 сек] «Вы никогда не принимаете ничего на веру»
 
@@ -76,9 +76,9 @@ const platforms = [
 
 [35-45 сек] «Главный вызов семёрки - научиться доверять»
 
-[45-60 сек] «Хотите узнать своё число? Ссылка в профиле»`,
-  },
-];
+[45-60 сек] «Хотите узнать своё число? Ссылка в профиле»`
+}];
+
 
 export default function Result() {
   const navigate = useNavigate();
@@ -88,12 +88,12 @@ export default function Result() {
   const [regenerating, setRegenerating] = useState(false);
   const [targetChars, setTargetChars] = useState<string>("");
   const [texts, setTexts] = useState<Record<string, string>>(
-    Object.fromEntries(platforms.map(p => [p.id, p.text]))
+    Object.fromEntries(platforms.map((p) => [p.id, p.text]))
   );
   const [editOpen, setEditOpen] = useState(false);
   const [editDraft, setEditDraft] = useState("");
 
-  const cur = platforms.find(p => p.id === activeTab)!;
+  const cur = platforms.find((p) => p.id === activeTab)!;
   const currentText = texts[activeTab] ?? cur.text;
 
   const handleCopy = (id: string, text: string) => {
@@ -108,7 +108,7 @@ export default function Result() {
   };
 
   const handleSaveEdit = () => {
-    setTexts(prev => ({ ...prev, [activeTab]: editDraft }));
+    setTexts((prev) => ({ ...prev, [activeTab]: editDraft }));
     setEditOpen(false);
     toast({ description: "Текст сохранён ✅" });
   };
@@ -127,11 +127,11 @@ export default function Result() {
     setRegenerating(true);
     try {
       const { data, error } = await supabase.functions.invoke("rewrite-text", {
-        body: { text: currentText, targetChars: Number(targetChars), platform: cur.name },
+        body: { text: currentText, targetChars: Number(targetChars), platform: cur.name }
       });
       if (error) throw error;
       if (data?.error) throw new Error(data.error);
-      setTexts(prev => ({ ...prev, [activeTab]: data.text }));
+      setTexts((prev) => ({ ...prev, [activeTab]: data.text }));
       toast({ description: `Текст переписан: ${data.text.length} симв. ✨` });
       setTargetChars("");
     } catch (e: any) {
@@ -166,7 +166,7 @@ export default function Result() {
 
       {/* Banner */}
       <motion.div initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }}
-        className="mx-5 mb-4 bg-royal rounded-2xl px-4 py-3.5 flex items-center gap-3">
+      className="mx-5 mb-4 bg-royal rounded-2xl px-4 py-3.5 flex items-center gap-3">
         <Sparkles size={20} className="text-gold flex-shrink-0" />
         <div>
           <p className="text-base text-swan font-medium">Всё готово для всех площадок</p>
@@ -177,14 +177,14 @@ export default function Result() {
       {/* Platform tabs */}
       <div className="mb-4 px-5">
         <div className="flex flex-wrap gap-2">
-          {platforms.map(p => (
-            <button key={p.id} onClick={() => setActiveTab(p.id)}
-              className={`flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-base font-medium whitespace-nowrap transition-all ${
-                activeTab === p.id ? "bg-royal text-swan" : "bg-white text-sapphire border border-border hover:border-sapphire/50 shadow-card"
-              }`}>
+          {platforms.map((p) =>
+          <button key={p.id} onClick={() => setActiveTab(p.id)}
+          className={`flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-base font-medium whitespace-nowrap transition-all ${
+          activeTab === p.id ? "bg-royal text-swan" : "bg-white text-sapphire border border-border hover:border-sapphire/50 shadow-card"}`
+          }>
               {p.name}
             </button>
-          ))}
+          )}
         </div>
       </div>
 
@@ -208,17 +208,17 @@ export default function Result() {
                     type="number"
                     value={targetChars}
                     onChange={(e) => setTargetChars(e.target.value)}
-                    onKeyDown={(e) => { if (e.key === "Enter") handleGenerateByChars(); }}
+                    onKeyDown={(e) => {if (e.key === "Enter") handleGenerateByChars();}}
                     placeholder={cur.charLimit.toString()}
-                    className="w-full bg-transparent text-sm text-royal focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                  />
+                    className="w-full bg-transparent text-sm text-royal focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" />
+                  
                   <span className="text-xs text-muted-foreground shrink-0">симв.</span>
                 </div>
                 <button
                   disabled={!targetChars || regenerating}
                   onClick={handleGenerateByChars}
-                  className="h-11 px-4 rounded-xl bg-royal text-swan text-sm font-medium flex items-center gap-1.5 transition-all active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed shrink-0"
-                >
+                  className="h-11 px-4 rounded-xl bg-royal text-swan text-sm font-medium flex items-center gap-1.5 transition-all active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed shrink-0">
+                  
                   <Sparkles size={14} className={regenerating ? "animate-spin" : ""} />
                   {regenerating ? "Пишу…" : "Сгенерировать"}
                 </button>
@@ -228,9 +228,9 @@ export default function Result() {
             {/* Action buttons */}
             <div className="grid grid-cols-2 gap-2">
               <button onClick={() => handleCopy(activeTab, currentText)}
-                className={`py-3 rounded-xl text-sm font-medium flex items-center justify-center gap-1.5 transition-all active:scale-95 ${
-                  copiedId === activeTab ? "bg-sapphire/10 text-sapphire" : "bg-background text-royal border border-border hover:border-sapphire/50"
-                }`}>
+              className={`py-3 rounded-xl text-sm font-medium flex items-center justify-center gap-1.5 transition-all active:scale-95 ${
+              copiedId === activeTab ? "bg-sapphire/10 text-sapphire" : "bg-background text-royal border border-border hover:border-sapphire/50"}`
+              }>
                 {copiedId === activeTab ? <Check size={15} /> : <Copy size={15} />}
                 {copiedId === activeTab ? "Скопировано" : "Копировать"}
               </button>
@@ -250,8 +250,8 @@ export default function Result() {
         <div className="space-y-4">
           <button
             onClick={() => navigate("/image-editor")}
-            className="w-full bg-white border border-border rounded-2xl px-4 py-4 flex items-center gap-3 shadow-card active:scale-[0.98] transition-all text-left"
-          >
+            className="w-full bg-white border border-border rounded-2xl px-4 py-4 flex items-center gap-3 shadow-card active:scale-[0.98] transition-all text-left">
+            
             <div className="w-12 h-12 rounded-xl bg-sapphire/10 flex items-center justify-center flex-shrink-0">
               <Image size={24} className="text-sapphire" />
             </div>
@@ -264,13 +264,13 @@ export default function Result() {
 
           <button
             onClick={() => navigate("/carousel-editor")}
-            className="w-full bg-white border border-border rounded-2xl px-4 py-4 flex items-center gap-3 shadow-card active:scale-[0.98] transition-all text-left"
-          >
+            className="w-full bg-white border border-border rounded-2xl px-4 py-4 flex items-center gap-3 shadow-card active:scale-[0.98] transition-all text-left">
+            
             <div className="w-12 h-12 rounded-xl bg-sapphire/10 flex items-center justify-center flex-shrink-0">
               <LayoutGrid size={24} className="text-sapphire" />
             </div>
             <div className="flex-1">
-              <p className="text-base font-medium text-royal">Карусель — 8 слайдов</p>
+              <p className="text-base font-medium text-royal">Карусель — 9 слайдов</p>
               <p className="text-sm text-muted-foreground">Редактор текста · шрифт · размер</p>
             </div>
             <ChevronRight size={20} className="text-muted-foreground" />
@@ -308,8 +308,8 @@ export default function Result() {
                 <span className="text-xs text-muted-foreground">{editDraft.length} симв.</span>
                 <button
                   onClick={handleSaveEdit}
-                  className="px-4 py-2 rounded-xl bg-royal text-swan text-sm font-medium flex items-center gap-1.5 active:scale-95 transition-all"
-                >
+                  className="px-4 py-2 rounded-xl bg-royal text-swan text-sm font-medium flex items-center gap-1.5 active:scale-95 transition-all">
+                  
                   <Check size={14} /> Сохранить
                 </button>
               </div>
@@ -321,13 +321,13 @@ export default function Result() {
               onChange={(e) => setEditDraft(e.target.value)}
               className="w-full h-full resize-none bg-transparent text-base text-foreground leading-relaxed focus:outline-none"
               autoFocus
-              spellCheck
-            />
+              spellCheck />
+            
           </div>
         </SheetContent>
       </Sheet>
 
       <BottomNav />
-    </div>
-  );
+    </div>);
+
 }
