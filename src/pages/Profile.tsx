@@ -32,9 +32,35 @@ export default function Profile() {
   const [showPw, setShowPw] = useState(false);
   const [savingPw, setSavingPw] = useState(false);
 
+  const [avatarEmoji, setAvatarEmoji] = useState(() => localStorage.getItem("avatarEmoji") || "🔮");
+  const [avatarPhoto, setAvatarPhoto] = useState<string | null>(() => localStorage.getItem("avatarPhoto") || null);
+  const [showAvatarPicker, setShowAvatarPicker] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
   // Use localStorage name as fallback for non-auth users
   const shownName = displayName || localStorage.getItem("userName") || "Пользователь";
   const email = user?.email || "";
+
+  const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const dataUrl = ev.target?.result as string;
+      setAvatarPhoto(dataUrl);
+      localStorage.setItem("avatarPhoto", dataUrl);
+      setShowAvatarPicker(false);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleSelectEmoji = (emoji: string) => {
+    setAvatarEmoji(emoji);
+    setAvatarPhoto(null);
+    localStorage.setItem("avatarEmoji", emoji);
+    localStorage.removeItem("avatarPhoto");
+    setShowAvatarPicker(false);
+  };
 
   const startEditName = () => {
     setNewName(shownName);
