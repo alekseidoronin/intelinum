@@ -166,9 +166,9 @@ export default function Home() {
               <TrendingUp size={18} className="text-sapphire" />
             </div>
             <div className="flex-1 min-w-0">
-              <div className="font-semibold text-royal text-sm mb-0.5">Хочу найти тему</div>
-              <div className="text-xs text-muted-foreground">Актуальные темы из трендов — один тап и контент готов</div>
-              <div className="mt-0.5 text-[10px] text-sapphire/70">Обновляется каждый день</div>
+              <div className="font-semibold text-royal text-base mb-0.5">Хочу найти тему</div>
+              <div className="text-sm text-muted-foreground">Актуальные темы из трендов — один тап и контент готов</div>
+              <div className="mt-0.5 text-xs text-sapphire/70">Обновляется каждый день</div>
             </div>
             <ChevronRight size={16} className="text-sapphire flex-shrink-0" />
           </div>
