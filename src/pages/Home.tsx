@@ -69,7 +69,7 @@ export default function Home() {
           </div>
 
           {/* Post text */}
-          <div className="px-4 py-3">
+          <div className="px-4 py-[40px]">
             <p className="text-xs text-white/85 leading-relaxed whitespace-pre-line line-clamp-5">
               {todayPost}
             </p>
