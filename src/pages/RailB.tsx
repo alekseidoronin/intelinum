@@ -88,7 +88,7 @@ export default function RailB() {
 
           {/* Quick prompts */}
           <div>
-            <h2 className="text-sm font-semibold text-royal tracking-wide uppercase mb-3">Быстрые темы</h2>
+            
             
 
 
