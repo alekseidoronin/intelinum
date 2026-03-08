@@ -112,8 +112,8 @@ export default function Result() {
       </motion.div>
 
       {/* Platform tabs */}
-      <div className="px-5 mb-4 overflow-x-auto scrollbar-hide">
-        <div className="flex gap-2 w-max">
+      <div className="mb-4 overflow-x-auto scrollbar-hide">
+        <div className="flex gap-2 w-max px-5">
           {platforms.map(p => (
             <button key={p.id} onClick={() => setActiveTab(p.id)}
               className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition-all ${
