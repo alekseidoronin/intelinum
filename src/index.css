@@ -98,6 +98,8 @@
     @apply bg-background text-foreground;
     font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
+    -webkit-overflow-scrolling: touch;
+    overflow-y: auto;
   }
 
   h1, h2, h3, .font-display {
