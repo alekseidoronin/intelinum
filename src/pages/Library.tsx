@@ -70,19 +70,17 @@ export default function Library() {
                 <Icon size={18} className="text-sapphire" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-royal truncate">{item.title}</p>
-                <div className="flex items-center gap-2 mt-0.5">
-                  <span className="text-xs text-muted-foreground">{item.date}</span>
-                  <span className="text-xs text-muted-foreground">·</span>
-                  <span className="text-xs text-muted-foreground">{typeLabels[item.type as keyof typeof typeLabels]}</span>
-                </div>
+                <p className="text-sm font-medium text-royal leading-snug line-clamp-1">{item.title}</p>
+                <p className="text-xs text-muted-foreground mt-0.5">
+                  {item.date} · {typeLabels[item.type as keyof typeof typeLabels]}
+                </p>
               </div>
-              <div className="flex items-center gap-1" onClick={e => e.stopPropagation()}>
-                <button className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${item.starred ? "text-gold-dark" : "text-muted-foreground hover:text-gold-dark"}`}>
-                  <Star size={15} fill={item.starred ? "currentColor" : "none"} />
+              <div className="flex items-center gap-1 flex-shrink-0" onClick={e => e.stopPropagation()}>
+                <button className={`w-9 h-9 rounded-lg flex items-center justify-center transition-colors ${item.starred ? "text-gold-dark" : "text-muted-foreground hover:text-gold-dark"}`}>
+                  <Star size={18} fill={item.starred ? "currentColor" : "none"} />
                 </button>
-                <button className="w-8 h-8 rounded-lg flex items-center justify-center text-muted-foreground hover:text-sapphire transition-colors">
-                  <Copy size={15} />
+                <button className="w-9 h-9 rounded-lg flex items-center justify-center text-muted-foreground hover:text-sapphire transition-colors">
+                  <Copy size={18} />
                 </button>
               </div>
             </motion.button>
