@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Check, Crown, Zap, Building2 } from "lucide-react";
+import { ChevronLeft, Check, Crown, Zap, Building2 } from "lucide-react";
 import { TopBar } from "@/components/TopBar";
 
 const plans = [
@@ -31,7 +31,16 @@ export default function Pricing() {
 
   return (
     <div className="min-h-screen bg-background pb-10">
-      <TopBar showBack />
+      <TopBar />
+      <div className="px-5 pb-4 flex items-center gap-3">
+        <button onClick={() => navigate(-1)} className="w-9 h-9 rounded-xl border border-border bg-white flex items-center justify-center text-sapphire shadow-card">
+          <ChevronLeft size={18} />
+        </button>
+        <div>
+          <h1 className="font-display text-xl text-royal">Тарифы</h1>
+          <p className="text-xs text-muted-foreground">Выберите подходящий план</p>
+        </div>
+      </div>
 
       <div className="px-5">
         <p className="text-sm text-muted-foreground mb-5 text-center">Годовая подписка — скидка 20%</p>
