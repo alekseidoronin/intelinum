@@ -11,6 +11,9 @@ import Result from "./pages/Result";
 import Library from "./pages/Library";
 import Profile from "./pages/Profile";
 import Pricing from "./pages/Pricing";
+import Education from "./pages/Education";
+import Solutions from "./pages/Solutions";
+import News from "./pages/News";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
