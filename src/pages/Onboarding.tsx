@@ -1,13 +1,25 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, Zap, Image, TrendingUp } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import logoImg from "@/assets/logo.png";
 
 const features = [
-  { icon: Zap, text: "Посты под все площадки в вашем стиле" },
-  { icon: Image, text: "Картинки без промптов" },
-  { icon: TrendingUp, text: "Темы из трендов каждый день" },
+  {
+    emoji: "⚡",
+    title: "Пишет вашим языком",
+    desc: "Платформа изучает ваш стиль и создаёт тексты, которые звучат как вы",
+  },
+  {
+    emoji: "🎴",
+    title: "Красивые картинки сами",
+    desc: "Выбираете стиль один раз — дальше картинки создаются автоматически",
+  },
+  {
+    emoji: "🔮",
+    title: "Каждое утро — готовая тема",
+    desc: "Не надо думать «о чём сегодня писать» — тема дня уже ждёт вас",
+  },
 ];
 
 export default function Onboarding() {
@@ -34,7 +46,7 @@ export default function Onboarding() {
       className="min-h-screen flex flex-col items-center px-6 relative overflow-hidden"
       style={{ background: "var(--gradient-hero)" }}
     >
-      {/* Soft radial glow only — no grid */}
+      {/* Ambient glows */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div
           className="absolute top-[-120px] left-1/2 -translate-x-1/2 w-[600px] h-[400px] rounded-full"
@@ -57,9 +69,9 @@ export default function Onboarding() {
         >
           {/* ── Step 0 ── */}
           {step === 0 && (
-            <div className="flex flex-col flex-1 pt-14">
+            <div className="flex flex-col flex-1 pt-12">
 
-              {/* Logo block — large and prominent */}
+              {/* Logo */}
               <motion.div
                 className="flex flex-col items-center mb-8"
                 initial={{ opacity: 0, scale: 0.85 }}
@@ -69,14 +81,17 @@ export default function Onboarding() {
                 <img
                   src={logoImg}
                   alt="ИНТЕЛИНУМ"
-                  className="object-contain mb-5"
-                  style={{ width: 110, height: 110, filter: "drop-shadow(0 0 24px hsl(var(--gold) / 0.5))" }}
-                />
-
-                <span
-                  className="font-display font-bold tracking-[0.22em] uppercase"
+                  className="object-contain mb-4"
                   style={{
-                    fontSize: 26,
+                    width: 110,
+                    height: 110,
+                    filter: "drop-shadow(0 0 24px hsl(var(--gold) / 0.5))",
+                  }}
+                />
+                <span
+                  className="font-display font-bold tracking-[0.22em] uppercase mb-1"
+                  style={{
+                    fontSize: 24,
                     background: "var(--gradient-gold)",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
@@ -85,27 +100,26 @@ export default function Onboarding() {
                 >
                   ИНТЕЛИНУМ
                 </span>
-
                 <span
-                  className="text-xs tracking-widest uppercase mt-1"
-                  style={{ color: "hsl(var(--swan) / 0.4)", letterSpacing: "0.2em" }}
+                  className="text-xs tracking-widest uppercase"
+                  style={{ color: "hsl(var(--swan) / 0.45)", letterSpacing: "0.18em" }}
                 >
-                  AI-платформа для авторов
+                  AI-платформа для нумерологов
                 </span>
               </motion.div>
 
               {/* Headline */}
               <motion.div
-                className="text-center mb-8"
+                className="text-center mb-7"
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.25, duration: 0.5 }}
               >
                 <h1
-                  className="font-display font-bold leading-[1.1] mb-4"
-                  style={{ fontSize: 36, color: "hsl(var(--swan))" }}
+                  className="font-display font-bold leading-[1.15] mb-3"
+                  style={{ fontSize: 32, color: "hsl(var(--swan))" }}
                 >
-                  Готовый контент<br />
+                  Пишет как вы.<br />
                   <span
                     style={{
                       background: "var(--gradient-gold)",
@@ -114,40 +128,40 @@ export default function Onboarding() {
                       backgroundClip: "text",
                     }}
                   >
-                    за 2 минуты
+                    Только быстрее.
                   </span>
                 </h1>
                 <p
                   className="text-sm leading-relaxed"
                   style={{ color: "hsl(var(--swan) / 0.6)" }}
                 >
-                  Тема или запись эфира → пакет постов<br />для всех площадок в вашем стиле
+                  Больше не нужно часами сидеть над текстами и картинками. Загрузите запись эфира или выберите тему — и получите готовые публикации в вашем стиле
                 </p>
               </motion.div>
 
               {/* Features */}
-              <div className="space-y-3 mb-10">
-                {features.map(({ icon: Icon, text }, i) => (
+              <div className="space-y-2.5 mb-8">
+                {features.map(({ emoji, title, desc }, i) => (
                   <motion.div
-                    key={text}
+                    key={title}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.35 + i * 0.1, duration: 0.45, ease: "easeOut" }}
-                    className="flex items-center gap-4 rounded-2xl px-4 py-3.5"
+                    className="flex items-start gap-4 rounded-2xl px-4 py-3.5"
                     style={{
                       background: "hsl(var(--swan) / 0.06)",
                       border: "1px solid hsl(var(--swan) / 0.1)",
                     }}
                   >
-                    <div
-                      className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
-                      style={{ background: "hsl(var(--gold) / 0.2)" }}
-                    >
-                      <Icon size={15} style={{ color: "hsl(var(--gold))" }} />
+                    <span className="text-xl leading-none mt-0.5 flex-shrink-0">{emoji}</span>
+                    <div>
+                      <p className="text-sm font-semibold mb-0.5" style={{ color: "hsl(var(--swan) / 0.95)" }}>
+                        {title}
+                      </p>
+                      <p className="text-xs leading-relaxed" style={{ color: "hsl(var(--swan) / 0.5)" }}>
+                        {desc}
+                      </p>
                     </div>
-                    <span className="text-sm" style={{ color: "hsl(var(--swan) / 0.85)" }}>
-                      {text}
-                    </span>
                   </motion.div>
                 ))}
               </div>
@@ -160,7 +174,7 @@ export default function Onboarding() {
                 transition={{ delay: 0.7, duration: 0.45 }}
                 whileHover={{ scale: 1.015, boxShadow: "0 0 36px hsl(var(--gold) / 0.55), 0 6px 20px hsl(var(--gold) / 0.3)" }}
                 whileTap={{ scale: 0.985, boxShadow: "0 0 52px hsl(var(--gold) / 0.75), 0 8px 28px hsl(var(--gold) / 0.5)" }}
-                className="w-full py-5 rounded-2xl font-bold text-lg flex items-center justify-center gap-2"
+                className="w-full py-5 rounded-2xl font-bold flex items-center justify-center gap-2"
                 style={{
                   background: "var(--gradient-gold)",
                   color: "hsl(var(--royal))",
@@ -168,14 +182,14 @@ export default function Onboarding() {
                 }}
               >
                 <Sparkles size={18} />
-                Начать бесплатно
+                Попробовать бесплатно
               </motion.button>
 
               <p
                 className="text-center text-xs mt-3"
                 style={{ color: "hsl(var(--swan) / 0.35)" }}
               >
-                Без карты · Без обязательств
+                Без карты · 3 публикации в подарок
               </p>
             </div>
           )}
@@ -183,7 +197,6 @@ export default function Onboarding() {
           {/* ── Step 1 — Name ── */}
           {step === 1 && (
             <div className="pt-20">
-              {/* Logo small */}
               <div className="flex flex-col items-center mb-10">
                 <img src={logoImg} alt="ИНТЕЛИНУМ" className="w-12 h-12 object-contain mb-3" />
                 <span
