@@ -145,28 +145,6 @@ export default function Profile() {
               </div>
             </div>
 
-            {/* Avatar picker dropdown */}
-            {showAvatarPicker && (
-              <div className="absolute left-5 right-5 top-28 z-50 bg-white rounded-2xl shadow-xl border border-border p-4">
-                <p className="text-sm font-medium text-royal mb-3">Выбери аватар или загрузи фото</p>
-                <div className="grid grid-cols-6 gap-2 mb-3">
-                  {AVATARS.map(em => (
-                    <button key={em} onClick={() => handleSelectEmoji(em)}
-                      className={`w-10 h-10 rounded-xl text-2xl flex items-center justify-center transition-all active:scale-90 ${avatarEmoji === em && !avatarPhoto ? "bg-royal/10 ring-2 ring-royal" : "hover:bg-muted"}`}>
-                      {em}
-                    </button>
-                  ))}
-                </div>
-                <button
-                  onClick={() => fileInputRef.current?.click()}
-                  className="w-full py-2.5 rounded-xl border border-border text-sm font-medium text-sapphire flex items-center justify-center gap-2 hover:border-sapphire/50 transition-all active:scale-95">
-                  <Camera size={15} />
-                  Загрузить фото
-                </button>
-                <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handlePhotoUpload} />
-              </div>
-            )}
-
             <div className="flex-1 min-w-0">
               {editingName ? (
                 <div className="flex items-center gap-2">
