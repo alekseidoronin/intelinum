@@ -32,7 +32,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background pb-24">
       {/* Header — прижат к safe area сверху */}
-      <div className="px-4 pt-5 pb-2">
+      <div className="px-4 pt-14 pb-3 py-[20px]">
         <div className="flex items-center justify-between">
           <Logo size="sm" vertical={false} />
           <button className="w-9 h-9 rounded-xl border border-border bg-card flex items-center justify-center text-sapphire hover:border-sapphire transition-colors shadow-card">
@@ -69,27 +69,32 @@ export default function Home() {
           </div>
 
           {/* Post text */}
-          <div className="px-4 py-3 max-h-32 overflow-y-auto scrollbar-hide">
-            <p className="text-xs text-white/85 leading-relaxed whitespace-pre-line">
+          <div className="px-4 py-3">
+            <p className="text-xs text-white/85 leading-relaxed whitespace-pre-line line-clamp-5">
               {todayPost}
             </p>
           </div>
 
           {/* Actions — три кнопки в ряд, текст в одну строку */}
-          <div className="px-4 pb-4 grid grid-cols-2 gap-2">
+          <div className="px-4 pb-4 grid grid-cols-3 gap-2">
             <button
               onClick={handleCopy}
-              className={`py-2.5 rounded-xl text-xs font-medium flex items-center justify-center gap-1.5 transition-all active:scale-95 ${
-              copied ? "bg-gold/30 text-gold" : "bg-white/15 text-white hover:bg-white/25"}`}>
+              className={`py-2.5 rounded-xl text-xs font-medium flex items-center justify-center gap-1.5 transition-all active:scale-95 min-w-0 ${
+              copied ? "bg-gold/30 text-gold" : "bg-white/15 text-white hover:bg-white/25"}`
+              }>
+              
               <Copy size={13} className="flex-shrink-0" />
-              <span>{copied ? "Скопировано" : "Копировать"}</span>
+              <span className="truncate">{copied ? "Скопировано" : "Копировать"}</span>
             </button>
             <button
-              onClick={() => navigate("/result")}
-              className="py-2.5 rounded-xl bg-white/15 text-white text-xs font-medium flex items-center justify-center gap-1.5 hover:bg-white/25 transition-all active:scale-95">
-              <Edit3 size={13} className="flex-shrink-0" />
-              <span>Редактировать</span>
+              onClick={() => {}}
+              className="py-2.5 rounded-xl bg-white/15 text-white text-xs font-medium flex items-center justify-center hover:bg-white/25 transition-all active:scale-95">
+              
+              Редактировать
             </button>
+            
+
+            
           </div>
         </motion.div>
 
