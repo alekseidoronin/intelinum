@@ -3,7 +3,6 @@ import { Home, Sparkles, BookOpen, User } from "lucide-react";
 
 const items = [
   { icon: Home, label: "Главная", path: "/home" },
-  { icon: Sparkles, label: "Создать", path: "/rail-b" },
   { icon: BookOpen, label: "Библиотека", path: "/library" },
   { icon: User, label: "Профиль", path: "/profile" },
 ];
