@@ -300,7 +300,7 @@ export default function Result() {
 
       {/* Edit sheet */}
       <Sheet open={editOpen} onOpenChange={setEditOpen}>
-        <SheetContent side="bottom" className="h-[90vh] flex flex-col rounded-t-2xl px-0 pb-0">
+        <SheetContent side="bottom" className="h-[92dvh] flex flex-col rounded-t-2xl px-0 pb-0">
           <SheetHeader className="px-5 pt-4 pb-3 border-b border-border flex-shrink-0">
             <div className="flex items-center justify-between">
               <SheetTitle className="text-base font-semibold text-royal">Редактировать текст</SheetTitle>
@@ -309,20 +309,19 @@ export default function Result() {
                 <button
                   onClick={handleSaveEdit}
                   className="px-4 py-2 rounded-xl bg-royal text-swan text-sm font-medium flex items-center gap-1.5 active:scale-95 transition-all">
-                  
                   <Check size={14} /> Сохранить
                 </button>
               </div>
             </div>
           </SheetHeader>
-          <div className="flex-1 overflow-hidden px-5 py-4">
+          <div className="flex-1 min-h-0 px-5 py-4 overflow-y-auto">
             <textarea
               value={editDraft}
               onChange={(e) => setEditDraft(e.target.value)}
-              className="w-full h-full resize-none bg-transparent text-base text-foreground leading-relaxed focus:outline-none"
+              className="w-full min-h-full resize-none bg-transparent text-base text-foreground leading-relaxed focus:outline-none"
+              style={{ minHeight: "100%" }}
               autoFocus
               spellCheck />
-            
           </div>
         </SheetContent>
       </Sheet>
