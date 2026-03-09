@@ -57,7 +57,7 @@ export default function Onboarding() {
           
           {/* ── Step 0 ── */}
           {step === 0 &&
-          <div className="flex flex-col flex-1 pt-14">
+          <div className="flex flex-col flex-1 pt-14 py-[30px]">
 
               {/* Logo block — large and prominent */}
               <motion.div
@@ -171,12 +171,12 @@ export default function Onboarding() {
                 Начать бесплатно
               </motion.button>
 
-              <p
-              className="text-center text-xs mt-3"
-              style={{ color: "hsl(var(--swan) / 0.35)" }}>
               
-                Без карты · Без обязательств
-              </p>
+
+
+
+
+            
             </div>
           }
 
