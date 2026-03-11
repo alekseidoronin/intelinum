@@ -170,7 +170,7 @@ export default function Result() {
         <Sparkles size={20} className="text-gold flex-shrink-0" />
         <div>
           <p className="text-base text-swan font-medium">Всё готово для всех площадок</p>
-          <p className="text-sm text-swan/60">5 постов · картинка · карусель</p>
+          <p className="text-sm text-swan/60">5 постов · картинка · карусель · PDF-гайд</p>
         </div>
       </motion.div>
 
