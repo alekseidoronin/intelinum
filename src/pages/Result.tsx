@@ -276,15 +276,15 @@ export default function Result() {
             <ChevronRight size={20} className="text-muted-foreground" />
           </button>
 
-          <button onClick={handlePdf} className="w-full bg-white border border-border rounded-2xl px-4 py-4 flex items-center gap-3 text-left hover:border-sapphire/40 shadow-card transition-all active:scale-[0.98]">
-            <div className="w-11 h-11 rounded-xl bg-sapphire/10 flex items-center justify-center flex-shrink-0">
-              <FileText size={20} className="text-sapphire" />
-            </div>
-            <div className="flex-1">
-              <p className="text-base font-medium text-royal">Сделать PDF-гайд</p>
-              <p className="text-sm text-muted-foreground">Красивый гайд на 3–7 страниц для привлечения клиентов</p>
-            </div>
-          </button>
+          
+
+
+
+
+
+
+
+          
 
           <button onClick={handleRegenerate} className="w-full bg-white border border-border rounded-2xl px-4 py-4 flex items-center gap-3 text-left hover:border-sapphire/40 shadow-card transition-all active:scale-[0.98]">
             <div className="w-11 h-11 rounded-xl bg-sapphire/10 flex items-center justify-center flex-shrink-0">
