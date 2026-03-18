@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, Zap, Image, TrendingUp } from "lucide-react";
+import { Zap, Image, TrendingUp } from "lucide-react";
 import logoImg from "@/assets/logo.png";
 
 const features = [
@@ -167,7 +167,7 @@ export default function Onboarding() {
                 fontSize: 17
               }}>
               
-                <Sparkles size={18} />
+                
                 Начать бесплатно
               </motion.button>
 
