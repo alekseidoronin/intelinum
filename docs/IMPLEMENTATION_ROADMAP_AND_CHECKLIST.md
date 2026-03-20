@@ -142,7 +142,7 @@ Acceptance criteria:
 ## Global execution checklist (single source of delivery truth)
 
 - [x] C0. Stage 0 architecture and execution contract documented.
-- [ ] C1. Core schema migrations created and reviewed.
+- [x] C1. Core schema migrations created and reviewed.
 - [ ] C2. RLS policies and role model implemented.
 - [ ] C3. Admin backend (settings, roles, audit) implemented.
 - [ ] C4. Admin panel v1 implemented.
@@ -177,4 +177,4 @@ Use this format for precise execution requests:
 
 ## Current next step
 
-Next execution checkpoint is **C1** (core schema migrations and review).
+Next execution checkpoint is **C2** (RLS policies and role model implementation).
