@@ -3,6 +3,7 @@
 ## Project info
 
 **URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+**Production URL**: https://intelinum.duckdns.org
 
 ## How can I edit this code?
 

@@ -4,6 +4,10 @@ This guide is for NeuroNanoBanana-style deployments where a backend service (for
 
 Repository note: this repo is a Vite/React frontend and does not itself open backend ports such as `8080`. Use this guide when deploying a companion backend service on your host or in Docker.
 
+Current deployment fact:
+
+- DNS update confirmed: `intelinum.duckdns.org` -> `144.217.12.20`
+
 ## 1) What the application listens on
 
 | Role | Default | Config |
