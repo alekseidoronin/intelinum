@@ -5,7 +5,7 @@ It defines architecture, phased delivery, acceptance criteria, and reporting pro
 
 ## Project context (current state)
 
-- Frontend routes and UX flows are already implemented (`onboarding`, `auth`, `home`, `rail-a`, `rail-b`, `result`, `library`, `profile`, `pricing`).  
+- Frontend routes and UX flows are already implemented (`onboarding`, `auth`, `home`, `rail-a`, `rail-b`, `result`, `library`, `profile`, `pricing`).
 - There is no dedicated admin route/module yet.
 - Supabase is integrated for auth and one edge function call (`rewrite-text`), but most product logic is still UI/local-state based.
 - Database types currently expose only `profiles` as product table.
