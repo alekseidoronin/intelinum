@@ -71,6 +71,20 @@ interface UsageItem {
   period_end: string;
 }
 
+interface LooseError {
+  message?: string;
+}
+
+interface LooseTableQuery<T> {
+  select(columns: string): LooseTableQuery<T>;
+  order(column: string, options: { ascending: boolean }): LooseTableQuery<T>;
+  limit(count: number): Promise<{ data: T[] | null; error: LooseError | null }>;
+}
+
+interface SupabaseLooseClient {
+  from<T>(table: string): LooseTableQuery<T>;
+}
+
 const tabs: { key: TabKey; label: string; icon: ComponentType<{ size?: number; className?: string }> }[] = [
   { key: "health", label: "Health", icon: Activity },
   { key: "settings", label: "Settings", icon: Settings2 },
@@ -155,6 +169,11 @@ export default function Admin() {
     }
   };
 
+  const getErrorMessage = (error: unknown, fallback: string) => {
+    if (error instanceof Error) return error.message;
+    return fallback;
+  };
+
   const invokeAdmin = async <T,>(fn: string, body: unknown): Promise<T> => {
     const { data, error } = await supabase.functions.invoke(fn, { body });
     if (error) throw new Error(error.message || "Admin API error");
@@ -206,7 +225,7 @@ export default function Admin() {
   };
 
   const loadPlansAndUsage = async () => {
-    const client = supabase as any;
+    const client = supabase as unknown as SupabaseLooseClient;
 
     try {
       const { data, error } = await client
@@ -217,9 +236,9 @@ export default function Admin() {
       if (error) throw error;
       setSubscriptions((data ?? []) as SubscriptionItem[]);
       setHealth((prev) => ({ ...prev, subscriptions: { state: "ok", message: `ok (${data?.length ?? 0} rows)` } }));
-    } catch (e: any) {
+    } catch (e: unknown) {
       setSubscriptions([]);
-      setHealth((prev) => ({ ...prev, subscriptions: { state: "warn", message: e?.message ?? "read error" } }));
+      setHealth((prev) => ({ ...prev, subscriptions: { state: "warn", message: getErrorMessage(e, "read error") } }));
     }
 
     try {
@@ -231,9 +250,9 @@ export default function Admin() {
       if (error) throw error;
       setUsageRows((data ?? []) as UsageItem[]);
       setHealth((prev) => ({ ...prev, usage: { state: "ok", message: `ok (${data?.length ?? 0} rows)` } }));
-    } catch (e: any) {
+    } catch (e: unknown) {
       setUsageRows([]);
-      setHealth((prev) => ({ ...prev, usage: { state: "warn", message: e?.message ?? "read error" } }));
+      setHealth((prev) => ({ ...prev, usage: { state: "warn", message: getErrorMessage(e, "read error") } }));
     }
 
     try {
@@ -290,8 +309,8 @@ export default function Admin() {
       toast({ description: "Draft создан" });
       setSettingsForm((prev) => ({ ...prev, key: "", description: "", changeNote: "" }));
       await Promise.all([loadSettings(), loadRevisions()]);
-    } catch (e: any) {
-      toast({ description: e?.message ?? "Не удалось создать draft", variant: "destructive" });
+    } catch (e: unknown) {
+      toast({ description: getErrorMessage(e, "Не удалось создать draft"), variant: "destructive" });
     }
   };
 
@@ -307,8 +326,8 @@ export default function Admin() {
       setPublishRevisionId("");
       setPublishNote("");
       await Promise.all([loadSettings(), loadRevisions(), loadAudit()]);
-    } catch (e: any) {
-      toast({ description: e?.message ?? "Не удалось опубликовать revision", variant: "destructive" });
+    } catch (e: unknown) {
+      toast({ description: getErrorMessage(e, "Не удалось опубликовать revision"), variant: "destructive" });
     }
   };
 
@@ -327,8 +346,8 @@ export default function Admin() {
       toast({ description: "Content rule draft создан" });
       setContentRuleForm({ key: "", valueText: "{\"enabled\": true}", description: "", changeNote: "" });
       await Promise.all([loadSettings(), loadRevisions()]);
-    } catch (e: any) {
-      toast({ description: e?.message ?? "Ошибка создания content rule", variant: "destructive" });
+    } catch (e: unknown) {
+      toast({ description: getErrorMessage(e, "Ошибка создания content rule"), variant: "destructive" });
     }
   };
 
@@ -341,8 +360,8 @@ export default function Admin() {
       });
       toast({ description: "Роль назначена" });
       await Promise.all([loadRoles(), loadAudit()]);
-    } catch (e: any) {
-      toast({ description: e?.message ?? "Ошибка назначения роли", variant: "destructive" });
+    } catch (e: unknown) {
+      toast({ description: getErrorMessage(e, "Ошибка назначения роли"), variant: "destructive" });
     }
   };
 
@@ -356,8 +375,8 @@ export default function Admin() {
       });
       toast({ description: "Роль отозвана" });
       await Promise.all([loadRoles(), loadAudit()]);
-    } catch (e: any) {
-      toast({ description: e?.message ?? "Ошибка отзыва роли", variant: "destructive" });
+    } catch (e: unknown) {
+      toast({ description: getErrorMessage(e, "Ошибка отзыва роли"), variant: "destructive" });
     }
   };
 
@@ -662,7 +681,7 @@ export default function Admin() {
                   <div key={u.id} className="border border-border rounded-xl p-2 text-xs">
                     <div className="font-semibold text-royal">{u.metric}: {u.used_count} / {u.limit_count ?? "∞"}</div>
                     <div className="text-muted-foreground break-all">user: {u.user_id}</div>
-                    <div className="text-muted-foreground">{u.period_start} -> {u.period_end}</div>
+                    <div className="text-muted-foreground">{u.period_start} {"->"} {u.period_end}</div>
                   </div>
                 ))}
               </div>
