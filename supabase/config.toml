@@ -2,3 +2,12 @@ project_id = "xirzlbqmmbwjumzzourz"
 
 [functions.rewrite-text]
 verify_jwt = false
+
+[functions.admin-settings]
+verify_jwt = true
+
+[functions.admin-roles]
+verify_jwt = true
+
+[functions.admin-audit]
+verify_jwt = true

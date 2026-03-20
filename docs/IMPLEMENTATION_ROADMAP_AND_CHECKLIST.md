@@ -144,7 +144,7 @@ Acceptance criteria:
 - [x] C0. Stage 0 architecture and execution contract documented.
 - [x] C1. Core schema migrations created and reviewed.
 - [x] C2. RLS policies and role model implemented.
-- [ ] C3. Admin backend (settings, roles, audit) implemented.
+- [x] C3. Admin backend (settings, roles, audit) implemented.
 - [ ] C4. Admin panel v1 implemented.
 - [ ] C5. Home connected to backend data.
 - [ ] C6. Library connected to backend data.
@@ -177,4 +177,4 @@ Use this format for precise execution requests:
 
 ## Current next step
 
-Next execution checkpoint is **C3** (admin backend for settings, roles, and audit).
+Next execution checkpoint is **C4** (admin panel v1 implementation).
