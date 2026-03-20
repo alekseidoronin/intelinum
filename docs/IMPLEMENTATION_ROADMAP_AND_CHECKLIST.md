@@ -145,7 +145,7 @@ Acceptance criteria:
 - [x] C1. Core schema migrations created and reviewed.
 - [x] C2. RLS policies and role model implemented.
 - [x] C3. Admin backend (settings, roles, audit) implemented.
-- [ ] C4. Admin panel v1 implemented.
+- [x] C4. Admin panel v1 implemented.
 - [ ] C5. Home connected to backend data.
 - [ ] C6. Library connected to backend data.
 - [ ] C7. Pricing and usage connected to backend data.
@@ -177,4 +177,4 @@ Use this format for precise execution requests:
 
 ## Current next step
 
-Next execution checkpoint is **C4** (admin panel v1 implementation).
+Next execution checkpoint is **C5** (home data connected to backend APIs).

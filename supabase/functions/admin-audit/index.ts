@@ -37,6 +37,27 @@ serve(async (req) => {
     const body = await req.json();
     const action = body?.action as string;
 
+    if (action === "list_events") {
+      const targetType = body?.targetType as string | undefined;
+      const targetId = body?.targetId as string | undefined;
+      const actionFilter = body?.eventAction as string | undefined;
+      const limit = Math.min(Number(body?.limit ?? 100), 500);
+
+      let query = client
+        .from("audit_events")
+        .select("*")
+        .order("created_at", { ascending: false })
+        .limit(limit);
+
+      if (targetType) query = query.eq("target_type", targetType);
+      if (targetId) query = query.eq("target_id", targetId);
+      if (actionFilter) query = query.eq("action", actionFilter);
+
+      const { data, error } = await query;
+      if (error) throw new Error(error.message);
+      return jsonResponse({ data });
+    }
+
     if (action === "write_event") {
       await requireAnyRole(client, ["owner", "admin"]);
       const { data, error } = await client.rpc("admin_log_event", {

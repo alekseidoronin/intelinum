@@ -21,6 +21,7 @@ import Pricing from "./pages/Pricing";
 import Education from "./pages/Education";
 import Solutions from "./pages/Solutions";
 import News from "./pages/News";
+import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -51,6 +52,7 @@ const App = () => (
               <Route path="/education" element={<Education />} />
               <Route path="/solutions" element={<Solutions />} />
               <Route path="/news" element={<News />} />
+              <Route path="/admin" element={<Admin />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </AppLayout>

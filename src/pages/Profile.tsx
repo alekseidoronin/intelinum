@@ -10,6 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 const AVATARS = ["🔮", "🌙", "⭐", "🌟", "🦋", "🌸", "🔥", "💎", "🌊", "🦄", "🌺", "✨"];
 
 const menuItems = [
+  { icon: Shield, label: "Админ-панель", desc: "Глобальные настройки и аудит", path: "/admin" },
   { icon: FileText, label: "Мой стиль письма", desc: "Обновить тексты-примеры", path: "/profile/style" },
   { icon: Palette, label: "Стиль визуала", desc: "Изменить визуальный стиль картинок", path: "/profile/visual" },
   { icon: Bell, label: "Уведомления", desc: "Настройки напоминаний", path: "/profile/notifications" },
