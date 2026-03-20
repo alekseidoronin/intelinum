@@ -64,6 +64,10 @@ This project is built with:
 
 Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
 
+If you are self-hosting a companion backend service behind a reverse proxy, see:
+
+- [Domain, SSL, and Ports Setup Guide](docs/DOMAIN_SSL_PORTS_SETUP_GUIDE.md)
+
 ## Can I connect a custom domain to my Lovable project?
 
 Yes, you can!
