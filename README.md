@@ -69,6 +69,10 @@ If you are self-hosting a companion backend service behind a reverse proxy, see:
 
 - [Domain, SSL, and Ports Setup Guide](docs/DOMAIN_SSL_PORTS_SETUP_GUIDE.md)
 
+For backend and admin-panel delivery planning, see:
+
+- [Implementation Roadmap and Checklist](docs/IMPLEMENTATION_ROADMAP_AND_CHECKLIST.md)
+
 ## Can I connect a custom domain to my Lovable project?
 
 Yes, you can!
