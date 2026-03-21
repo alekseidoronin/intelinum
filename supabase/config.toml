@@ -2,3 +2,9 @@ project_id = "xirzlbqmmbwjumzzourz"
 
 [functions.rewrite-text]
 verify_jwt = false
+
+[functions.pricing-usage]
+verify_jwt = false
+
+[functions.generate-content-pack]
+verify_jwt = false

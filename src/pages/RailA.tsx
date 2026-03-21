@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Upload, ChevronLeft, FileAudio, X, Sparkles, CheckCircle2 } from "lucide-react";
 import { BottomNav } from "@/components/BottomNav";
 import { TopBar } from "@/components/TopBar";
+import { generateContentPack } from "@/lib/content-pack";
 
 type Step = "upload" | "transcribing" | "transcript" | "generating" | "done";
 
@@ -46,9 +47,17 @@ export default function RailA() {
     }, 350);
   };
 
-  const startGeneration = () => {
+  const startGeneration = async () => {
     setStep("generating");
-    setTimeout(() => navigate("/result"), 3000);
+    const generationInput = {
+      topic: "Разбор из вашей записи",
+      transcript: mockTranscript,
+    };
+    const pack = await generateContentPack({
+      topic: generationInput.topic,
+      transcript: generationInput.transcript,
+    });
+    navigate("/result", { state: { contentPack: pack, generationInput } });
   };
 
   return (

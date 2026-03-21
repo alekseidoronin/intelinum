@@ -1,100 +1,64 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Copy, Edit3, RefreshCw, ChevronLeft, ChevronRight, Check, FileText, LayoutGrid, Sparkles, Image, X } from "lucide-react";
+import { Copy, Edit3, RefreshCw, ChevronLeft, ChevronRight, Check, LayoutGrid, Sparkles, Image } from "lucide-react";
 import { BottomNav } from "@/components/BottomNav";
 import { TopBar } from "@/components/TopBar";
 import { useToast } from "@/hooks/use-toast";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { fallbackPack, generateContentPack, type ContentPack, type PlatformId } from "@/lib/content-pack";
 
+type GenerationInput = {
+  topic: string;
+  transcript?: string;
+};
 
-const platforms = [
-{
-  id: "instagram", name: "Instagram", emoji: "📸", charLimit: 2200,
-  text: `✨ Число 7 - почему эти люди всегда ищут истину?
+type ResultLocationState = {
+  contentPack?: ContentPack;
+  generationInput?: GenerationInput;
+};
 
-Если у вас семёрка в матрице судьбы, вы, наверное, не раз слышали: «Ты слишком много думаешь». И знаете что? Это правда. Но это ваш дар.
+const emojiByPlatform: Record<PlatformId, string> = {
+  instagram: "📸",
+  telegram: "✈️",
+  vk: "🔵",
+  dzen: "📰",
+  reels: "🎬",
+};
 
-Семёрка - число духовного поиска. Им нужно понять, докопаться, исследовать.
+const getErrorMessage = (error: unknown, fallback: string) => {
+  if (error instanceof Error && error.message.trim()) return error.message;
+  return fallback;
+};
 
-👁 3 главные черты людей с числом 7:
-• Глубокий аналитический ум
-• Внутренняя интуиция
-• Потребность в уединении для «перезарядки»
-
-Если это про вас - напишите «7» в комментарии 👇
-
-#нумерология #числосудьбы #матрицасудьбы #число7`
-},
-{
-  id: "telegram", name: "Telegram", emoji: "✈️", charLimit: 4096,
-  text: `**Число 7: почему эти люди никогда не перестают искать**
-
-Люди с числом 7 в матрице судьбы отличаются особым устройством ума. Они не могут просто принять что-то на веру - им нужно понять механизм, найти закономерность.
-
-**Что это значит на практике?**
-
-Семёрки часто кажутся окружающим «странными». Им нужно время в одиночестве - это не социофобия, это перезарядка.
-
-**Главная задача семёрки** - научиться доверять своей интуиции. Парадокс: при всём аналитическом уме, интуиция у них феноменальная.
-
-Если хотите узнать, есть ли семёрка в вашей матрице - записывайтесь на разбор.`
-},
-{
-  id: "vk", name: "ВКонтакте", emoji: "🔵", charLimit: 3000,
-  text: `Число 7 в нумерологии - разбор для тех, кто узнаёт себя
-
-Давайте поговорим о людях с семёркой. Их легко вычислить: они всегда «в своей голове» и редко довольствуются поверхностными ответами.
-
-Три вещи, которые важно знать о числе 7:
-
-1. Им нужно одиночество для восстановления.
-2. Их интуиция работает лучше логики.
-3. Их главный урок - доверие к себе и жизни.
-
-Провожу полные разборы матрицы судьбы. Пишите в личные.`
-},
-{
-  id: "dzen", name: "Яндекс Дзен", emoji: "📰", charLimit: 10000,
-  text: `Число 7 в нумерологии: полный разбор характера и жизненного пути
-
-Нумерология позволяет через числа понять глубинные черты личности. Число 7 занимает особое место - это число духовного поиска, аналитического ума и внутреннего знания...
-
-[Полная SEO-статья на 3000+ слов будет сгенерирована]`
-},
-{
-  id: "reels", name: "Reels / Скрипт", emoji: "🎬", charLimit: 500,
-  text: `[0-3 сек] «Если у вас число 7 - вы это узнаете по одной вещи»
-
-[3-8 сек] «Вы никогда не принимаете ничего на веру»
-
-[8-20 сек] «Семёрка - число людей, которые всегда ищут истину»
-
-[20-35 сек] «3 черты: аналитический ум, сильная интуиция, потребность в уединении»
-
-[35-45 сек] «Главный вызов семёрки - научиться доверять»
-
-[45-60 сек] «Хотите узнать своё число? Ссылка в профиле»`
-}];
-
+const toTextMap = (pack: ContentPack) =>
+  Object.fromEntries(pack.platforms.map((platform) => [platform.id, platform.text]));
 
 export default function Result() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { toast } = useToast();
-  const [activeTab, setActiveTab] = useState("instagram");
+  const state = (location.state as ResultLocationState | null) ?? null;
+
+  const initialPack = state?.contentPack ?? fallbackPack("Число 7: духовный поиск");
+  const initialInput: GenerationInput = state?.generationInput ?? { topic: initialPack.topic };
+
+  const [pack, setPack] = useState<ContentPack>(initialPack);
+  const [generationInput, setGenerationInput] = useState<GenerationInput>(initialInput);
+  const [activeTab, setActiveTab] = useState<PlatformId>(initialPack.platforms[0]?.id ?? "instagram");
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [regenerating, setRegenerating] = useState(false);
   const [targetChars, setTargetChars] = useState<string>("");
-  const [texts, setTexts] = useState<Record<string, string>>(
-    Object.fromEntries(platforms.map((p) => [p.id, p.text]))
-  );
+  const [texts, setTexts] = useState<Record<string, string>>(toTextMap(initialPack));
   const [editOpen, setEditOpen] = useState(false);
   const [editDraft, setEditDraft] = useState("");
 
-  const cur = platforms.find((p) => p.id === activeTab)!;
-  const currentText = texts[activeTab] ?? cur.text;
+  const currentPlatform =
+    pack.platforms.find((platform) => platform.id === activeTab) ?? pack.platforms[0] ?? fallbackPack("Контент").platforms[0];
+  const currentText = texts[activeTab] ?? currentPlatform.text;
+  const sourceLabel = pack.source === "backend" ? "backend" : "fallback";
+  const tabs = useMemo(() => pack.platforms, [pack.platforms]);
 
   const handleCopy = (id: string, text: string) => {
     navigator.clipboard.writeText(text);
@@ -114,12 +78,17 @@ export default function Result() {
   };
 
 
-  const handleRegenerate = () => {
+  const handleRegenerate = async () => {
     setRegenerating(true);
-    setTimeout(() => {
-      setRegenerating(false);
-      toast({ description: "Пакет перегенерирован ✨" });
-    }, 1200);
+    const nextPack = await generateContentPack(generationInput);
+    setPack(nextPack);
+    setTexts(toTextMap(nextPack));
+    setActiveTab(nextPack.platforms[0]?.id ?? "instagram");
+    setGenerationInput({ topic: nextPack.topic, transcript: generationInput.transcript });
+    setRegenerating(false);
+    toast({
+      description: `Пакет перегенерирован (${nextPack.source === "backend" ? "backend" : "fallback"}) ✨`,
+    });
   };
 
   const handleGenerateByChars = async () => {
@@ -127,24 +96,20 @@ export default function Result() {
     setRegenerating(true);
     try {
       const { data, error } = await supabase.functions.invoke("rewrite-text", {
-        body: { text: currentText, targetChars: Number(targetChars), platform: cur.name }
+        body: { text: currentText, targetChars: Number(targetChars), platform: currentPlatform.name }
       });
       if (error) throw error;
-      if (data?.error) throw new Error(data.error);
-      setTexts((prev) => ({ ...prev, [activeTab]: data.text }));
-      toast({ description: `Текст переписан: ${data.text.length} симв. ✨` });
+      if (data?.error) throw new Error(String(data.error));
+      const rewrittenText = typeof data?.text === "string" ? data.text : currentText;
+      setTexts((prev) => ({ ...prev, [activeTab]: rewrittenText }));
+      toast({ description: `Текст переписан: ${rewrittenText.length} симв. ✨` });
       setTargetChars("");
-    } catch (e: any) {
-      toast({ description: e?.message ?? "Ошибка генерации", variant: "destructive" });
+    } catch (error) {
+      toast({ description: getErrorMessage(error, "Ошибка генерации"), variant: "destructive" });
     } finally {
       setRegenerating(false);
     }
   };
-
-  const handlePdf = () => {
-    toast({ description: "PDF-гайд будет создан в следующем обновлении 📄" });
-  };
-
 
   return (
     <div className="min-h-screen bg-background pb-32 md:pb-8">
@@ -160,7 +125,7 @@ export default function Result() {
             <Check size={18} className="text-sapphire" />
             <h1 className="font-display text-xl text-royal">Контент-пакет готов</h1>
           </div>
-          <p className="text-sm text-muted-foreground">Число 7: духовный поиск</p>
+          <p className="text-sm text-muted-foreground">{pack.title}</p>
         </div>
       </div>
 
@@ -170,21 +135,24 @@ export default function Result() {
         <Sparkles size={20} className="text-gold flex-shrink-0" />
         <div>
           <p className="text-base text-swan font-medium">Всё готово для всех площадок</p>
-          <p className="text-sm text-swan/60">5 постов · картинка · карусель · PDF-гайд</p>
+          <p className="text-sm text-swan/60">
+            {tabs.length} постов · картинка · карусель · источник: {sourceLabel}
+          </p>
         </div>
       </motion.div>
 
       {/* Platform tabs */}
       <div className="mb-4 px-5">
         <div className="flex flex-wrap gap-2">
-          {platforms.map((p) =>
-          <button key={p.id} onClick={() => setActiveTab(p.id)}
+          {tabs.map((platform) => (
+          <button key={platform.id} onClick={() => setActiveTab(platform.id)}
           className={`flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-base font-medium whitespace-nowrap transition-all ${
-          activeTab === p.id ? "bg-royal text-swan" : "bg-white text-sapphire border border-border hover:border-sapphire/50 shadow-card"}`
+          activeTab === platform.id ? "bg-royal text-swan" : "bg-white text-sapphire border border-border hover:border-sapphire/50 shadow-card"}`
           }>
-              {p.name}
+              <span>{emojiByPlatform[platform.id]}</span>
+              {platform.name}
             </button>
-          )}
+          ))}
         </div>
       </div>
 
@@ -192,8 +160,8 @@ export default function Result() {
         {/* Post card */}
         <motion.div key={activeTab} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="bg-white border border-border rounded-2xl overflow-hidden shadow-card">
           <div className="px-4 py-3 border-b border-border flex items-center justify-between bg-background">
-            <span className="text-base font-medium text-royal">{cur.name}</span>
-            <span className="text-sm text-muted-foreground">{currentText.length} / {cur.charLimit.toLocaleString()} симв.</span>
+            <span className="text-base font-medium text-royal">{currentPlatform.name}</span>
+            <span className="text-sm text-muted-foreground">{currentText.length} / {currentPlatform.charLimit.toLocaleString()} симв.</span>
           </div>
           <div className="px-4 py-4 max-h-64 overflow-y-auto scrollbar-hide">
             <p className="text-base text-foreground leading-relaxed whitespace-pre-line">{currentText}</p>
@@ -209,7 +177,7 @@ export default function Result() {
                     value={targetChars}
                     onChange={(e) => setTargetChars(e.target.value)}
                     onKeyDown={(e) => {if (e.key === "Enter") handleGenerateByChars();}}
-                    placeholder={cur.charLimit.toString()}
+                    placeholder={currentPlatform.charLimit.toString()}
                     className="w-full bg-transparent text-sm text-royal focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" />
                   
                   <span className="text-xs text-muted-foreground shrink-0">симв.</span>

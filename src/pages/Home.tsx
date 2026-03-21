@@ -5,6 +5,7 @@ import { Copy, Edit3, Mic, TrendingUp, RefreshCw, ChevronRight, Zap } from "luci
 import { BottomNav } from "@/components/BottomNav";
 import { TopBar } from "@/components/TopBar";
 import { useToast } from "@/hooks/use-toast";
+import { usePricingUsage } from "@/hooks/usePricingUsage";
 
 const posts = [
 `Число 9 сегодня - это число завершений и мудрости. 
@@ -35,6 +36,7 @@ const posts = [
 export default function Home() {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { data: pricingData } = usePricingUsage();
   const [copied, setCopied] = useState(false);
   const [postIndex, setPostIndex] = useState(0);
   const [refreshing, setRefreshing] = useState(false);
@@ -63,6 +65,13 @@ export default function Home() {
   const today = new Date();
   const dayNum = today.getDate() + today.getMonth() + 1;
   const num = (dayNum - 1) % 9 + 1;
+  const contentPacks = pricingData?.usage.contentPacks;
+  const packsUsed = contentPacks?.used ?? 2;
+  const packsLimit = contentPacks?.limit ?? 3;
+  const usageWidth = packsLimit === null ? 100 : Math.min(100, Math.round((packsUsed / Math.max(1, packsLimit)) * 100));
+  const usageLabel = packsLimit === null ? `${packsUsed} / ∞` : `${packsUsed} / ${packsLimit}`;
+  const currentPlanName = pricingData?.currentPlanName ?? "Бесплатный";
+  const sourceLabel = pricingData?.source ?? "fallback";
 
   return (
     <div className="min-h-dvh flex flex-col bg-background">
@@ -161,16 +170,19 @@ export default function Home() {
         <div className="bg-card rounded-2xl px-4 py-3 border border-border shadow-card mb-2">
           <div className="flex items-center justify-between mb-1.5">
             <span className="text-sm text-muted-foreground">Пакеты в этом месяце</span>
-            <span className="text-sm text-sapphire font-medium">2 / 3</span>
+            <span className="text-sm text-sapphire font-medium">{usageLabel}</span>
           </div>
           <div className="w-full bg-shell rounded-full h-1.5">
-            <div className="h-1.5 rounded-full bg-sapphire" style={{ width: "67%" }} />
+            <div className="h-1.5 rounded-full bg-sapphire" style={{ width: `${usageWidth}%` }} />
           </div>
           <div className="mt-1.5 text-sm text-muted-foreground">
-            Бесплатный план ·{" "}
+            {currentPlanName} ·{" "}
             <button onClick={() => navigate("/pricing")} className="text-sapphire font-medium active:opacity-70">
               Расширить
             </button>
+          </div>
+          <div className="mt-1 text-xs text-muted-foreground/80">
+            Источник: {sourceLabel === "backend" ? "backend" : "fallback"}
           </div>
         </div>
 
