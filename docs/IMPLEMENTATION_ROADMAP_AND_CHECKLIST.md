@@ -146,7 +146,7 @@ Acceptance criteria:
 - [x] C2. RLS policies and role model implemented.
 - [x] C3. Admin backend (settings, roles, audit) implemented.
 - [x] C4. Admin panel v1 implemented.
-- [ ] C5. Home connected to backend data.
+- [x] C5. Home connected to backend data.
 - [ ] C6. Library connected to backend data.
 - [ ] C7. Pricing and usage connected to backend data.
 - [ ] C8. Rail B generation pipeline implemented end-to-end.
@@ -177,4 +177,4 @@ Use this format for precise execution requests:
 
 ## Current next step
 
-Next execution checkpoint is **C5** (home data connected to backend APIs).
+Next execution checkpoint is **C6** (library data connected to backend APIs).
