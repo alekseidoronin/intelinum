@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ChevronLeft, Sparkles, Brain, DollarSign, Heart, Trophy, Star, User } from "lucide-react";
 import { BottomNav } from "@/components/BottomNav";
+import { generateContentPack } from "@/lib/content-pack";
 
 const categories = [
   {
@@ -127,10 +128,12 @@ export default function RailB() {
   const [selected, setSelected] = useState<string | null>(null);
   const [generating, setGenerating] = useState(false);
 
-  const handleSelect = (topic: string) => {
+  const handleSelect = async (topic: string) => {
     setSelected(topic);
     setGenerating(true);
-    setTimeout(() => navigate("/result"), 3000);
+    const generationInput = { topic };
+    const pack = await generateContentPack(generationInput);
+    navigate("/result", { state: { contentPack: pack, generationInput } });
   };
 
   // Generating screen
