@@ -1,6 +1,6 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, User, GraduationCap, BookOpen, Sparkles, LayoutGrid, Newspaper, Menu } from "lucide-react";
+import { X, User, GraduationCap, BookOpen, Sparkles, LayoutGrid, Newspaper, Menu, Shield } from "lucide-react";
 import { useState } from "react";
 import { Logo } from "@/components/Logo";
 
@@ -11,6 +11,7 @@ const menuItems = [
   { icon: Sparkles,      label: "Создать",           path: "/rail-b" },
   { icon: LayoutGrid,    label: "Готовые решения",   path: "/solutions" },
   { icon: Newspaper,     label: "Новости",            path: "/news" },
+  { icon: Shield,        label: "Админ-панель",       path: "/admin" },
 ];
 
 export function SideMenuButton() {

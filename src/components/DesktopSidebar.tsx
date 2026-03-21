@@ -1,5 +1,5 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import { Home, User, GraduationCap, BookOpen, Sparkles, LayoutGrid, Newspaper, Crown } from "lucide-react";
+import { Home, User, GraduationCap, BookOpen, Sparkles, LayoutGrid, Newspaper, Crown, Shield } from "lucide-react";
 import { Logo } from "@/components/Logo";
 
 const navItems = [
@@ -9,6 +9,7 @@ const navItems = [
   { icon: GraduationCap, label: "Обучение",          path: "/education" },
   { icon: LayoutGrid,    label: "Готовые решения",   path: "/solutions" },
   { icon: Newspaper,     label: "Новости",            path: "/news" },
+  { icon: Shield,        label: "Админ-панель",       path: "/admin" },
   { icon: User,          label: "Профиль",           path: "/profile" },
 ];
 
