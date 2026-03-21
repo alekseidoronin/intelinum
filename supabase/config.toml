@@ -17,3 +17,6 @@ verify_jwt = false
 
 [functions.library-dashboard]
 verify_jwt = false
+
+[functions.pricing-dashboard]
+verify_jwt = false

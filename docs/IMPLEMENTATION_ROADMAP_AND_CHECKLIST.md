@@ -148,7 +148,7 @@ Acceptance criteria:
 - [x] C4. Admin panel v1 implemented.
 - [x] C5. Home connected to backend data.
 - [x] C6. Library connected to backend data.
-- [ ] C7. Pricing and usage connected to backend data.
+- [x] C7. Pricing and usage connected to backend data.
 - [ ] C8. Rail B generation pipeline implemented end-to-end.
 - [ ] C9. Rail A upload/transcription pipeline implemented end-to-end.
 - [ ] C10. Production hardening and operations baseline completed.
@@ -177,4 +177,4 @@ Use this format for precise execution requests:
 
 ## Current next step
 
-Next execution checkpoint is **C7** (pricing and usage connected to backend APIs).
+Next execution checkpoint is **C8** (Rail B generation pipeline end-to-end).
